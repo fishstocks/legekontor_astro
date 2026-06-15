@@ -12,30 +12,117 @@ const navItems = [
   { label: 'Kontakt', href: '/kontakt' },
 ];
 
-const patientActions = [
+const quickFacts = [
   {
-    title: 'Bestill time',
-    text: 'Bestill time på Helsenorge, eller ring oss.',
-    href: 'https://minhelse.helsenorge.no/fastlegen/bestill-time',
-    icon: 'calendar',
+    icon: 'heartbeatStrip',
+    title: 'Akutt time',
+    text: 'Ring samme dag fra kl. 08:00. Ved livstruende tilstander, ring 113.',
+    accent: true,
   },
   {
-    title: 'Forny resept',
-    text: 'Forny resepten din på Helsenorge.',
-    href: 'https://minhelse.helsenorge.no/fastlegen/forny-resept',
-    icon: 'capsule',
+    icon: 'clock',
+    title: 'Åpningstider',
+    text: 'Man-fre 08:00-15:00. Telefon 08:30-14:30. Helg stengt.',
   },
   {
+    icon: 'message',
     title: 'E-konsultasjon',
-    text: 'Nettbasert skriftlig konsultasjon. Du betaler egenandel som ved vanlig legetime.',
+    text: 'Nettbasert skriftlig konsultasjon, samme egenandel som vanlig legetime.',
     href: 'https://minhelse.helsenorge.no/fastlegen/e-konsultasjon',
-    icon: 'person',
   },
   {
-    title: 'Kontakt legekontoret',
-    text: 'Administrative henvendelser til legekontoret, for eksempel bestilling av drosje.',
-    href: 'https://minhelse.helsenorge.no/fastlegen/kontakt-legekontoret',
     icon: 'mail',
+    title: 'Kontakt legekontoret',
+    text: 'Administrative henvendelser, for eksempel bestilling av drosje.',
+    href: 'https://minhelse.helsenorge.no/fastlegen/kontakt-legekontoret',
+  },
+];
+
+const usefulLinks = [
+  {
+    icon: 'route',
+    title: 'Pasientreiser',
+    text: 'Reise til og fra behandling',
+    href: 'https://www.helsenorge.no/rettigheter/pasientreiser/',
+  },
+  {
+    icon: 'building',
+    title: 'NAV',
+    text: '55 55 33 33',
+    href: 'https://www.nav.no/',
+  },
+  {
+    icon: 'shield',
+    title: 'Helfo',
+    text: 'Refusjon og frikort',
+    href: 'https://www.helfo.no/',
+  },
+  {
+    icon: 'cross',
+    title: 'Helsedirektoratet',
+    text: 'Nasjonale helseråd',
+    href: 'https://www.helsedirektoratet.no/',
+  },
+  {
+    icon: 'vaccine',
+    title: 'Folkehelseinstituttet',
+    text: 'Vaksiner og smittevern',
+    href: 'https://www.fhi.no/',
+  },
+  {
+    icon: 'world',
+    title: 'Helsenorge',
+    text: 'Dine helsetjenester',
+    href: 'https://www.helsenorge.no/',
+  },
+  {
+    icon: 'book',
+    title: 'Helsebiblioteket',
+    text: 'Pasientinformasjon',
+    href: 'https://www.helsebiblioteket.no/',
+  },
+];
+
+const services = [
+  {
+    icon: 'heartbeat',
+    title: 'Akutt helsehjelp',
+    text: 'Alle fastlegene ved Vågsbygd legesenter yter akutt helsehjelp for sine pasienter. Hver dag har vi åpne akutt-timer. Dersom din lege er borte akkurat den dagen er vi vikar for hverandre.',
+  },
+  {
+    icon: 'stethoscope',
+    title: 'Sykdomsoppfølging',
+    text: 'Ved et fastlegekontor får du en fastlege som følger deg i et sykdomsforløp. Vi leser epikrise fra sykehuset, følger opp på kontroller og har som mål å yte trygg og god oppfølging, over tid.',
+  },
+  {
+    icon: 'microscope',
+    title: 'Celleprøve',
+    text: 'Alle legene ved Vågsbygd legesenter utfører celleprøve som anbefalt nasjonalt, og oppfordrer våre pasienter til å følge disse anbefalingene.',
+  },
+  {
+    icon: 'bandage',
+    title: 'Små-kirurgi',
+    text: 'Vi har to fullt utstyrte skiftestuer. Vi fjerner store og små føflekker, fettkuler, vorter og sjenerende utvekster. Ved skader syr vi store og små sår.',
+  },
+  {
+    icon: 'activity',
+    title: 'EKG, spirometri og 24t BT',
+    text: 'Vi har utstyr til hjerteprøver, pusteprøver og kan også følge blodtrykket ditt over 24 timer, dersom det er grunn til dette.',
+  },
+  {
+    icon: 'testTube',
+    title: 'Lab-tjenester',
+    text: 'Vi tilbyr hurtigprøver ved infeksjon, diabetes, urinplager og INR. I tillegg tar vi vanlige blodprøver som sendes for videre analyse ved sykehuset.',
+  },
+  {
+    icon: 'phone',
+    title: 'Tilgjengelighet',
+    text: 'Vi tilbyr timebestilling direkte i legens timebok, for å gjøre det enklest mulig for deg som pasient. I tillegg gjør det telefonen mer tilgjengelig for akutte tilstander.',
+  },
+  {
+    icon: 'school',
+    title: 'Høy kompetanse',
+    text: 'Alle legene ved Vågsbygd legesenter er ferdige spesialister i allmennmedisin, en 5-årig etterutdanning. Vi tilstreber høy faglig kompetanse ved vårt legesenter.',
   },
 ];
 
@@ -49,6 +136,42 @@ const icons = {
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
   mail:
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="m4 7 8 6 8-6"/></svg>',
+  heartbeatStrip:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-4 3 8 2-6 2 2h5"/></svg>',
+  clock:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>',
+  message:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>',
+  heartbeat:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/><path d="M4 13h4l2-4 4 8 2-4h4"/></svg>',
+  stethoscope:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v5a4 4 0 0 0 8 0V3"/><path d="M10 16a6 6 0 0 0 12 0v-2"/><path d="M22 14a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/><path d="M4 3h2M14 3h2"/></svg>',
+  microscope:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18h8M3 22h18M8 18a6 6 0 0 0 6-6"/><path d="m9 4 6 6"/><path d="m7 6 4-4 6 6-4 4Z"/><path d="M14 12h4v4"/></svg>',
+  bandage:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 10 4 4"/><path d="M8.5 15.5 3.8 10.8a4 4 0 0 1 5.7-5.7l9.4 9.4a4 4 0 0 1-5.7 5.7l-4.7-4.7Z"/><path d="m14.5 8.5-6 6"/><path d="M9.5 9.5h.01M11.5 11.5h.01M12.5 8.5h.01M14.5 10.5h.01"/></svg>',
+  activity:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-7 4 14 2-7h6"/><path d="M17 4a4 4 0 0 1 4 4"/></svg>',
+  testTube:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h8"/><path d="M14 2v7.5l4.3 7.4A3.4 3.4 0 0 1 15.4 22H6.6a3.4 3.4 0 0 1-2.9-5.1L8 9.5V2"/><path d="M6 16h10"/></svg>',
+  phone:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6.1 6.1l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>',
+  school:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 10-10-5-10 5 10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/><path d="M22 10v6"/></svg>',
+  route:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a3 3 0 0 0 3-3v-1a3 3 0 0 0-3-3H9a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h7"/></svg>',
+  building:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M14 9h4a2 2 0 0 1 2 2v10"/><path d="M9 21v-4M4 21h16M9 9h.01M9 13h.01M9 5h.01"/></svg>',
+  shield:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.5 7.5 8 9 4.5-1.5 8-4.5 8-9V6Z"/></svg>',
+  cross:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
+  vaccine:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2 9 11"/><path d="m13 4 7 7-3 3-7-7Z"/><path d="m9 11-6 6 2 2 1-1 1 1 2-2-1-1 1-1 1 1 2-2Z"/></svg>',
+  world:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg>',
+  book:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>',
 };
 ---
 
@@ -66,7 +189,7 @@ const icons = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Baloo+2:wght@600;800&display=swap"
       rel="stylesheet"
     />
     <title>Hjem - {clinicName}</title>
@@ -107,28 +230,48 @@ const icons = {
         </div>
       </section>
 
-      <section class="action-section" aria-label="Digitale tjenester">
-        <div class="content-wrap">
-          <div class="action-grid" aria-label="Digitale tjenester">
-            {
-              patientActions.map((action) => (
-                <a class="action-card" href={action.href}>
-                  <span class="action-icon" set:html={icons[action.icon]} />
-                  <span>
-                    <strong>{action.title}</strong>
-                    <small>{action.text}</small>
-                  </span>
-                </a>
-              ))
-            }
-          </div>
-
-          <a class="phone-pill is-closed" href="tel:+4712345678">
-            <span aria-hidden="true">☎</span>
-            Telefon - stengt
-          </a>
+      <section class="quickfacts-section" aria-label="Praktisk informasjon">
+        <div class="quickfacts-grid">
+          {
+            quickFacts.map((fact, index) => (
+              <div class="quickfact-item">
+                {index > 0 && (
+                  <div class="quickfact-divider" aria-hidden="true">
+                    <span></span>
+                  </div>
+                )}
+                <div class:list={['quickfact-icon', fact.accent && 'is-accent']} set:html={icons[fact.icon]} />
+                <h3>{fact.title}</h3>
+                <p>{fact.text}</p>
+                {fact.href && (
+                  <a class="quickfact-link" href={fact.href}>
+                    Gå til Helsenorge
+                  </a>
+                )}
+              </div>
+            ))
+          }
         </div>
       </section>
+
+      <section class="contact-method-section" aria-label="Slik når du oss">
+        <div class="content-wrap contact-method-card">
+          <p class="contact-method-label">Slik når du oss</p>
+          <p>
+            All kommunikasjon med legesenteret går via
+            <a href="https://www.helsenorge.no/" target="_blank" rel="noreferrer">Helsenorge</a>
+            eller telefon. Bruk Helsenorge for timebestilling, reseptfornyelse, e-konsultasjon og
+            administrative henvendelser.
+          </p>
+        </div>
+      </section>
+
+      <div class="phone-pill-wrap">
+        <a class="phone-pill is-closed" href="tel:+4712345678">
+          <span aria-hidden="true">☎</span>
+          Telefon - stengt
+        </a>
+      </div>
 
       <section class="notice-section">
         <div class="content-wrap">
@@ -140,6 +283,66 @@ const icons = {
             </p>
             <time datetime="2025-02-13">13. februar 2025</time>
           </article>
+        </div>
+      </section>
+
+      <section class="about-section" aria-labelledby="about-heading">
+        <div class="content-wrap about-layout">
+          <div class="about-content">
+            <p class="section-kicker">Om oss</p>
+            <h2 id="about-heading">Vågsbygd legesenter</h2>
+
+            <p>
+              Vågsbygd legesenter ligger sentralt i Hyrule, et par raske steg fra nærmeste stall og
+              akkurat langt nok unna Death Mountain til at resepsjonen slipper lavaskader i
+              venterommet.
+            </p>
+
+            <p>
+              Vi er et fastlegekontor med modige behandlere, helsesekretærer med bedre oversikt enn
+              et fullstendig kart og nok plaster til en middels krevende bossfight. Enten du trenger
+              time, reseptfornyelse eller en vurdering av hvorfor du plutselig hører bossmusikk,
+              møter vi deg med faglighet og hjertecontainer-varme.
+            </p>
+
+            <ul class="about-list" aria-label="Kort om legesenteret">
+              <li>Allmennlegekontor for Hylians, Gorons og slitne eventyrere</li>
+              <li>Null toleranse for uregistrerte cursed potions</li>
+              <li>Fastleger, helsesekretærer og høy rupee-moral</li>
+            </ul>
+          </div>
+
+          <div class="map-card image-card">
+            <img src="/sykehus.png" alt="Illustrasjon av Vågsbygd legesenter" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section class="services-section" aria-labelledby="services-heading">
+        <div class="content-wrap">
+          <div class="services-header">
+            <h2 id="services-heading">
+              <span class="services-title-dark">Våre</span>
+              <span class="services-title-accent">tjenester</span>
+            </h2>
+            <p>Vågsbygd legesenter tilbyr alle vanlige fastlegetjenester.</p>
+          </div>
+
+          <div class="services-grid">
+            {
+              services.map((service) => (
+                <article class="service-item">
+                  <div class="service-icon" set:html={icons[service.icon]} />
+                  <h3>{service.title}</h3>
+                  <div class="service-triforce" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <p>{service.text}</p>
+                </article>
+              ))
+            }
+          </div>
         </div>
       </section>
 
@@ -208,15 +411,8 @@ const icons = {
               Husk at du selv må gi beskjed til legekontoret du bytter fra om at journalen skal
               oversendes til ny fastlege. Dette skjer ikke automatisk.
             </p>
-          </div>
-
-          <div class="switch-action" aria-label="Slik bytter du fastlege">
-            <ol>
-              <li>Åpne Helsenorge</li>
-              <li>Velg Vågsbygd Torv Legesenter AS</li>
-              <li>Be tidligere legekontor sende journalen</li>
-            </ol>
             <a
+              class="switch-link"
               href="https://tjenester.helsenorge.no/bytte-fastlege?searchquery=V%C3%A5gsbygd%20Torv%20Legesenter%20AS&searchquerytype=legekontor"
               target="_blank"
               rel="noreferrer"
@@ -227,34 +423,44 @@ const icons = {
         </div>
       </section>
 
-      <section class="about-section" aria-labelledby="about-heading">
-        <div class="content-wrap about-layout">
-          <div class="about-content">
-            <p class="section-kicker">Om oss</p>
-            <h2 id="about-heading">Vågsbygd legesenter</h2>
-
+      <section class="useful-section" aria-labelledby="useful-heading">
+        <div class="content-wrap useful-wrap">
+          <div class="useful-block blood-test-block">
+            <h2 id="useful-heading">Dine blodprøver</h2>
             <p>
-              Vågsbygd legesenter ligger sentralt i Hyrule, et par raske steg fra nærmeste stall og
-              akkurat langt nok unna Death Mountain til at resepsjonen slipper lavaskader i
-              venterommet.
+              Har du fått tatt blodprøver som er sendt til Fürst laboratorium, kan du logge inn for
+              å se resultatene dine.
             </p>
-
-            <p>
-              Vi er et fastlegekontor med modige behandlere, helsesekretærer med bedre oversikt enn
-              et fullstendig kart og nok plaster til en middels krevende bossfight. Enten du trenger
-              time, reseptfornyelse eller en vurdering av hvorfor du plutselig hører bossmusikk,
-              møter vi deg med faglighet og hjertecontainer-varme.
-            </p>
-
-            <ul class="about-list" aria-label="Kort om legesenteret">
-              <li>Allmennlegekontor for Hylians, Gorons og slitne eventyrere</li>
-              <li>Null toleranse for uregistrerte cursed potions</li>
-              <li>Fastleger, helsesekretærer og høy rupee-moral</li>
-            </ul>
           </div>
 
-          <div class="map-card image-card">
-            <img src="/sykehus.png" alt="Illustrasjon av Vågsbygd legesenter" loading="lazy" />
+          <a class="blood-test-panel" href="https://www.furstpasient.no/" target="_blank" rel="noreferrer">
+            <div class="blood-test-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3s-6 5.7-6 10a6 6 0 0 0 12 0c0-4.3-6-10-6-10Z" />
+              </svg>
+            </div>
+            <div>
+              <strong>Fürst pasientportal</strong>
+              <small>Logg inn og se dine blodprøvesvar</small>
+            </div>
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <p class="section-kicker useful-links-kicker">Nyttige lenker</p>
+
+          <div class="official-link-grid" aria-label="Offentlige helselenker">
+            {
+              usefulLinks.map((link) => (
+                <a class="official-link-card" href={link.href} target="_blank" rel="noreferrer">
+                  <div class="official-link-icon" set:html={icons[link.icon]} />
+                  <div class="official-link-text">
+                    <strong>{link.title}</strong>
+                    <small>{link.text}</small>
+                  </div>
+                  <span class="official-link-arrow" aria-hidden="true">→</span>
+                </a>
+              ))
+            }
           </div>
         </div>
       </section>
@@ -337,8 +543,16 @@ const icons = {
     --color-border: #d9e2ec;
     --color-warning: #fff0f0;
     --color-footer: #d8dee7;
+    --color-green: #0d6b57;
+    --color-mint: #d8f0e7;
+    --color-heart: #c75c52;
     --shadow-soft: 0 16px 36px rgb(18 34 75 / 12%);
     --action-card-overlap: 6rem;
+    --text-h1: clamp(4.5rem, 7vw, 8.4rem);
+    --text-h2: clamp(2.2rem, 4.5vw, 3.5rem);
+    --text-kicker: clamp(1.05rem, 1.8vw, 1.35rem);
+    --text-body-lg: clamp(1.05rem, 1.6vw, 1.3rem);
+    --text-body: 1rem;
   }
 
   * {
@@ -460,6 +674,7 @@ const icons = {
   }
 
   h1 {
+    font-family: 'Baloo 2', 'Source Sans 3', system-ui, sans-serif;
     font-size: clamp(4.5rem, 7vw, 8.4rem);
     font-weight: 800;
     line-height: 0.92;
@@ -502,21 +717,143 @@ const icons = {
     color: white;
   }
 
-  .action-section {
-    background: linear-gradient(
-      to bottom,
-      transparent 0,
-      rgb(255 255 255 / 52%) calc(var(--action-card-overlap) * 0.45),
-      var(--color-surface) var(--action-card-overlap)
-    );
-    margin-top: calc(-1 * var(--action-card-overlap));
-    padding: 0 1rem 3rem;
-    position: relative;
-    z-index: 2;
+  .quickfacts-section {
+    background:
+      linear-gradient(135deg, rgb(184 163 126 / 18%) 0 1px, transparent 1px 15px),
+      linear-gradient(180deg, rgb(8 40 34 / 96%), rgb(3 31 27 / 94%));
   }
 
-  .action-section .content-wrap {
+  .quickfacts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0 auto;
+    max-width: 1120px;
+  }
+
+  .quickfact-item {
+    color: white;
+    padding: 2.5rem 1.75rem;
     position: relative;
+  }
+
+  .quickfact-divider {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+
+  .quickfact-divider span {
+    border-bottom: 12px solid var(--color-brand-sand);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    height: 0;
+    opacity: 0.75;
+    width: 0;
+  }
+
+  .quickfact-icon {
+    align-items: center;
+    background: rgb(216 240 231 / 16%);
+    border-radius: 50%;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    margin-bottom: 0.9rem;
+    width: 40px;
+  }
+
+  .quickfact-icon :global(svg) {
+    fill: none;
+    height: 20px;
+    stroke: var(--color-mint);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    width: 20px;
+  }
+
+  .quickfact-icon.is-accent :global(svg) {
+    stroke: var(--color-heart);
+  }
+
+  .quickfact-item h3 {
+    font-size: 1.05rem;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    margin: 0 0 0.4rem;
+    text-transform: uppercase;
+  }
+
+  .quickfact-item p {
+    color: #cfe6dd;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .quickfact-link {
+    color: var(--color-mint);
+    display: inline-block;
+    font-size: 0.88rem;
+    font-weight: 800;
+    margin-top: 0.6rem;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+
+  .contact-method-section {
+    background: var(--color-surface);
+    padding: 1.25rem 1rem 0;
+  }
+
+  .contact-method-card {
+    align-items: start;
+    background: var(--color-brand-cream);
+    border: 1px solid rgb(184 163 126 / 28%);
+    border-radius: 1rem;
+    display: grid;
+    gap: 0.45rem 1.25rem;
+    grid-template-columns: auto 1fr;
+    padding: 1rem 1.2rem;
+  }
+
+  .contact-method-label {
+    color: var(--color-brand-ink);
+    font-size: 0.86rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    margin: 0;
+    padding-top: 0.12rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .contact-method-card p:last-child {
+    color: #52605d;
+    font-size: 1rem;
+    font-weight: 650;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .contact-method-card a {
+    color: var(--color-green);
+    font-weight: 900;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+
+  .phone-pill-wrap {
+    background: var(--color-surface);
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1rem 0;
   }
 
   .notice-section {
@@ -525,7 +862,8 @@ const icons = {
   }
 
   .notice-card {
-    background: var(--color-warning);
+    background: var(--color-brand-cream);
+    border: 1px solid rgb(184 163 126 / 28%);
     border-radius: 1.5rem;
     box-shadow: var(--shadow-soft);
     margin: 0 auto;
@@ -592,7 +930,7 @@ const icons = {
 
   .info-content h2 {
     color: #063b33;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: var(--text-h2);
     line-height: 1;
     margin-bottom: 1rem;
   }
@@ -647,23 +985,21 @@ const icons = {
   }
 
   .switch-section {
-    background: linear-gradient(180deg, white, var(--color-surface));
+    background: linear-gradient(180deg, white, var(--color-brand-cream));
     padding: 4rem 1rem;
   }
 
   .switch-layout {
-    align-items: center;
-    display: grid;
-    gap: 3rem;
-    grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.8fr);
+    display: block;
   }
 
   .switch-content {
-    max-width: 620px;
+    max-width: 820px;
   }
 
   .switch-content h2 {
     color: var(--color-primary);
+    font-family: 'Baloo 2', 'Source Sans 3', system-ui, sans-serif;
     font-size: clamp(2.6rem, 5vw, 4.7rem);
     font-weight: 900;
     letter-spacing: 0;
@@ -673,129 +1009,203 @@ const icons = {
 
   .switch-content p {
     color: #63666b;
-    font-size: clamp(1.05rem, 1.45vw, 1.26rem);
+    font-size: var(--text-body-lg);
     font-weight: 650;
     line-height: 1.55;
     margin: 0 0 1.2rem;
   }
 
-  .switch-action {
-    background:
-      linear-gradient(135deg, rgb(216 240 231 / 82%), rgb(247 244 236 / 94%)),
-      white;
-    border: 1px solid rgb(13 107 87 / 14%);
-    border-radius: 1.4rem;
-    box-shadow: var(--shadow-soft);
-    padding: clamp(1.5rem, 3vw, 2.3rem);
-  }
-
-  .switch-action ol {
-    counter-reset: switch-steps;
-    display: grid;
-    gap: 1rem;
-    list-style: none;
-    margin: 0 0 1.6rem;
-    padding: 0;
-  }
-
-  .switch-action li {
-    align-items: center;
-    color: #063b33;
-    counter-increment: switch-steps;
-    display: grid;
-    font-size: 1.08rem;
-    font-weight: 850;
-    gap: 0.9rem;
-    grid-template-columns: 42px 1fr;
-    line-height: 1.2;
-  }
-
-  .switch-action li::before {
-    align-items: center;
-    background: white;
-    border-radius: 50%;
-    color: var(--color-green);
-    content: counter(switch-steps);
-    display: inline-flex;
-    font-size: 1rem;
-    font-weight: 900;
-    height: 42px;
-    justify-content: center;
-    width: 42px;
-  }
-
-  .switch-action a {
+  .switch-link {
     background: var(--color-green);
     border-radius: 999px;
     color: white;
     display: inline-flex;
     font-size: 1.05rem;
     font-weight: 900;
-    padding: 0.9rem 1.25rem;
+    margin-top: 0.4rem;
+    padding: 0.9rem 1.3rem;
     text-decoration: none;
   }
 
-  .action-grid {
+  .useful-section {
+    background: var(--color-surface);
+    padding: 4rem 1rem;
+  }
+
+  .useful-wrap {
     display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-bottom: 2rem;
+    gap: 1.25rem;
   }
 
-  .action-card {
-    align-items: stretch;
-    background: var(--color-action-card);
-    border-radius: 1.5rem;
-    border: 1px solid rgb(13 107 87 / 14%);
-    box-shadow: 0 18px 40px rgb(31 138 112 / 16%);
-    display: grid;
-    grid-template-columns: minmax(110px, 30%) 1fr;
-    min-height: 154px;
-    overflow: hidden;
-    text-decoration: none;
+  .useful-block {
+    max-width: 920px;
   }
 
-  .action-card:hover,
-  .action-card:focus-visible {
-    outline: 3px solid rgb(21 154 138 / 24%);
-    outline-offset: 4px;
+  .useful-block h2 {
+    color: var(--color-primary);
+    font-size: var(--text-h2);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    margin: 0;
+    padding-bottom: 0.55rem;
+    position: relative;
   }
 
-  .action-icon {
+  .useful-block h2::after {
+    background: rgb(13 107 87 / 24%);
+    border-radius: 999px;
+    bottom: 0;
+    content: '';
+    height: 3px;
+    left: 0;
+    position: absolute;
+    width: min(100%, 620px);
+  }
+
+  .blood-test-block p {
+    color: #63666b;
+    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+    font-weight: 550;
+    line-height: 1.55;
+    margin: 1.4rem 0 1rem;
+  }
+
+  .useful-links-kicker {
+    margin: 2.4rem 0 1.2rem;
+  }
+
+  .blood-test-panel {
     align-items: center;
-    background: var(--color-action-card);
-    display: flex;
-    justify-content: center;
-    padding: 1.5rem;
+    background: var(--color-brand-cream);
+    border: 1px solid rgb(184 163 126 / 40%);
+    border-radius: 1rem;
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 64px 1fr auto;
+    margin-top: 0.6rem;
+    padding: clamp(1.2rem, 2.4vw, 1.7rem);
+    text-decoration: none;
+    transition: border-color 160ms ease, transform 160ms ease;
   }
 
-  .action-icon :global(svg) {
+  .blood-test-panel:hover,
+  .blood-test-panel:focus-visible {
+    border-color: var(--color-green);
+    transform: translateY(-2px);
+  }
+
+  .blood-test-icon {
+    align-items: center;
+    background: var(--color-mint);
+    border-radius: 1rem;
+    color: var(--color-green);
+    display: inline-flex;
+    height: 58px;
+    justify-content: center;
+    width: 58px;
+  }
+
+  .blood-test-icon svg {
     fill: none;
-    height: 4.5rem;
-    stroke: var(--color-action-accent-strong);
+    height: 30px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    width: 30px;
+  }
+
+  .blood-test-panel strong {
+    color: var(--color-primary);
+    display: block;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    line-height: 1.1;
+  }
+
+  .blood-test-panel small {
+    color: #52605d;
+    display: block;
+    font-size: clamp(1.05rem, 1.9vw, 1.35rem);
+    font-weight: 550;
+    line-height: 1.3;
+    margin-top: 0.2rem;
+  }
+
+  .blood-test-panel > span {
+    color: rgb(13 107 87 / 48%);
+    font-size: 1.6rem;
+    font-weight: 900;
+  }
+
+  .official-link-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .official-link-card {
+    align-items: center;
+    background: var(--color-brand-cream);
+    border: 1px solid rgb(184 163 126 / 35%);
+    border-radius: 1rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 44px 1fr auto;
+    min-height: 96px;
+    padding: 1.1rem 1.3rem;
+    text-decoration: none;
+    transition: background 160ms ease, border-color 160ms ease;
+  }
+
+  .official-link-card:hover,
+  .official-link-card:focus-visible {
+    background: rgb(216 240 231 / 40%);
+    border-color: var(--color-green);
+  }
+
+  .official-link-icon {
+    align-items: center;
+    background: rgb(184 163 126 / 18%);
+    border-radius: 50%;
+    color: var(--color-brand-ink);
+    display: flex;
+    height: 44px;
+    justify-content: center;
+    width: 44px;
+  }
+
+  .official-link-icon :global(svg) {
+    fill: none;
+    height: 22px;
+    stroke: currentColor;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.8;
-    width: 4.5rem;
+    width: 22px;
   }
 
-  .action-card span:last-child {
-    align-self: center;
-    padding: 1.5rem;
-  }
-
-  .action-card strong {
-    color: #063b33;
+  .official-link-text strong {
+    color: var(--color-brand-ink);
     display: block;
-    font-size: 1.35rem;
+    font-size: 1.05rem;
+    font-weight: 900;
     line-height: 1.2;
-    margin-bottom: 0.65rem;
   }
 
-  .action-card small {
-    color: #245f55;
+  .official-link-text small {
+    color: #7a6b52;
     display: block;
-    font-size: 1rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: 0.25rem;
+  }
+
+  .official-link-arrow {
+    color: var(--color-green);
+    font-size: 1.3rem;
+    font-weight: 900;
   }
 
   .phone-pill {
@@ -807,7 +1217,7 @@ const icons = {
     display: flex;
     font-weight: 700;
     gap: 0.75rem;
-    margin: 1rem auto 0;
+    margin: 0;
     max-width: max-content;
     padding: 0.75rem 1.5rem;
     text-decoration: none;
@@ -830,7 +1240,7 @@ const icons = {
   }
 
   .about-section {
-    background: var(--color-surface);
+    background: var(--color-brand-cream);
     padding: 4rem 1rem;
   }
 
@@ -848,7 +1258,7 @@ const icons = {
   .section-kicker {
     color: var(--color-brand-ink);
     display: inline-flex;
-    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    font-size: var(--text-kicker);
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 1rem;
@@ -869,7 +1279,7 @@ const icons = {
 
   .about-content h2 {
     color: #050505;
-    font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+    font-size: var(--text-h2);
     font-weight: 900;
     letter-spacing: 0;
     line-height: 0.96;
@@ -938,6 +1348,103 @@ const icons = {
     object-fit: cover;
     object-position: center;
     width: 100%;
+  }
+
+  .services-section {
+    background: var(--color-surface);
+    padding: 4.5rem 1rem;
+  }
+
+  .services-header {
+    margin: 0 auto 3rem;
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .services-header h2 {
+    font-family: 'Baloo 2', 'Source Sans 3', system-ui, sans-serif;
+    font-size: var(--text-h2);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    margin: 0 0 0.65rem;
+  }
+
+  .services-title-dark {
+    color: var(--color-primary);
+  }
+
+  .services-title-accent {
+    color: var(--color-green);
+  }
+
+  .services-header p {
+    color: #63666b;
+    font-size: var(--text-body-lg);
+    font-weight: 650;
+    margin: 0;
+  }
+
+  .services-grid {
+    display: grid;
+    gap: 2.5rem 1.5rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .service-item {
+    min-width: 0;
+  }
+
+  .service-icon {
+    align-items: center;
+    background: var(--color-mint);
+    border-radius: 50%;
+    color: var(--color-green);
+    display: flex;
+    height: 64px;
+    justify-content: center;
+    margin-bottom: 1rem;
+    width: 64px;
+  }
+
+  .service-icon :global(svg) {
+    fill: none;
+    height: 34px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+    width: 34px;
+  }
+
+  .service-item h3 {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    font-weight: 900;
+    line-height: 1.2;
+    margin: 0 0 0.5rem;
+  }
+
+  .service-triforce {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 0.6rem;
+  }
+
+  .service-triforce span {
+    border-bottom: 10px solid var(--color-brand-sand);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    height: 0;
+    width: 0;
+  }
+
+  .service-item p {
+    color: #63666b;
+    font-size: 0.97rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 0;
   }
 
   .contact-map-section {
@@ -1066,6 +1573,12 @@ const icons = {
     max-width: 980px;
   }
 
+  @media (max-width: 920px) {
+    .services-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media (max-width: 760px) {
     body {
       font-size: 16px;
@@ -1105,17 +1618,39 @@ const icons = {
       padding: 0.85rem 1.4rem;
     }
 
-    .action-section .content-wrap {
-      margin-top: -3rem;
-    }
-
-    .action-grid,
     .about-layout,
     .switch-layout,
     .info-quick-grid,
+    .official-link-grid,
     .footer-grid,
     .contact-map-layout {
       grid-template-columns: 1fr;
+    }
+
+    .quickfacts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .quickfact-divider {
+      display: none;
+    }
+
+    .quickfact-item {
+      border-bottom: 1px solid rgb(184 163 126 / 24%);
+      padding: 1.75rem 1.5rem;
+    }
+
+    .quickfact-item:last-child {
+      border-bottom: none;
+    }
+
+    .contact-method-card {
+      grid-template-columns: 1fr;
+    }
+
+    .blood-test-panel,
+    .official-link-grid {
+      grid-column: auto;
     }
 
     .about-section {
@@ -1140,18 +1675,11 @@ const icons = {
       min-height: 360px;
     }
 
-    .action-card {
-      grid-template-columns: 96px 1fr;
-      min-height: 112px;
-    }
+  }
 
-    .action-icon :global(svg) {
-      height: 3.2rem;
-      width: 3.2rem;
-    }
-
-    .action-card small {
-      display: none;
+  @media (max-width: 520px) {
+    .services-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

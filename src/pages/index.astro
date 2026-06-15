@@ -1,17 +1,578 @@
 ---
+// Page data lives here so you can edit text, links, and images without hunting
+// through the HTML. Later, these arrays can move into separate files/components.
+const clinicName = 'Test legesenter';
 
+const navItems = [
+  { label: 'Hjem', href: '/' },
+  { label: 'Ansatte', href: '/ansatte' },
+  { label: 'Priser', href: '/priser' },
+  { label: 'Kontakt', href: '/kontakt' },
+];
+
+const patientActions = [
+  {
+    title: 'Bestill time',
+    text: 'Bestill time på Helsenorge, eller ring oss.',
+    href: 'https://minhelse.helsenorge.no/fastlegen/bestill-time',
+    icon: 'calendar',
+  },
+  {
+    title: 'Forny resept',
+    text: 'Forny resepten din på Helsenorge.',
+    href: 'https://minhelse.helsenorge.no/fastlegen/forny-resept',
+    icon: 'capsule',
+  },
+  {
+    title: 'E-konsultasjon',
+    text: 'Nettbasert skriftlig konsultasjon. Du betaler egenandel som ved vanlig legetime.',
+    href: 'https://minhelse.helsenorge.no/fastlegen/e-konsultasjon',
+    icon: 'person',
+  },
+  {
+    title: 'Kontakt legekontoret',
+    text: 'Administrative henvendelser til legekontoret, for eksempel bestilling av drosje.',
+    href: 'https://minhelse.helsenorge.no/fastlegen/kontakt-legekontoret',
+    icon: 'mail',
+  },
+];
+
+const news = [
+  {
+    title: 'HPV hjemmetest',
+    text: 'Kvinner og andre med livmorhals som har utfordringer med å ta livmorhalsprøver, kan nå få HPV hjemmetest av fastlegen.',
+    href: 'https://www.kreftregisteret.no/screening/livmorhalsprogrammet/hvem-far-tilbud-om-hpv-hjemmetest/',
+    linkLabel: 'Les mer om HPV hjemmetest',
+    date: '16. mars 2025',
+  },
+];
+
+const galleryImages = [
+  {
+    src: 'https://storage.googleapis.com/prod_fastlegeweb_bucket/demo-legekontor/galleri/pexels-pavel-danilyuk-reception.jpg',
+    alt: 'Resepsjonsområdet til legekontoret',
+  },
+  {
+    src: 'https://storage.googleapis.com/prod_fastlegeweb_bucket/demo-legekontor/galleri/pexels-mart-production-UL.jpg',
+    alt: 'Ved behov kan ultralyd benyttes på legekontoret',
+  },
+  {
+    src: 'https://storage.googleapis.com/prod_fastlegeweb_bucket/demo-legekontor/galleri/pexels-shvetsa-mri.jpg',
+    alt: 'Illustrasjonsfoto med gjennomgang av MR- og røntgenbilder',
+  },
+  {
+    src: 'https://storage.googleapis.com/prod_fastlegeweb_bucket/demo-legekontor/galleri/pexels-firvntivcus-xray.jpg',
+    alt: 'Illustrasjonsfoto med gjennomgang av røntgenbilder',
+  },
+];
+
+// Small SVG helper keeps the action cards readable without depending on a large icon library.
+const icons = {
+  calendar:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3M17 2v3M4 9h16M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="m9 14 2 2 4-4"/></svg>',
+  capsule:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10.5 20.5 10-10a4.24 4.24 0 0 0-6-6l-10 10a4.24 4.24 0 0 0 6 6Z"/><path d="m8.5 10.5 5 5"/></svg>',
+  person:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+  mail:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="m4 7 8 6 8-6"/></svg>',
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Hjemmeside for Test legesenter med timebestilling, reseptfornyelse, aktuelt og kontaktinformasjon."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Hjem - {clinicName}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav-shell" aria-label="Hovedmeny">
+        <a class="brand" href="/">{clinicName}</a>
+
+        <div class="nav-links">
+          {
+            navItems.map((item) => (
+              <a href={item.href} class="nav-link">
+                {item.label}
+              </a>
+            ))
+          }
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero-section">
+        <div class="content-wrap">
+          <h1>Velkommen til {clinicName}</h1>
+
+          <article class="notice-card" aria-label="Viktig beskjed">
+            <p class="notice-title">Heisen i ustand</p>
+            <p>
+              Dette er et testvarsel. Her går det an å informere pasientene om viktige beskjeder i
+              en spesifisert tidsperiode.
+            </p>
+            <time datetime="2025-02-13">13. februar 2025</time>
+          </article>
+
+          <div class="action-grid" aria-label="Digitale tjenester">
+            {
+              patientActions.map((action) => (
+                <a class="action-card" href={action.href}>
+                  <span class="action-icon" set:html={icons[action.icon]} />
+                  <span>
+                    <strong>{action.title}</strong>
+                    <small>{action.text}</small>
+                  </span>
+                </a>
+              ))
+            }
+          </div>
+
+          <a class="phone-pill is-closed" href="tel:+4712345678">
+            <span aria-hidden="true">☎</span>
+            Telefon - stengt
+          </a>
+        </div>
+      </section>
+
+      <section class="section-heading">
+        <h2>Aktuelt</h2>
+      </section>
+
+      <section class="white-section">
+        <div class="content-wrap narrow-grid">
+          {
+            news.map((item) => (
+              <article class="news-card">
+                <div class="news-header">
+                  <h3>{item.title}</h3>
+                </div>
+                <div class="news-body">
+                  <p>{item.text}</p>
+                  <a class="button-link" href={item.href} target="_blank" rel="noreferrer">
+                    {item.linkLabel}
+                  </a>
+                  <time datetime="2025-03-16">{item.date}</time>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="section-heading">
+        <h2>Galleri</h2>
+      </section>
+
+      <section class="white-section">
+        <div class="content-wrap gallery-grid">
+          {
+            galleryImages.map((image) => (
+              <figure class="gallery-card">
+                <img src={image.src} alt={image.alt} loading="lazy" />
+                <figcaption>{image.alt}</figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-title">{clinicName}</p>
+          <p>Andebys gate 1, 1234 Andeby</p>
+        </div>
+
+        <nav aria-label="Bunnmeny">
+          <a href="/kontakt">Åpningstider</a>
+          <a href="/priser">Priser og tjenester</a>
+          <a href="/ansatte">Ansatte</a>
+          <a href="/tilgjengelighet">Tilgjengelighet</a>
+        </nav>
+
+        <address>
+          <a href="tel:+4712345678">12 34 56 78</a>
+          <a href="mailto:eksempeladresse@eksempelmail.no">eksempeladresse@eksempelmail.no</a>
+        </address>
+      </div>
+
+      <div class="footer-bottom">© 2026 {clinicName}</div>
+    </footer>
+  </body>
 </html>
+
+<style>
+  :root {
+    --color-primary: #12224b;
+    --color-primary-soft: #dce8f4;
+    --color-heading-band: #c9dceb;
+    --color-surface: #ffffff;
+    --color-muted: #667085;
+    --color-border: #d9e2ec;
+    --color-warning: #fff0f0;
+    --color-footer: #d8dee7;
+    --shadow-soft: 0 16px 36px rgb(18 34 75 / 12%);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: #f6f8fb;
+    color: var(--color-primary);
+    font-family: 'Source Sans 3', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .site-header {
+    background: var(--color-surface);
+  }
+
+  .nav-shell {
+    align-items: center;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1120px;
+    min-height: 96px;
+    padding: 1rem 1.5rem;
+  }
+
+  .brand {
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: flex-end;
+  }
+
+  .nav-link {
+    font-size: 1.25rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.35em;
+  }
+
+  .hero-section {
+    background: var(--color-primary-soft);
+    padding: 4rem 1rem 5rem;
+  }
+
+  .content-wrap {
+    margin: 0 auto;
+    max-width: 1120px;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin-top: 0;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: 1.1;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .notice-card {
+    background: var(--color-warning);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    margin: 0 auto 3rem;
+    max-width: 760px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .notice-title {
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  time {
+    color: var(--color-muted);
+    display: inline-block;
+    font-size: 0.9rem;
+  }
+
+  .action-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 2rem;
+  }
+
+  .action-card {
+    align-items: stretch;
+    background: var(--color-surface);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    grid-template-columns: minmax(110px, 30%) 1fr;
+    min-height: 154px;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .action-card:hover,
+  .action-card:focus-visible {
+    outline: 3px solid rgb(18 34 75 / 22%);
+    outline-offset: 4px;
+  }
+
+  .action-icon {
+    align-items: center;
+    background: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .action-icon :global(svg) {
+    fill: none;
+    height: 4.5rem;
+    stroke: #5d6673;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+    width: 4.5rem;
+  }
+
+  .action-card span:last-child {
+    align-self: center;
+    padding: 1.5rem;
+  }
+
+  .action-card strong {
+    display: block;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    margin-bottom: 0.65rem;
+  }
+
+  .action-card small {
+    display: block;
+    font-size: 1rem;
+  }
+
+  .phone-pill {
+    align-items: center;
+    background: var(--color-surface);
+    border: 2px solid #ad1f2d;
+    border-radius: 999px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    font-weight: 700;
+    gap: 0.75rem;
+    margin: 1rem auto 0;
+    max-width: max-content;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+  }
+
+  .section-heading {
+    background: var(--color-heading-band);
+    padding: 3rem 1rem 1.5rem;
+    text-align: center;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0;
+  }
+
+  .white-section {
+    background: var(--color-surface);
+    padding: 3.5rem 1rem;
+  }
+
+  .narrow-grid {
+    display: grid;
+    justify-items: center;
+  }
+
+  .news-card {
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    max-width: 620px;
+    overflow: hidden;
+  }
+
+  .news-header {
+    background: #edf3f8;
+    padding: 1.4rem 1.6rem 1rem;
+  }
+
+  .news-header h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0;
+  }
+
+  .news-body {
+    padding: 1.6rem;
+  }
+
+  .button-link {
+    background: var(--color-heading-band);
+    border-radius: 0.75rem;
+    display: inline-flex;
+    font-weight: 700;
+    margin: 0.5rem 0 1.5rem;
+    padding: 0.8rem 1rem;
+    text-decoration: none;
+  }
+
+  .gallery-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gallery-card {
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .gallery-card img {
+    aspect-ratio: 4 / 3;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .gallery-card figcaption {
+    background: rgb(0 0 0 / 56%);
+    bottom: 1rem;
+    border-radius: 0.75rem;
+    color: white;
+    left: 1rem;
+    padding: 0.75rem 1rem;
+    position: absolute;
+    right: 1rem;
+  }
+
+  .site-footer {
+    background: var(--color-footer);
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1.3fr 1fr 1.3fr;
+    margin: 0 auto;
+    max-width: 1120px;
+    padding: 3rem 1.5rem;
+  }
+
+  .footer-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  .footer-grid nav,
+  .footer-grid address {
+    display: grid;
+    font-style: normal;
+    gap: 0.75rem;
+  }
+
+  .footer-bottom {
+    background: #c6d0dc;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  @media (max-width: 760px) {
+    body {
+      font-size: 16px;
+    }
+
+    .nav-shell {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: auto;
+    }
+
+    .nav-links {
+      gap: 1rem;
+      justify-content: flex-start;
+    }
+
+    .hero-section {
+      padding-top: 3rem;
+    }
+
+    .action-grid,
+    .gallery-grid,
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .action-card {
+      grid-template-columns: 96px 1fr;
+      min-height: 112px;
+    }
+
+    .action-icon :global(svg) {
+      height: 3.2rem;
+      width: 3.2rem;
+    }
+
+    .action-card small {
+      display: none;
+    }
+
+    .gallery-card figcaption {
+      position: static;
+    }
+  }
+</style>

@@ -1,0 +1,677 @@
+---
+const clinicName = 'Vågsbygd legesenter';
+
+const navItems = [
+  { label: 'Hjem', href: '/' },
+  { label: 'Ansatte', href: '/ansatte' },
+  { label: 'Priser', href: '/priser' },
+  { label: 'Skjema', href: '/skjema' },
+  { label: 'Informasjon', href: '/informasjon', active: true },
+  { label: 'Kontakt', href: '/kontakt' },
+];
+
+const quickInfo = [
+  ['Akutt time', 'Ring samme dag fra kl. 08:00'],
+  ['Tolk', 'Gi beskjed ved bestilling av time'],
+  ['Blodprøver', 'Må avtales med lege eller resepsjon'],
+  ['Attester', 'Bestilles via legekontoret'],
+  ['Prøvesvar', 'Kontakt legekontoret eller se Helsenorge dersom tilgjengelig'],
+  ['Avbestilling', 'Avbestill senest 24 timer før'],
+];
+
+const vaccineLinks = [
+  {
+    title: 'Influensavaksine for året',
+    href: 'https://www.fhi.no/sv/influensa/sesonginfluensa/influensavaksine/',
+  },
+  {
+    title: 'Oversikt over vaksiner du har fått',
+    href: 'https://helsenorge.no/vaksiner/mine-vaksiner',
+  },
+  {
+    title: 'Anbefalte reisevaksiner og råd for reisen',
+    href: 'https://www.fhi.no/sv/vaksine/reisevaksiner/',
+  },
+];
+
+const vaccineSteps = [
+  {
+    title: '1. Sjekk behovet',
+    text: 'Se anbefalinger hos FHI eller Helsenorge før du bestiller, spesielt ved reise.',
+  },
+  {
+    title: '2. Kontakt legekontoret',
+    text: 'Bestill time eller send melding via Helsenorge dersom du er usikker på hva du trenger.',
+  },
+  {
+    title: '3. Avtal tidspunkt',
+    text: 'Noen vaksiner må bestilles inn eller settes med riktig intervall før avreise.',
+  },
+];
+
+const vaccineItems = [
+  {
+    title: 'Influensavaksine',
+    subtitle: 'Sesongvaksine',
+    text: 'Anbefales særlig til personer i risikogrupper og andre som ønsker beskyttelse i influensasesongen.',
+  },
+  {
+    title: 'Reisevaksiner',
+    subtitle: 'Planlegg i god tid',
+    text: 'Hvilke vaksiner du trenger avhenger av reisemål, varighet, tidligere vaksiner og helsetilstand.',
+  },
+  {
+    title: 'Vaksineoversikt',
+    subtitle: 'Mine vaksiner',
+    text: 'Du kan se registrerte vaksiner på Helsenorge. Ta kontakt hvis noe mangler eller du er usikker.',
+  },
+  {
+    title: 'Barne- og voksenvaksiner',
+    subtitle: 'Etter avtale',
+    text: 'Kontakt legekontoret dersom du har spørsmål om oppfriskningsdoser eller vaksiner utenfor barnevaksinasjonsprogrammet.',
+  },
+];
+
+const usefulLinks = [
+  {
+    title: 'Bytte fastlege',
+    text: 'Du må selv gi beskjed til legekontoret du bytter fra om at journalen skal oversendes til ny fastlege. Dette skjer ikke automatisk.',
+    href: 'https://helsenorge.no/behandlere/bytte-av-fastlege',
+  },
+  {
+    title: 'Pasientreise',
+    text: 'Informasjon om rettigheter, reiseutgifter og pasientreiser.',
+    href: 'https://helsenorge.no/rettigheter/pasientreiser',
+  },
+  {
+    title: 'Dine blodprøver',
+    text: 'Logg inn hos Fürst Pasient for å se blodprøver som er tatt hos fastlegen.',
+    href: 'https://www.furstpasient.no/',
+  },
+];
+---
+
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Praktisk pasientinformasjon for Vågsbygd legesenter: akutt time, tolk, blodprøver, attester, vaksiner og nyttige lenker."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Informasjon - {clinicName}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav-shell" aria-label="Hovedmeny">
+        <a class="brand" href="/">
+          <img class="brand-logo" src="/logo-title.png" alt={clinicName} />
+        </a>
+
+        <div class="nav-links">
+          {
+            navItems.map((item) => (
+              <a href={item.href} class:list={['nav-link', item.active && 'is-active']} aria-current={item.active ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="content-wrap">
+          <p class="section-kicker">Informasjon</p>
+          <h1>Praktisk pasientinfo</h1>
+          <p>
+            Her samler vi ting som er nyttige før du bestiller time, møter opp på laboratoriet eller
+            legger ut på en liten helsereise gjennom Hyrule.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="content-wrap info-layout">
+          <section class="info-card" aria-labelledby="quick-heading">
+            <div class="card-header">
+              <span>01</span>
+              <h2 id="quick-heading">Viktig informasjon</h2>
+            </div>
+
+            <div class="quick-grid">
+              {
+                quickInfo.map(([topic, text]) => (
+                  <div class="quick-item">
+                    <span>{topic}</span>
+                    <strong>{text}</strong>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="info-card" aria-labelledby="vaccine-heading">
+            <div class="card-header">
+              <span>02</span>
+              <h2 id="vaccine-heading">Vaksiner</h2>
+            </div>
+
+            <div class="vaccine-ordering">
+              <h3>Bestilling og planlegging</h3>
+              <div class="vaccine-steps">
+                {
+                  vaccineSteps.map((step) => (
+                    <div class="vaccine-step">
+                      <h4>{step.title}</h4>
+                      <p>{step.text}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+
+            <div class="travel-alert">
+              <div class="travel-mark" aria-hidden="true">FHI</div>
+              <div>
+                <h3>Reisevaksiner</h3>
+                <p>
+                  Skal du reise, bør du sjekke anbefalte vaksiner og smittevernråd i god tid før
+                  avreise.
+                </p>
+                <a href="https://www.fhi.no/sv/vaksine/reisevaksiner/" target="_blank" rel="noreferrer">
+                  Se reiseråd hos FHI
+                </a>
+              </div>
+            </div>
+
+            <div class="vaccine-list">
+              {
+                vaccineItems.map((item) => (
+                  <details class="vaccine-item">
+                    <summary>
+                      <span>
+                        <strong>{item.title}</strong>
+                        <small>{item.subtitle}</small>
+                      </span>
+                      <span class="chevron" aria-hidden="true">⌄</span>
+                    </summary>
+                    <p>{item.text}</p>
+                  </details>
+                ))
+              }
+            </div>
+
+            <div class="link-list">
+              {
+                vaccineLinks.map((link) => (
+                  <a class="resource-link" href={link.href} target="_blank" rel="noreferrer">
+                    <strong>{link.title}</strong>
+                    <small>{link.href}</small>
+                  </a>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="info-card info-card-wide" aria-labelledby="links-heading">
+            <div class="card-header">
+              <span>03</span>
+              <h2 id="links-heading">Lenker</h2>
+            </div>
+
+            <div class="resource-grid">
+              {
+                usefulLinks.map((link) => (
+                  <a class="resource-link" href={link.href} target="_blank" rel="noreferrer">
+                    <strong>{link.title}</strong>
+                    <p>{link.text}</p>
+                    <small>{link.href}</small>
+                  </a>
+                ))
+              }
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Hyrule Health Guild. Designet av Link Corporation.</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --color-primary: #12224b;
+    --color-brand-sand: #b8a37e;
+    --color-brand-cream: #f7f4ec;
+    --color-brand-ink: #4b3f2d;
+    --color-green: #0d6b57;
+    --color-mint: #d8f0e7;
+    --shadow-soft: 0 16px 36px rgb(18 34 75 / 12%);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-brand-cream);
+    color: var(--color-primary);
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .site-header {
+    background: var(--color-brand-cream);
+    border-bottom: 1px solid rgb(184 163 126 / 26%);
+  }
+
+  .nav-shell,
+  .content-wrap {
+    margin: 0 auto;
+    max-width: 1120px;
+  }
+
+  .nav-shell {
+    align-items: center;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    min-height: 96px;
+    padding: 1rem 1.5rem;
+  }
+
+  .brand-logo {
+    display: block;
+    height: clamp(2.4rem, 5vw, 3.6rem);
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: flex-end;
+  }
+
+  .nav-link {
+    color: var(--color-brand-ink);
+    display: inline-flex;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding-bottom: 0.3rem;
+    position: relative;
+    text-decoration: none;
+  }
+
+  .nav-link::after,
+  .section-kicker::after {
+    background: var(--color-brand-sand);
+    border-radius: 999px;
+    bottom: 0;
+    content: '';
+    height: 3px;
+    left: 0;
+    position: absolute;
+  }
+
+  .nav-link::after {
+    opacity: 0;
+    transform: scaleX(0.65);
+    transform-origin: left;
+    transition: opacity 160ms ease, transform 160ms ease;
+    width: 100%;
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after,
+  .nav-link.is-active::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .page-hero {
+    background: linear-gradient(135deg, var(--color-brand-cream), #ffffff);
+    padding: 4rem 1.5rem 2rem;
+  }
+
+  .section-kicker {
+    color: var(--color-brand-ink);
+    display: inline-flex;
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin: 0 0 1rem;
+    padding-bottom: 0.35rem;
+    position: relative;
+  }
+
+  .section-kicker::after {
+    width: 68%;
+  }
+
+  h1 {
+    color: var(--color-brand-ink);
+    font-size: clamp(3rem, 7vw, 5.8rem);
+    font-weight: 900;
+    line-height: 0.95;
+    margin: 0 0 1rem;
+    max-width: 760px;
+  }
+
+  .page-hero p:not(.section-kicker) {
+    color: #5f6470;
+    font-size: 1.2rem;
+    font-weight: 700;
+    max-width: 720px;
+  }
+
+  .content-section {
+    background: white;
+    padding: 3.5rem 1.5rem 5rem;
+  }
+
+  .info-layout {
+    display: grid;
+    gap: 1.75rem;
+    max-width: 980px;
+  }
+
+  .info-card {
+    background: #fbfefd;
+    border: 1px solid rgb(13 107 87 / 13%);
+    border-radius: 1.2rem;
+    box-shadow: var(--shadow-soft);
+    padding: clamp(1.3rem, 3vw, 2rem);
+  }
+
+  .card-header {
+    align-items: center;
+    display: flex;
+    gap: 0.9rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .card-header span {
+    align-items: center;
+    background: var(--color-mint);
+    border-radius: 50%;
+    color: var(--color-green);
+    display: inline-flex;
+    font-weight: 900;
+    height: 42px;
+    justify-content: center;
+    width: 42px;
+  }
+
+  .card-header h2 {
+    color: var(--color-green);
+    font-size: clamp(1.55rem, 3vw, 2.2rem);
+    line-height: 1;
+    margin: 0;
+  }
+
+  .quick-grid,
+  .link-list,
+  .resource-grid,
+  .vaccine-steps,
+  .vaccine-list {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .quick-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .resource-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .vaccine-ordering {
+    background: rgb(216 240 231 / 42%);
+    border: 1px solid rgb(13 107 87 / 13%);
+    border-radius: 0.95rem;
+    margin-bottom: 1rem;
+    padding: 1.2rem;
+  }
+
+  .vaccine-ordering h3,
+  .travel-alert h3 {
+    color: var(--color-brand-ink);
+    font-size: 1.2rem;
+    line-height: 1.1;
+    margin: 0 0 0.9rem;
+  }
+
+  .vaccine-steps {
+    gap: 1.2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .vaccine-step h4 {
+    color: var(--color-green);
+    font-size: 1rem;
+    margin: 0 0 0.35rem;
+  }
+
+  .vaccine-step p,
+  .travel-alert p,
+  .vaccine-item p {
+    color: #52605d;
+    font-weight: 650;
+    margin: 0;
+  }
+
+  .travel-alert {
+    align-items: stretch;
+    background: white;
+    border: 1px solid rgb(184 163 126 / 28%);
+    border-left: 6px solid var(--color-green);
+    border-radius: 0.95rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 96px 1fr;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .travel-mark {
+    align-items: center;
+    background: var(--color-green);
+    color: white;
+    display: flex;
+    font-size: 1.35rem;
+    font-weight: 900;
+    justify-content: center;
+    letter-spacing: 0.04em;
+    padding: 1rem;
+  }
+
+  .travel-alert div:last-child {
+    padding: 1rem 1rem 1rem 0;
+  }
+
+  .travel-alert h3 {
+    color: var(--color-green);
+    margin-bottom: 0.35rem;
+  }
+
+  .travel-alert a {
+    background: var(--color-mint);
+    border-radius: 999px;
+    color: var(--color-green);
+    display: inline-flex;
+    font-size: 0.92rem;
+    font-weight: 900;
+    margin-top: 0.85rem;
+    padding: 0.55rem 0.85rem;
+    text-decoration: none;
+  }
+
+  .vaccine-list {
+    margin-bottom: 1rem;
+  }
+
+  .vaccine-item {
+    background: white;
+    border: 1px solid rgb(184 163 126 / 28%);
+    border-radius: 0.85rem;
+    overflow: hidden;
+  }
+
+  .vaccine-item summary {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0.95rem 1rem;
+  }
+
+  .vaccine-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .vaccine-item summary strong {
+    color: var(--color-green);
+    display: block;
+    font-size: 1.05rem;
+    line-height: 1.15;
+  }
+
+  .vaccine-item summary small {
+    color: #6b7280;
+    display: block;
+    font-size: 0.86rem;
+    font-weight: 750;
+    margin-top: 0.2rem;
+  }
+
+  .chevron {
+    color: var(--color-brand-sand);
+    font-size: 1.4rem;
+    font-weight: 900;
+    transition: transform 160ms ease;
+  }
+
+  .vaccine-item[open] .chevron {
+    transform: rotate(180deg);
+  }
+
+  .vaccine-item p {
+    border-top: 1px solid rgb(184 163 126 / 20%);
+    padding: 0.95rem 1rem;
+  }
+
+  .quick-item,
+  .resource-link {
+    background: white;
+    border: 1px solid rgb(184 163 126 / 28%);
+    border-radius: 0.85rem;
+    display: grid;
+    gap: 0.25rem;
+    padding: 1rem;
+  }
+
+  .quick-item span {
+    color: var(--color-brand-ink);
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .quick-item strong,
+  .resource-link strong {
+    color: var(--color-green);
+    font-size: 1.08rem;
+    line-height: 1.2;
+  }
+
+  .resource-link {
+    text-decoration: none;
+    transition: border-color 160ms ease, transform 160ms ease;
+  }
+
+  .resource-link:hover,
+  .resource-link:focus-visible {
+    border-color: var(--color-green);
+    transform: translateY(-2px);
+  }
+
+  .resource-link p {
+    color: #52605d;
+    font-weight: 650;
+    margin: 0.35rem 0 0;
+  }
+
+  .resource-link small {
+    color: #6b7280;
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  .site-footer {
+    background: var(--color-brand-ink);
+    color: rgb(247 244 236 / 86%);
+    font-weight: 700;
+    padding: 1.25rem 1rem;
+    text-align: center;
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+
+  @media (max-width: 760px) {
+    body {
+      font-size: 16px;
+    }
+
+    .nav-shell {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: auto;
+    }
+
+    .nav-links {
+      gap: 1rem;
+      justify-content: flex-start;
+    }
+
+    .info-layout,
+    .quick-grid,
+    .resource-grid,
+    .vaccine-steps,
+    .travel-alert {
+      grid-template-columns: 1fr;
+    }
+
+    .travel-alert div:last-child {
+      padding: 1rem;
+    }
+  }
+</style>

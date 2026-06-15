@@ -1,12 +1,14 @@
 ---
 // Page data lives here so you can edit text, links, and images without hunting
 // through the HTML. Later, these arrays can move into separate files/components.
-const clinicName = 'Test legesenter';
+const clinicName = 'Vågsbygd legesenter';
 
 const navItems = [
-  { label: 'Hjem', href: '/' },
+  { label: 'Hjem', href: '/', active: true },
   { label: 'Ansatte', href: '/ansatte' },
   { label: 'Priser', href: '/priser' },
+  { label: 'Skjema', href: '/skjema' },
+  { label: 'Informasjon', href: '/informasjon' },
   { label: 'Kontakt', href: '/kontakt' },
 ];
 
@@ -37,35 +39,6 @@ const patientActions = [
   },
 ];
 
-const news = [
-  {
-    title: 'HPV hjemmetest',
-    text: 'Kvinner og andre med livmorhals som har utfordringer med å ta livmorhalsprøver, kan nå få HPV hjemmetest av fastlegen.',
-    href: 'https://www.kreftregisteret.no/screening/livmorhalsprogrammet/hvem-far-tilbud-om-hpv-hjemmetest/',
-    linkLabel: 'Les mer om HPV hjemmetest',
-    date: '16. mars 2025',
-  },
-];
-
-const galleryImages = [
-  {
-    src: 'https://storage.googleapis.com/prod_fastlegeweb_bucket/demo-legekontor/galleri/pexels-pavel-danilyuk-reception.jpg',
-    alt: 'Resepsjonsområdet til legekontoret',
-  },
-  {
-    src: 'https://storage.googleapis.com/prod_fastlegeweb_bucket/demo-legekontor/galleri/pexels-mart-production-UL.jpg',
-    alt: 'Ved behov kan ultralyd benyttes på legekontoret',
-  },
-  {
-    src: 'https://storage.googleapis.com/prod_fastlegeweb_bucket/demo-legekontor/galleri/pexels-shvetsa-mri.jpg',
-    alt: 'Illustrasjonsfoto med gjennomgang av MR- og røntgenbilder',
-  },
-  {
-    src: 'https://storage.googleapis.com/prod_fastlegeweb_bucket/demo-legekontor/galleri/pexels-firvntivcus-xray.jpg',
-    alt: 'Illustrasjonsfoto med gjennomgang av røntgenbilder',
-  },
-];
-
 // Small SVG helper keeps the action cards readable without depending on a large icon library.
 const icons = {
   calendar:
@@ -86,7 +59,7 @@ const icons = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Hjemmeside for Test legesenter med timebestilling, reseptfornyelse, aktuelt og kontaktinformasjon."
+      content="Hjemmeside for Vågsbygd legesenter med timebestilling, reseptfornyelse, aktuelt og kontaktinformasjon."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
@@ -101,12 +74,14 @@ const icons = {
   <body>
     <header class="site-header">
       <nav class="nav-shell" aria-label="Hovedmeny">
-        <a class="brand" href="/">{clinicName}</a>
+        <a class="brand" href="/">
+          <img class="brand-logo" src="/logo-title.png" alt={clinicName} />
+        </a>
 
         <div class="nav-links">
           {
             navItems.map((item) => (
-              <a href={item.href} class="nav-link">
+              <a href={item.href} class:list={['nav-link', item.active && 'is-active']} aria-current={item.active ? 'page' : undefined}>
                 {item.label}
               </a>
             ))
@@ -117,18 +92,23 @@ const icons = {
 
     <main>
       <section class="hero-section">
+        <div class="content-wrap hero-content">
+          <p class="hero-eyebrow">Velkommen til</p>
+          <h1>Vågsbygd<br />legesenter</h1>
+
+          <div class="hero-buttons" aria-label="Snarveier">
+            <a class="hero-button hero-button-primary" href="https://minhelse.helsenorge.no/fastlegen/bestill-time">
+              Timeavtale
+            </a>
+            <a class="hero-button" href="https://minhelse.helsenorge.no/fastlegen/forny-resept">
+              Resepter
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="action-section" aria-label="Digitale tjenester">
         <div class="content-wrap">
-          <h1>Velkommen til {clinicName}</h1>
-
-          <article class="notice-card" aria-label="Viktig beskjed">
-            <p class="notice-title">Heisen i ustand</p>
-            <p>
-              Dette er et testvarsel. Her går det an å informere pasientene om viktige beskjeder i
-              en spesifisert tidsperiode.
-            </p>
-            <time datetime="2025-02-13">13. februar 2025</time>
-          </article>
-
           <div class="action-grid" aria-label="Digitale tjenester">
             {
               patientActions.map((action) => (
@@ -150,70 +130,160 @@ const icons = {
         </div>
       </section>
 
-      <section class="section-heading">
-        <h2>Aktuelt</h2>
-      </section>
-
-      <section class="white-section">
-        <div class="content-wrap narrow-grid">
-          {
-            news.map((item) => (
-              <article class="news-card">
-                <div class="news-header">
-                  <h3>{item.title}</h3>
-                </div>
-                <div class="news-body">
-                  <p>{item.text}</p>
-                  <a class="button-link" href={item.href} target="_blank" rel="noreferrer">
-                    {item.linkLabel}
-                  </a>
-                  <time datetime="2025-03-16">{item.date}</time>
-                </div>
-              </article>
-            ))
-          }
+      <section class="notice-section">
+        <div class="content-wrap">
+          <article class="notice-card" aria-label="Viktig beskjed">
+            <p class="notice-title">Heisen i ustand</p>
+            <p>
+              Dette er et testvarsel. Her går det an å informere pasientene om viktige beskjeder i
+              en spesifisert tidsperiode.
+            </p>
+            <time datetime="2025-02-13">13. februar 2025</time>
+          </article>
         </div>
       </section>
 
-      <section class="section-heading">
-        <h2>Galleri</h2>
+      <section class="info-section" aria-labelledby="info-heading">
+        <div class="content-wrap">
+          <article class="info-card">
+            <div class="info-emergency">
+              <p class="info-label">Ved øyeblikkelig hjelp utenfor åpningstid</p>
+              <p>
+                Ring Hyrule legevakt på <a href="tel:116117">116117</a>, eller bruk
+                <a href="tel:113">113</a> ved akutte og livstruende tilstander. Hvis du hører
+                bossmusikk og mister tre hjerter på rad, ikke vent til mandag.
+              </p>
+            </div>
+
+            <div class="info-content">
+              <h2 id="info-heading">Viktig informasjon</h2>
+              <p>
+                Her er det viktigste de fleste pasienter trenger raskt. Vaksiner, bytte av fastlege
+                og andre nyttige lenker ligger samlet på informasjonssiden.
+              </p>
+
+              <div class="info-quick-grid">
+                <div class="info-quick-item">
+                  <span>Akutt time</span>
+                  <strong>Ring samme dag fra kl. 08:00</strong>
+                </div>
+                <div class="info-quick-item">
+                  <span>Tolk</span>
+                  <strong>Gi beskjed ved bestilling av time</strong>
+                </div>
+                <div class="info-quick-item">
+                  <span>Blodprøver</span>
+                  <strong>Må avtales med lege eller resepsjon</strong>
+                </div>
+                <div class="info-quick-item">
+                  <span>Attester</span>
+                  <strong>Bestilles via legekontoret</strong>
+                </div>
+                <div class="info-quick-item">
+                  <span>Prøvesvar</span>
+                  <strong>Kontakt legekontoret eller se Helsenorge dersom tilgjengelig</strong>
+                </div>
+                <div class="info-quick-item">
+                  <span>Avbestilling</span>
+                  <strong>Avbestill senest 24 timer før</strong>
+                </div>
+              </div>
+
+              <a class="info-link" href="/informasjon">Se vaksiner og nyttige lenker</a>
+            </div>
+          </article>
+        </div>
       </section>
 
-      <section class="white-section">
-        <div class="content-wrap gallery-grid">
-          {
-            galleryImages.map((image) => (
-              <figure class="gallery-card">
-                <img src={image.src} alt={image.alt} loading="lazy" />
-                <figcaption>{image.alt}</figcaption>
-              </figure>
-            ))
-          }
+      <section class="about-section" aria-labelledby="about-heading">
+        <div class="content-wrap about-layout">
+          <div class="about-content">
+            <p class="section-kicker">Om oss</p>
+            <h2 id="about-heading">Vågsbygd legesenter</h2>
+
+            <p>
+              Vågsbygd legesenter ligger sentralt i Hyrule, et par raske steg fra nærmeste stall og
+              akkurat langt nok unna Death Mountain til at resepsjonen slipper lavaskader i
+              venterommet.
+            </p>
+
+            <p>
+              Vi er et fastlegekontor med modige behandlere, helsesekretærer med bedre oversikt enn
+              et fullstendig kart og nok plaster til en middels krevende bossfight. Enten du trenger
+              time, reseptfornyelse eller en vurdering av hvorfor du plutselig hører bossmusikk,
+              møter vi deg med faglighet og hjertecontainer-varme.
+            </p>
+
+            <ul class="about-list" aria-label="Kort om legesenteret">
+              <li>Allmennlegekontor for Hylians, Gorons og slitne eventyrere</li>
+              <li>Null toleranse for uregistrerte cursed potions</li>
+              <li>Fastleger, helsesekretærer og høy rupee-moral</li>
+            </ul>
+          </div>
+
+          <div class="map-card image-card">
+            <img src="/sykehus.png" alt="Illustrasjon av Vågsbygd legesenter" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-map-section" aria-label="Åpningstider og kart">
+        <div class="contact-map-layout">
+          <aside class="contact-panel">
+            <div class="contact-block">
+              <h2>Åpningstider</h2>
+              <div class="hours-list">
+                <div class="hours-row">
+                  <span>Legekontor</span>
+                  <strong>Man-fre 08:00-15:00</strong>
+                </div>
+                <div class="hours-row">
+                  <span>Telefon</span>
+                  <strong>Man-fre 08:30-14:30</strong>
+                </div>
+                <div class="hours-row">
+                  <span>Laboratorium</span>
+                  <strong>Man-fre 08:15-14:00</strong>
+                </div>
+                <div class="hours-row">
+                  <span>Helg</span>
+                  <strong>Stengt</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-block">
+              <h2>Kontakt oss</h2>
+              <div class="contact-lines">
+                <p>Vardåsveien 69, 4637 Kristiansand</p>
+                <p><a href="tel:+4738128844">+47 38 12 88 44</a></p>
+              </div>
+            </div>
+
+            <div class="contact-note">
+              <span>Quest log</span>
+              <a href="/personvern">Personvern og cookies for Vågsbygd legesenter</a>
+            </div>
+          </aside>
+
+          <div class="contact-map">
+            <iframe
+              title="Kart til Vågsbygd legesenter"
+              src="https://www.google.com/maps?q=Vard%C3%A5sveien%2069%2C%204637%20Kristiansand&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div class="footer-grid">
-        <div>
-          <p class="footer-title">{clinicName}</p>
-          <p>Andebys gate 1, 1234 Andeby</p>
-        </div>
-
-        <nav aria-label="Bunnmeny">
-          <a href="/kontakt">Åpningstider</a>
-          <a href="/priser">Priser og tjenester</a>
-          <a href="/ansatte">Ansatte</a>
-          <a href="/tilgjengelighet">Tilgjengelighet</a>
-        </nav>
-
-        <address>
-          <a href="tel:+4712345678">12 34 56 78</a>
-          <a href="mailto:eksempeladresse@eksempelmail.no">eksempeladresse@eksempelmail.no</a>
-        </address>
-      </div>
-
-      <div class="footer-bottom">© 2026 {clinicName}</div>
+      <p>
+        © 2026 Hyrule Health Guild. Vågsbygd legesenter™, Master Sword Medical Systems™ og alle
+        rupee-relaterte venteromsavgifter er designet av Link Corporation. Ingen potter ble knust
+        under utviklingen.
+      </p>
     </footer>
   </body>
 </html>
@@ -221,14 +291,22 @@ const icons = {
 <style>
   :root {
     --color-primary: #12224b;
+    --color-brand-sand: #b8a37e;
+    --color-brand-cream: #f7f4ec;
+    --color-brand-ink: #4b3f2d;
     --color-primary-soft: #dce8f4;
     --color-heading-band: #c9dceb;
     --color-surface: #ffffff;
+    --color-action-panel: #d8f0e7;
+    --color-action-accent: #1f8a70;
+    --color-action-accent-strong: #0d6b57;
+    --color-action-card: #d8f0e7;
     --color-muted: #667085;
     --color-border: #d9e2ec;
     --color-warning: #fff0f0;
     --color-footer: #d8dee7;
     --shadow-soft: 0 16px 36px rgb(18 34 75 / 12%);
+    --action-card-overlap: 6rem;
   }
 
   * {
@@ -254,7 +332,8 @@ const icons = {
   }
 
   .site-header {
-    background: var(--color-surface);
+    background: var(--color-brand-cream);
+    border-bottom: 1px solid rgb(184 163 126 / 26%);
   }
 
   .nav-shell {
@@ -269,9 +348,16 @@ const icons = {
   }
 
   .brand {
-    font-size: clamp(1.7rem, 4vw, 2.5rem);
-    font-weight: 700;
+    align-items: center;
+    display: inline-flex;
     text-decoration: none;
+  }
+
+  .brand-logo {
+    display: block;
+    height: clamp(2.4rem, 5vw, 3.6rem);
+    object-fit: contain;
+    width: auto;
   }
 
   .nav-links {
@@ -282,25 +368,56 @@ const icons = {
   }
 
   .nav-link {
+    color: var(--color-brand-ink);
+    display: inline-flex;
     font-size: 1.25rem;
     font-weight: 500;
+    padding-bottom: 0.3rem;
+    position: relative;
     text-decoration: none;
   }
 
-  .nav-link:hover,
-  .nav-link:focus-visible {
-    text-decoration: underline;
-    text-underline-offset: 0.35em;
+  .nav-link::after {
+    background: var(--color-brand-sand);
+    border-radius: 999px;
+    bottom: 0;
+    content: '';
+    height: 3px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    transform: scaleX(0.65);
+    transform-origin: left;
+    transition: opacity 160ms ease, transform 160ms ease;
+    width: 100%;
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after,
+  .nav-link.is-active::after {
+    opacity: 1;
+    transform: scaleX(1);
   }
 
   .hero-section {
-    background: var(--color-primary-soft);
-    padding: 4rem 1rem 5rem;
+    align-items: center;
+    background-image: linear-gradient(rgb(18 73 105 / 54%), rgb(18 73 105 / 48%)),
+      url('https://images3.alphacoders.com/710/thumb-1920-710798.jpg');
+    background-position: center;
+    background-size: cover;
+    color: white;
+    display: flex;
+    min-height: 680px;
+    padding: 5rem 1rem 7.5rem;
   }
 
   .content-wrap {
     margin: 0 auto;
     max-width: 1120px;
+  }
+
+  .hero-content {
+    width: 100%;
   }
 
   h1,
@@ -311,17 +428,75 @@ const icons = {
   }
 
   h1 {
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-size: clamp(4.5rem, 7vw, 8.4rem);
+    font-weight: 800;
+    line-height: 0.92;
+    margin-bottom: 2rem;
+    max-width: 760px;
+    text-align: left;
+  }
+
+  .hero-eyebrow {
+    font-size: clamp(1rem, 1.8vw, 1.35rem);
+    font-style: italic;
+    font-weight: 700;
     line-height: 1.1;
-    margin-bottom: 2.5rem;
-    text-align: center;
+    margin-bottom: 1.1rem;
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .hero-button {
+    align-items: center;
+    background: white;
+    border-radius: 999px;
+    box-shadow: 0 10px 20px rgb(0 0 0 / 16%);
+    color: #101828;
+    display: inline-flex;
+    font-size: 1.25rem;
+    font-weight: 800;
+    justify-content: center;
+    min-width: 180px;
+    padding: 1rem 2.2rem;
+    text-decoration: none;
+  }
+
+  .hero-button-primary {
+    background: #1498d5;
+    color: white;
+  }
+
+  .action-section {
+    background: linear-gradient(
+      to bottom,
+      transparent 0,
+      rgb(255 255 255 / 52%) calc(var(--action-card-overlap) * 0.45),
+      var(--color-surface) var(--action-card-overlap)
+    );
+    margin-top: calc(-1 * var(--action-card-overlap));
+    padding: 0 1rem 3rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .action-section .content-wrap {
+    position: relative;
+  }
+
+  .notice-section {
+    background: var(--color-surface);
+    padding: 0 1rem 4rem;
   }
 
   .notice-card {
     background: var(--color-warning);
     border-radius: 1.5rem;
     box-shadow: var(--shadow-soft);
-    margin: 0 auto 3rem;
+    margin: 0 auto;
     max-width: 760px;
     padding: 1.5rem;
     text-align: center;
@@ -340,6 +515,105 @@ const icons = {
     font-size: 0.9rem;
   }
 
+  .info-section {
+    background: var(--color-surface);
+    padding: 0 1rem 4.5rem;
+  }
+
+  .info-card {
+    background: #fbfefd;
+    border: 1px solid rgb(13 107 87 / 12%);
+    border-radius: 1.5rem;
+    box-shadow: 0 18px 44px rgb(8 79 80 / 10%);
+    overflow: hidden;
+  }
+
+  .info-emergency {
+    background: #0d6b57;
+    color: white;
+    padding: 1.5rem clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .info-label {
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.45rem;
+    text-transform: uppercase;
+  }
+
+  .info-emergency p:last-child {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0;
+  }
+
+  .info-emergency a {
+    color: white;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+
+  .info-content {
+    padding: clamp(1.75rem, 4vw, 2.7rem);
+  }
+
+  .info-content h2 {
+    color: #063b33;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .info-content p,
+  .info-content li {
+    color: #39556b;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .info-quick-grid {
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1.8rem;
+  }
+
+  .info-quick-item {
+    background: rgb(216 240 231 / 48%);
+    border: 1px solid rgb(13 107 87 / 12%);
+    border-radius: 0.85rem;
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.95rem 1rem;
+  }
+
+  .info-quick-item span {
+    color: var(--color-green);
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .info-quick-item strong {
+    color: #063b33;
+    font-size: 1.02rem;
+    line-height: 1.2;
+  }
+
+  .info-link {
+    background: var(--color-green);
+    border-radius: 999px;
+    color: white;
+    display: inline-flex;
+    font-weight: 900;
+    margin-top: 1.6rem;
+    padding: 0.8rem 1.15rem;
+    text-decoration: none;
+  }
+
   .action-grid {
     display: grid;
     gap: 1.5rem;
@@ -349,9 +623,10 @@ const icons = {
 
   .action-card {
     align-items: stretch;
-    background: var(--color-surface);
+    background: var(--color-action-card);
     border-radius: 1.5rem;
-    box-shadow: var(--shadow-soft);
+    border: 1px solid rgb(13 107 87 / 14%);
+    box-shadow: 0 18px 40px rgb(31 138 112 / 16%);
     display: grid;
     grid-template-columns: minmax(110px, 30%) 1fr;
     min-height: 154px;
@@ -361,13 +636,13 @@ const icons = {
 
   .action-card:hover,
   .action-card:focus-visible {
-    outline: 3px solid rgb(18 34 75 / 22%);
+    outline: 3px solid rgb(21 154 138 / 24%);
     outline-offset: 4px;
   }
 
   .action-icon {
     align-items: center;
-    background: #f4f6f9;
+    background: var(--color-action-card);
     display: flex;
     justify-content: center;
     padding: 1.5rem;
@@ -376,7 +651,7 @@ const icons = {
   .action-icon :global(svg) {
     fill: none;
     height: 4.5rem;
-    stroke: #5d6673;
+    stroke: var(--color-action-accent-strong);
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.8;
@@ -389,6 +664,7 @@ const icons = {
   }
 
   .action-card strong {
+    color: #063b33;
     display: block;
     font-size: 1.35rem;
     line-height: 1.2;
@@ -396,6 +672,7 @@ const icons = {
   }
 
   .action-card small {
+    color: #245f55;
     display: block;
     font-size: 1rem;
   }
@@ -431,103 +708,241 @@ const icons = {
     padding: 3.5rem 1rem;
   }
 
-  .narrow-grid {
+  .about-section {
+    background: var(--color-surface);
+    padding: 4rem 1rem;
+  }
+
+  .about-layout {
+    align-items: stretch;
     display: grid;
-    justify-items: center;
+    gap: 3rem;
+    grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
   }
 
-  .news-card {
-    border-radius: 1.5rem;
-    box-shadow: var(--shadow-soft);
-    max-width: 620px;
-    overflow: hidden;
+  .about-content {
+    max-width: 560px;
   }
 
-  .news-header {
-    background: #edf3f8;
-    padding: 1.4rem 1.6rem 1rem;
-  }
-
-  .news-header h3 {
-    font-size: 1.6rem;
-    margin-bottom: 0;
-  }
-
-  .news-body {
-    padding: 1.6rem;
-  }
-
-  .button-link {
-    background: var(--color-heading-band);
-    border-radius: 0.75rem;
+  .section-kicker {
+    color: var(--color-brand-ink);
     display: inline-flex;
-    font-weight: 700;
-    margin: 0.5rem 0 1.5rem;
-    padding: 0.8rem 1rem;
-    text-decoration: none;
-  }
-
-  .gallery-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .gallery-card {
-    border-radius: 1.5rem;
-    box-shadow: var(--shadow-soft);
-    margin: 0;
-    overflow: hidden;
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    padding-bottom: 0.35rem;
     position: relative;
   }
 
-  .gallery-card img {
-    aspect-ratio: 4 / 3;
+  .section-kicker::after {
+    background: var(--color-brand-sand);
+    border-radius: 999px;
+    bottom: 0;
+    content: '';
+    height: 3px;
+    left: 0;
+    position: absolute;
+    width: 68%;
+  }
+
+  .about-content h2 {
+    color: #050505;
+    font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.96;
+    margin-bottom: 1.7rem;
+    max-width: 460px;
+  }
+
+  .about-content p {
+    color: #63666b;
+    font-size: clamp(1rem, 1.35vw, 1.18rem);
+    font-weight: 600;
+    line-height: 1.52;
+    margin-bottom: 1.35rem;
+  }
+
+  .about-list {
+    color: #63666b;
+    display: grid;
+    font-size: clamp(0.95rem, 1.25vw, 1.08rem);
+    font-weight: 700;
+    gap: 0.7rem;
+    list-style: none;
+    margin: 1.8rem 0 0;
+    padding: 0;
+  }
+
+  .about-list li {
+    align-items: center;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 34px 1fr;
+  }
+
+  .about-list li::before {
+    align-items: center;
+    background: #1498d5;
+    border-radius: 50%;
+    color: white;
+    content: '✓';
+    display: inline-flex;
+    font-size: 1.1rem;
+    font-weight: 900;
+    height: 24px;
+    justify-content: center;
+    width: 24px;
+  }
+
+  .map-card {
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    min-height: 440px;
+    overflow: hidden;
+  }
+
+  .map-card iframe {
+    border: 0;
+    display: block;
     height: 100%;
-    object-fit: cover;
+    min-height: 440px;
     width: 100%;
   }
 
-  .gallery-card figcaption {
-    background: rgb(0 0 0 / 56%);
-    bottom: 1rem;
-    border-radius: 0.75rem;
+  .image-card img {
+    height: 100%;
+    min-height: 440px;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+  }
+
+  .contact-map-section {
+    background: linear-gradient(180deg, var(--color-surface), var(--color-brand-cream));
+    padding: 4rem 1rem;
+  }
+
+  .contact-map-layout {
+    border-radius: 1.5rem;
+    box-shadow: 0 22px 60px rgb(75 63 45 / 16%);
+    display: grid;
+    grid-template-columns: minmax(340px, 0.42fr) minmax(0, 1fr);
+    margin: 0 auto;
+    max-width: 1180px;
+    min-height: 640px;
+    overflow: hidden;
+  }
+
+  .contact-panel {
+    background:
+      linear-gradient(135deg, rgb(184 163 126 / 18%) 0 1px, transparent 1px 15px),
+      linear-gradient(180deg, rgb(8 40 34 / 92%), rgb(3 31 27 / 88%));
+    backdrop-filter: blur(8px);
+    border: 1px solid rgb(247 244 236 / 20%);
+    box-shadow: 0 22px 46px rgb(0 0 0 / 28%);
     color: white;
-    left: 1rem;
-    padding: 0.75rem 1rem;
-    position: absolute;
-    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.55rem;
+    padding: clamp(2rem, 4vw, 3rem);
+  }
+
+  .contact-block {
+    border-bottom: 1px solid rgb(184 163 126 / 38%);
+    padding-bottom: 1.55rem;
+  }
+
+  .contact-block h2 {
+    color: white;
+    font-size: clamp(1.65rem, 3vw, 2.7rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 2px 0 rgb(0 0 0 / 14%);
+    text-transform: uppercase;
+  }
+
+  .hours-list {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .hours-row {
+    background: rgb(247 244 236 / 12%);
+    border: 1px solid rgb(184 163 126 / 34%);
+    border-radius: 0.75rem;
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.8rem 0.9rem;
+  }
+
+  .hours-row span,
+  .contact-note span {
+    color: #eadcc4;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .hours-row strong {
+    color: white;
+    font-size: 1.02rem;
+    line-height: 1.15;
+  }
+
+  .contact-lines {
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .contact-lines p,
+  .contact-note a {
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .contact-block a,
+  .contact-note a {
+    color: white;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+
+  .contact-note {
+    background: rgb(75 63 45 / 28%);
+    border: 1px solid rgb(184 163 126 / 36%);
+    border-radius: 0.9rem;
+    display: grid;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding: 1rem;
+  }
+
+  .contact-map iframe {
+    border: 0;
+    display: block;
+    height: 100%;
+    min-height: 640px;
+    width: 100%;
   }
 
   .site-footer {
-    background: var(--color-footer);
-  }
-
-  .footer-grid {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 1.3fr 1fr 1.3fr;
-    margin: 0 auto;
-    max-width: 1120px;
-    padding: 3rem 1.5rem;
-  }
-
-  .footer-title {
-    font-size: 1.35rem;
+    background: var(--color-brand-ink);
+    color: rgb(247 244 236 / 86%);
+    font-size: 0.95rem;
     font-weight: 700;
-  }
-
-  .footer-grid nav,
-  .footer-grid address {
-    display: grid;
-    font-style: normal;
-    gap: 0.75rem;
-  }
-
-  .footer-bottom {
-    background: #c6d0dc;
-    padding: 1rem;
+    padding: 1.25rem 1rem;
     text-align: center;
+  }
+
+  .site-footer p {
+    margin: 0 auto;
+    max-width: 980px;
   }
 
   @media (max-width: 760px) {
@@ -547,14 +962,60 @@ const icons = {
       justify-content: flex-start;
     }
 
+    .brand-logo {
+      height: 2.6rem;
+    }
+
     .hero-section {
-      padding-top: 3rem;
+      min-height: 560px;
+      padding: 4rem 1rem 6rem;
+    }
+
+    h1 {
+      font-size: clamp(3.4rem, 18vw, 5.2rem);
+    }
+
+    .hero-buttons {
+      gap: 0.8rem;
+    }
+
+    .hero-button {
+      min-width: 140px;
+      padding: 0.85rem 1.4rem;
+    }
+
+    .action-section .content-wrap {
+      margin-top: -3rem;
     }
 
     .action-grid,
-    .gallery-grid,
-    .footer-grid {
+    .about-layout,
+    .info-quick-grid,
+    .footer-grid,
+    .contact-map-layout {
       grid-template-columns: 1fr;
+    }
+
+    .about-section {
+      padding: 3rem 1rem;
+    }
+
+    .about-content {
+      max-width: none;
+    }
+
+    .map-card,
+    .map-card iframe,
+    .image-card img {
+      min-height: 340px;
+    }
+
+    .contact-panel {
+      gap: 1.8rem;
+    }
+
+    .contact-map iframe {
+      min-height: 360px;
     }
 
     .action-card {
@@ -569,10 +1030,6 @@ const icons = {
 
     .action-card small {
       display: none;
-    }
-
-    .gallery-card figcaption {
-      position: static;
     }
   }
 </style>

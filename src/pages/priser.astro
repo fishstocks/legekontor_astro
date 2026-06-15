@@ -1,0 +1,441 @@
+---
+const clinicName = 'Vågsbygd legesenter';
+
+const navItems = [
+  { label: 'Hjem', href: '/' },
+  { label: 'Ansatte', href: '/ansatte' },
+  { label: 'Priser', href: '/priser', active: true },
+  { label: 'Skjema', href: '/skjema' },
+  { label: 'Informasjon', href: '/informasjon' },
+  { label: 'Kontakt', href: '/kontakt' },
+];
+
+const frikortPrices = [
+  ['Konsultasjon hos allmennpraktiserende lege på dagtid/kveld, legevakt', '179 / 301'],
+  ['Sykebesøk på dagtid/kveld', '240 / 384'],
+  ['Tillegg hos spesialist i allmennmedisin ved konsultasjon/sykebesøk', '56 / 41'],
+  [
+    'Enkel pasientkontakt, forespørsel, rådgivning, sykmelding, rekvisisjon til røntgen/fysioterapi og henvisning til spesialist ved fremmøte, bud',
+    '64',
+  ],
+  ['Tillegg for taking av blodprøver og andre prøver', '64'],
+  [
+    'Taking og undersøkelse av hemoglobin, blodsenkning og telling av hvite blodlegemer og mikroskopering av urinsediment',
+    '62',
+  ],
+];
+
+const otherPrices = [
+  ['Tillegg for konsultasjon/sykebesøk for pasient utenfor fastlegeordningen', '127'],
+  [
+    'Tillegg for materiell ved bestemte prosedyrer: Gynekologisk undersøkelse, enkle elastiske bind m.m.',
+    '75',
+  ],
+  [
+    'Tillegg for materiell ved bestemte prosedyrer: Spirometri, EKG, rektoskopi, enkelt sårskift m.m.',
+    '113',
+  ],
+  [
+    'Tillegg for materiell ved bestemte prosedyrer: Kateterisering, mindre kirurgiske inngrep, lim m.m.',
+    '161',
+  ],
+  [
+    'Tillegg for materiell ved bestemte prosedyrer: Større kirurgiske inngrep, større sårskift m.m.',
+    '219',
+  ],
+  ['Tillegg for spesielt materiell, medisiner, spiral, kateter, gips, vaksiner, ortoser m.v.', 'Etter kostnad'],
+  [
+    'Ekspedisjonsgebyr ved forsendelse av resepter, rekvisisjoner, henvisninger osv. per brev, faks, telefon, e-post etter ønske fra pasienten',
+    '59',
+  ],
+  [
+    'For bestilt enkelttime som avbestilles senere enn 24 timer før avtalt time eller ikke benyttes hos allmennlege/spesialist',
+    '193 / 313',
+  ],
+  [
+    'Når legen må kreve inn ubetalt honorar kan legen i tillegg til honoraret belaste pasienten for legekontorets kostnader vedrørende dette',
+    'Etter kostnad',
+  ],
+];
+---
+
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Priser - {clinicName}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav-shell" aria-label="Hovedmeny">
+        <a class="brand" href="/">
+          <img class="brand-logo" src="/logo-title.png" alt={clinicName} />
+        </a>
+
+        <div class="nav-links">
+          {
+            navItems.map((item) => (
+              <a href={item.href} class:list={['nav-link', item.active && 'is-active']} aria-current={item.active ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="content-wrap">
+          <p class="section-kicker">Priser</p>
+          <h1>Priser hos fastlegen</h1>
+          <p>
+            Gjeldende fra 1. juli 2024 til 30. juni 2025. Legen skal gi deg kvittering for beløpet
+            du har betalt.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="content-wrap price-layout">
+          <article class="price-note">
+            <h2>Betaling</h2>
+            <p>
+              Noen egenandeler inngår i frikortgrunnlaget. Andre tillegg, materiell og gebyrer gjør
+              ikke det. Ingen rupees, kun vanlig betaling.
+            </p>
+          </article>
+
+          <div class="price-tables">
+            <section class="price-table-card" aria-labelledby="frikort-heading">
+              <h2 id="frikort-heading">Egenandeler som inngår i frikortgrunnlaget</h2>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Tjeneste</th>
+                      <th scope="col">Kroner</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      frikortPrices.map(([service, amount]) => (
+                        <tr>
+                          <td>{service}</td>
+                          <td>{amount}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="price-table-card" aria-labelledby="other-heading">
+              <h2 id="other-heading">Annet som ikke inngår i frikortgrunnlaget</h2>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Tjeneste</th>
+                      <th scope="col">Kroner</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      otherPrices.map(([service, amount]) => (
+                        <tr>
+                          <td>{service}</td>
+                          <td>{amount}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Hyrule Health Guild. Designet av Link Corporation.</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --color-primary: #12224b;
+    --color-brand-sand: #b8a37e;
+    --color-brand-cream: #f7f4ec;
+    --color-brand-ink: #4b3f2d;
+    --color-green: #0d6b57;
+    --color-mint: #d8f0e7;
+    --shadow-soft: 0 16px 36px rgb(18 34 75 / 12%);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-brand-cream);
+    color: var(--color-primary);
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .site-header {
+    background: var(--color-brand-cream);
+    border-bottom: 1px solid rgb(184 163 126 / 26%);
+  }
+
+  .nav-shell,
+  .content-wrap {
+    margin: 0 auto;
+    max-width: 1120px;
+  }
+
+  .nav-shell {
+    align-items: center;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    min-height: 96px;
+    padding: 1rem 1.5rem;
+  }
+
+  .brand-logo {
+    display: block;
+    height: clamp(2.4rem, 5vw, 3.6rem);
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: flex-end;
+  }
+
+  .nav-link {
+    color: var(--color-brand-ink);
+    display: inline-flex;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding-bottom: 0.3rem;
+    position: relative;
+    text-decoration: none;
+  }
+
+  .nav-link::after,
+  .section-kicker::after {
+    background: var(--color-brand-sand);
+    border-radius: 999px;
+    bottom: 0;
+    content: '';
+    height: 3px;
+    left: 0;
+    position: absolute;
+  }
+
+  .nav-link::after {
+    opacity: 0;
+    transform: scaleX(0.65);
+    transform-origin: left;
+    transition: opacity 160ms ease, transform 160ms ease;
+    width: 100%;
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after,
+  .nav-link.is-active::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .page-hero {
+    background: linear-gradient(135deg, var(--color-brand-cream), #ffffff);
+    padding: 4rem 1.5rem 2rem;
+  }
+
+  .section-kicker {
+    color: var(--color-brand-ink);
+    display: inline-flex;
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin: 0 0 1rem;
+    padding-bottom: 0.35rem;
+    position: relative;
+  }
+
+  .section-kicker::after {
+    width: 68%;
+  }
+
+  h1 {
+    color: var(--color-brand-ink);
+    font-size: clamp(3rem, 7vw, 5.8rem);
+    font-weight: 900;
+    line-height: 0.95;
+    margin: 0 0 1rem;
+    max-width: 760px;
+  }
+
+  .page-hero p:not(.section-kicker) {
+    color: #5f6470;
+    font-size: 1.2rem;
+    font-weight: 700;
+    max-width: 680px;
+  }
+
+  .content-section {
+    background: white;
+    padding: 3.5rem 1.5rem 5rem;
+  }
+
+  .price-layout {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 0.38fr 1fr;
+  }
+
+  .price-note,
+  .price-table-card {
+    border-radius: 1rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .price-note {
+    align-self: start;
+    background: linear-gradient(180deg, #0d6b57, #063b33);
+    color: white;
+    padding: 1.5rem;
+  }
+
+  .price-note h2 {
+    font-size: 2rem;
+    line-height: 1;
+    margin: 0 0 1rem;
+  }
+
+  .price-note p {
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .price-tables {
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  .price-table-card {
+    background: #fbfefd;
+    border: 1px solid rgb(13 107 87 / 13%);
+    overflow: hidden;
+  }
+
+  .price-table-card h2 {
+    color: var(--color-green);
+    font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+    line-height: 1.1;
+    margin: 0;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    min-width: 720px;
+    width: 100%;
+  }
+
+  th,
+  td {
+    border-top: 1px solid rgb(13 107 87 / 12%);
+    padding: 0.9rem 1.4rem;
+    vertical-align: top;
+  }
+
+  th {
+    background: var(--color-mint);
+    color: var(--color-green);
+    font-size: 0.9rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  td {
+    color: #52605d;
+    font-size: 1rem;
+    font-weight: 650;
+  }
+
+  th:last-child,
+  td:last-child {
+    color: var(--color-brand-ink);
+    font-weight: 900;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) {
+    background: rgb(216 240 231 / 22%);
+  }
+
+  .site-footer {
+    background: var(--color-brand-ink);
+    color: rgb(247 244 236 / 86%);
+    font-weight: 700;
+    padding: 1.25rem 1rem;
+    text-align: center;
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+
+  @media (max-width: 760px) {
+    body {
+      font-size: 16px;
+    }
+
+    .nav-shell {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: auto;
+    }
+
+    .nav-links {
+      gap: 1rem;
+      justify-content: flex-start;
+    }
+
+    .price-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

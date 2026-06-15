@@ -1,0 +1,457 @@
+---
+const clinicName = 'Vågsbygd legesenter';
+
+const navItems = [
+  { label: 'Hjem', href: '/' },
+  { label: 'Ansatte', href: '/ansatte' },
+  { label: 'Priser', href: '/priser' },
+  { label: 'Skjema', href: '/skjema', active: true },
+  { label: 'Informasjon', href: '/informasjon' },
+  { label: 'Kontakt', href: '/kontakt' },
+];
+
+const categories = [
+  {
+    title: 'Psykisk helse',
+    text: 'Skjema som kan hjelpe legen å forstå symptomer og følge opp behandling.',
+    forms: [
+      { title: 'PHQ-9', text: 'Kartlegging av depresjonssymptomer.', href: 'https://fastlegen.com/spors/mediQuest.html?nr=141' },
+      { title: 'GAD-7', text: 'Kartlegging av angstplager.', href: 'https://fastlegen.com/spors/mediQuest.html?nr=140' },
+      { title: 'ADHD Del A', text: 'Første del av ADHD-kartlegging for voksne.', href: 'https://fastlegen.com/spors/mediQuest.html?nr=164' },
+      { title: 'ADHD Del B', text: 'Andre del av ADHD-kartlegging for voksne.', href: 'https://fastlegen.com/spors/mediQuest.html?nr=165' },
+      { title: 'MADRS', text: 'Grundigere vurdering av depresjonssymptomer.', href: 'https://fastlegen.com/spors/mediQuest.html?nr=170' },
+    ],
+  },
+  {
+    title: 'Fysisk helse',
+    text: 'Skjema for plager som påvirker funksjon, aktivitet eller hverdagsliv.',
+    forms: [
+      { title: 'IPSS', text: 'Vurdering av vannlatingsplager hos menn.', href: 'https://fastlegen.com/spors/mediQuest.html?nr=50' },
+      { title: 'Rygg funksjonsvurdering', text: 'Kartlegger hvordan ryggplager påvirker aktivitet.', href: 'https://fastlegen.com/spors/mediQuest.html?nr=154' },
+      { title: 'Norsk funksjonsskjema', text: 'Vurdering av arbeidsevne og daglig funksjon.', href: 'https://fastlegen.com/spors/mediQuest.html?nr=188' },
+    ],
+  },
+  {
+    title: 'Livsstil',
+    text: 'Enkle kartleggingsverktøy for søvn, alkohol og andre helsevaner.',
+    forms: [
+      { title: 'Epworth søvnighetsskala', text: 'Vurderer grad av dagtretthet.', href: 'https://fastlegen.com/spors/mediQuest.html?nr=156' },
+      { title: 'AUDIT', text: 'Kartlegging av alkoholvaner.', href: 'https://fastlegen.com/spors/mediQuest.html?nr=171' },
+    ],
+  },
+];
+
+const eConsultationForms = [
+  {
+    title: 'Urinveisinfeksjon, kvinne',
+    text: 'For kvinner med symptomer på urinveisinfeksjon. Gir legen rask oversikt over plagene.',
+    href: 'https://fastlegen.com/spors/mediQuest.html?nr=139',
+  },
+  {
+    title: 'Luftveissymptomer',
+    text: 'Ved hoste, tetthet eller andre luftveisplager.',
+    href: 'https://fastlegen.com/spors/mediQuest.html?nr=149',
+  },
+  {
+    title: 'Depresjon, forløp',
+    text: 'For oppfølging av depresjonsbehandling over tid.',
+    href: 'https://fastlegen.com/spors/mediQuest.html?nr=151',
+  },
+  {
+    title: 'Diare/oppkast',
+    text: 'Ved mage-tarm-plager som diare eller oppkast.',
+    href: 'https://fastlegen.com/spors/mediQuest.html?nr=169',
+  },
+  {
+    title: 'Kviser',
+    text: 'For vurdering av kviser og hudproblemer.',
+    href: 'https://fastlegen.com/spors/mediQuest.html?nr=174',
+  },
+  {
+    title: 'Øyekatarr/øyeinfeksjon',
+    text: 'Ved røde, rennende eller irriterte øyne.',
+    href: 'https://fastlegen.com/spors/mediQuest.html?nr=177',
+  },
+  {
+    title: 'Vondt i halsen',
+    text: 'Ved sår hals eller svelgplager.',
+    href: 'https://fastlegen.com/spors/mediQuest.html?nr=52',
+  },
+  {
+    title: 'Ryggsmerter',
+    text: 'Ved akutte eller langvarige ryggsmerter.',
+    href: 'https://fastlegen.com/spors/mediQuest.html?nr=48',
+  },
+];
+---
+
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Skjema - {clinicName}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav-shell" aria-label="Hovedmeny">
+        <a class="brand" href="/">
+          <img class="brand-logo" src="/logo-title.png" alt={clinicName} />
+        </a>
+
+        <div class="nav-links">
+          {
+            navItems.map((item) => (
+              <a href={item.href} class:list={['nav-link', item.active && 'is-active']} aria-current={item.active ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="content-wrap">
+          <p class="section-kicker">Skjema</p>
+          <h1>Quest log for helsa</h1>
+          <p>
+            Skjemaene åpnes eksternt. Fyll dem bare ut dersom legekontoret eller legen har bedt om
+            det, ellers blir journalen fort like full som en eventyrsekk.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="content-wrap category-list">
+          {
+            categories.map((category, index) => (
+              <section class="category-card" aria-labelledby={`category-${index}-heading`}>
+                <div class="category-header">
+                  <h2 id={`category-${index}-heading`}>{category.title}</h2>
+                  <p>{category.text}</p>
+                </div>
+
+                <div class="form-grid">
+                  {
+                    category.forms.map((form) => (
+                      <a class="form-card" href={form.href} target="_blank" rel="noreferrer">
+                        <span class="form-icon" aria-hidden="true">□</span>
+                        <span>
+                          <strong>{form.title}</strong>
+                          <small>{form.text}</small>
+                        </span>
+                      </a>
+                    ))
+                  }
+                </div>
+              </section>
+            ))
+          }
+
+          <section class="category-card econsult-card" aria-labelledby="econsult-heading">
+            <div class="category-header">
+              <h2 id="econsult-heading">E-konsultasjon</h2>
+              <p>
+                Skjemaer du kan fylle ut før du oppretter e-konsultasjon. Lim ferdig tekst inn i
+                e-konsultasjonen, og legg gjerne til egne opplysninger.
+              </p>
+            </div>
+
+            <div class="form-grid">
+              {
+                eConsultationForms.map((form) => (
+                  <a class="form-card" href={form.href} target="_blank" rel="noreferrer">
+                    <span class="form-icon" aria-hidden="true">□</span>
+                    <span>
+                      <strong>{form.title}</strong>
+                      <small>{form.text}</small>
+                    </span>
+                  </a>
+                ))
+              }
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Hyrule Health Guild. Designet av Link Corporation.</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --color-primary: #12224b;
+    --color-brand-sand: #b8a37e;
+    --color-brand-cream: #f7f4ec;
+    --color-brand-ink: #4b3f2d;
+    --color-green: #0d6b57;
+    --color-mint: #d8f0e7;
+    --shadow-soft: 0 16px 36px rgb(18 34 75 / 12%);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-brand-cream);
+    color: var(--color-primary);
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .site-header {
+    background: var(--color-brand-cream);
+    border-bottom: 1px solid rgb(184 163 126 / 26%);
+  }
+
+  .nav-shell,
+  .content-wrap {
+    margin: 0 auto;
+    max-width: 1120px;
+  }
+
+  .nav-shell {
+    align-items: center;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    min-height: 96px;
+    padding: 1rem 1.5rem;
+  }
+
+  .brand-logo {
+    display: block;
+    height: clamp(2.4rem, 5vw, 3.6rem);
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: flex-end;
+  }
+
+  .nav-link {
+    color: var(--color-brand-ink);
+    display: inline-flex;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding-bottom: 0.3rem;
+    position: relative;
+    text-decoration: none;
+  }
+
+  .nav-link::after,
+  .section-kicker::after {
+    background: var(--color-brand-sand);
+    border-radius: 999px;
+    bottom: 0;
+    content: '';
+    height: 3px;
+    left: 0;
+    position: absolute;
+  }
+
+  .nav-link::after {
+    opacity: 0;
+    transform: scaleX(0.65);
+    transform-origin: left;
+    transition: opacity 160ms ease, transform 160ms ease;
+    width: 100%;
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after,
+  .nav-link.is-active::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .page-hero {
+    background: linear-gradient(135deg, var(--color-brand-cream), #ffffff);
+    padding: 4rem 1.5rem 2rem;
+  }
+
+  .section-kicker {
+    color: var(--color-brand-ink);
+    display: inline-flex;
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin: 0 0 1rem;
+    padding-bottom: 0.35rem;
+    position: relative;
+  }
+
+  .section-kicker::after {
+    width: 68%;
+  }
+
+  h1 {
+    color: var(--color-brand-ink);
+    font-size: clamp(3rem, 7vw, 5.8rem);
+    font-weight: 900;
+    line-height: 0.95;
+    margin: 0 0 1rem;
+    max-width: 760px;
+  }
+
+  .page-hero p:not(.section-kicker) {
+    color: #5f6470;
+    font-size: 1.2rem;
+    font-weight: 700;
+    max-width: 720px;
+  }
+
+  .content-section {
+    background: white;
+    padding: 3.5rem 1.5rem 5rem;
+  }
+
+  .category-list {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .category-card {
+    background: #fbfefd;
+    border: 1px solid rgb(13 107 87 / 13%);
+    border-radius: 1.2rem;
+    box-shadow: var(--shadow-soft);
+    padding: clamp(1.3rem, 3vw, 2rem);
+  }
+
+  .econsult-card {
+    background: linear-gradient(180deg, #fbfefd 0%, rgb(216 240 231 / 42%) 100%);
+  }
+
+  .category-header {
+    align-items: start;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 0.35fr 1fr;
+    margin-bottom: 1.3rem;
+  }
+
+  .category-header h2 {
+    color: var(--color-green);
+    font-size: 2rem;
+    line-height: 1;
+    margin: 0;
+  }
+
+  .category-header p {
+    color: #52605d;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .form-grid {
+    display: grid;
+    gap: 0.9rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .form-card {
+    align-items: center;
+    background: white;
+    border: 1px solid rgb(184 163 126 / 28%);
+    border-radius: 0.85rem;
+    display: grid;
+    gap: 0.9rem;
+    grid-template-columns: 42px 1fr;
+    padding: 1rem;
+    text-decoration: none;
+    transition: transform 160ms ease, border-color 160ms ease;
+  }
+
+  .form-card:hover,
+  .form-card:focus-visible {
+    border-color: var(--color-green);
+    transform: translateY(-2px);
+  }
+
+  .form-icon {
+    align-items: center;
+    background: var(--color-mint);
+    border-radius: 0.55rem;
+    color: var(--color-green);
+    display: inline-flex;
+    font-size: 1.4rem;
+    font-weight: 900;
+    height: 42px;
+    justify-content: center;
+    width: 42px;
+  }
+
+  .form-card strong {
+    color: var(--color-brand-ink);
+    display: block;
+    font-size: 1.12rem;
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+  }
+
+  .form-card small {
+    color: #52605d;
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  .site-footer {
+    background: var(--color-brand-ink);
+    color: rgb(247 244 236 / 86%);
+    font-weight: 700;
+    padding: 1.25rem 1rem;
+    text-align: center;
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+
+  @media (max-width: 760px) {
+    body {
+      font-size: 16px;
+    }
+
+    .nav-shell {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: auto;
+    }
+
+    .nav-links {
+      gap: 1rem;
+      justify-content: flex-start;
+    }
+
+    .category-header,
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,363 @@
+---
+const clinicName = 'Vågsbygd legesenter';
+
+const navItems = [
+  { label: 'Hjem', href: '/' },
+  { label: 'Ansatte', href: '/ansatte' },
+  { label: 'Priser', href: '/priser' },
+  { label: 'Skjema', href: '/skjema' },
+  { label: 'Informasjon', href: '/informasjon' },
+  { label: 'Kontakt', href: '/kontakt', active: true },
+];
+
+const hours = [
+  ['Legekontor', 'Man-fre 08:00-15:00'],
+  ['Telefon', 'Man-fre 08:30-14:30'],
+  ['Laboratorium', 'Man-fre 08:15-14:00'],
+  ['Helg', 'Stengt'],
+];
+---
+
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Kontakt - {clinicName}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav-shell" aria-label="Hovedmeny">
+        <a class="brand" href="/">
+          <img class="brand-logo" src="/logo-title.png" alt={clinicName} />
+        </a>
+
+        <div class="nav-links">
+          {
+            navItems.map((item) => (
+              <a href={item.href} class:list={['nav-link', item.active && 'is-active']} aria-current={item.active ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="content-wrap">
+          <p class="section-kicker">Kontakt</p>
+          <h1>Finn veien hit</h1>
+          <p>
+            Ring oss for øyeblikkelig hjelp-time, tolk, praktiske spørsmål eller hvis kartet plutselig
+            peker deg mot Lost Woods.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="contact-map-layout">
+          <aside class="contact-panel">
+            <div class="contact-block">
+              <h2>Åpningstider</h2>
+              <div class="hours-list">
+                {
+                  hours.map(([label, value]) => (
+                    <div class="hours-row">
+                      <span>{label}</span>
+                      <strong>{value}</strong>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+
+            <div class="contact-block">
+              <h2>Kontakt oss</h2>
+              <p>Vardåsveien 69, 4637 Kristiansand</p>
+              <p><a href="tel:+4738128844">+47 38 12 88 44</a></p>
+            </div>
+          </aside>
+
+          <div class="contact-map">
+            <iframe
+              title="Kart til Vågsbygd legesenter"
+              src="https://www.google.com/maps?q=Vard%C3%A5sveien%2069%2C%204637%20Kristiansand&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Hyrule Health Guild. Designet av Link Corporation.</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --color-primary: #12224b;
+    --color-brand-sand: #b8a37e;
+    --color-brand-cream: #f7f4ec;
+    --color-brand-ink: #4b3f2d;
+    --color-green: #0d6b57;
+    --shadow-soft: 0 16px 36px rgb(18 34 75 / 12%);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-brand-cream);
+    color: var(--color-primary);
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .site-header {
+    background: var(--color-brand-cream);
+    border-bottom: 1px solid rgb(184 163 126 / 26%);
+  }
+
+  .nav-shell,
+  .content-wrap {
+    margin: 0 auto;
+    max-width: 1120px;
+  }
+
+  .nav-shell {
+    align-items: center;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    min-height: 96px;
+    padding: 1rem 1.5rem;
+  }
+
+  .brand-logo {
+    display: block;
+    height: clamp(2.4rem, 5vw, 3.6rem);
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: flex-end;
+  }
+
+  .nav-link {
+    color: var(--color-brand-ink);
+    display: inline-flex;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding-bottom: 0.3rem;
+    position: relative;
+    text-decoration: none;
+  }
+
+  .nav-link::after,
+  .section-kicker::after {
+    background: var(--color-brand-sand);
+    border-radius: 999px;
+    bottom: 0;
+    content: '';
+    height: 3px;
+    left: 0;
+    position: absolute;
+  }
+
+  .nav-link::after {
+    opacity: 0;
+    transform: scaleX(0.65);
+    transform-origin: left;
+    transition: opacity 160ms ease, transform 160ms ease;
+    width: 100%;
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after,
+  .nav-link.is-active::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .page-hero {
+    background: linear-gradient(135deg, var(--color-brand-cream), #ffffff);
+    padding: 4rem 1.5rem 2rem;
+  }
+
+  .section-kicker {
+    color: var(--color-brand-ink);
+    display: inline-flex;
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin: 0 0 1rem;
+    padding-bottom: 0.35rem;
+    position: relative;
+  }
+
+  .section-kicker::after {
+    width: 68%;
+  }
+
+  h1 {
+    color: var(--color-brand-ink);
+    font-size: clamp(3rem, 7vw, 5.8rem);
+    font-weight: 900;
+    line-height: 0.95;
+    margin: 0 0 1rem;
+    max-width: 760px;
+  }
+
+  .page-hero p:not(.section-kicker) {
+    color: #5f6470;
+    font-size: 1.2rem;
+    font-weight: 700;
+    max-width: 720px;
+  }
+
+  .content-section {
+    background: linear-gradient(180deg, white, var(--color-brand-cream));
+    padding: 3.5rem 1.5rem 5rem;
+  }
+
+  .contact-map-layout {
+    border-radius: 1.5rem;
+    box-shadow: 0 22px 60px rgb(75 63 45 / 16%);
+    display: grid;
+    grid-template-columns: minmax(340px, 0.42fr) minmax(0, 1fr);
+    margin: 0 auto;
+    max-width: 1180px;
+    min-height: 640px;
+    overflow: hidden;
+  }
+
+  .contact-panel {
+    background:
+      linear-gradient(135deg, rgb(184 163 126 / 18%) 0 1px, transparent 1px 15px),
+      linear-gradient(180deg, rgb(8 40 34 / 92%), rgb(3 31 27 / 88%));
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
+    padding: clamp(2rem, 4vw, 3rem);
+  }
+
+  .contact-block {
+    border-bottom: 1px solid rgb(184 163 126 / 38%);
+    padding-bottom: 1.6rem;
+  }
+
+  .contact-block h2 {
+    color: white;
+    font-size: clamp(1.65rem, 3vw, 2.7rem);
+    font-weight: 900;
+    line-height: 1;
+    margin: 0 0 1.2rem;
+    text-transform: uppercase;
+  }
+
+  .hours-list {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .hours-row {
+    background: rgb(247 244 236 / 12%);
+    border: 1px solid rgb(184 163 126 / 34%);
+    border-radius: 0.75rem;
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.8rem 0.9rem;
+  }
+
+  .hours-row span {
+    color: #eadcc4;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .hours-row strong,
+  .contact-block p {
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 0.7rem;
+  }
+
+  .contact-block a {
+    color: white;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+
+  .contact-map iframe {
+    border: 0;
+    display: block;
+    height: 100%;
+    min-height: 640px;
+    width: 100%;
+  }
+
+  .site-footer {
+    background: var(--color-brand-ink);
+    color: rgb(247 244 236 / 86%);
+    font-weight: 700;
+    padding: 1.25rem 1rem;
+    text-align: center;
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+
+  @media (max-width: 760px) {
+    body {
+      font-size: 16px;
+    }
+
+    .nav-shell {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: auto;
+    }
+
+    .nav-links {
+      gap: 1rem;
+      justify-content: flex-start;
+    }
+
+    .contact-map-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-map iframe {
+      min-height: 360px;
+    }
+  }
+</style>

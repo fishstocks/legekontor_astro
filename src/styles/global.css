@@ -3586,12 +3586,16 @@ p {
   margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
 }
 
+.price-list-header h1 {
+  margin-top: 0.45rem;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+}
+
 .price-list-header__period {
   width: fit-content;
   margin-top: 1.25rem;
-  padding: 0.55rem 0.8rem;
-  border-left: 3px solid var(--kelp);
-  background: var(--pastel-sand-soft);
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--kelp);
   color: var(--fjord);
   font-weight: 670;
 }
@@ -3603,23 +3607,85 @@ p {
   color: var(--muted);
 }
 
+.price-frikort {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+  align-items: center;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  padding: clamp(1.4rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2rem);
+  border-block: 1px solid #a8c9c6;
+  background: var(--pastel-sea-soft);
+}
+
+.price-frikort > svg {
+  width: clamp(3.1rem, 5vw, 4.25rem);
+  height: auto;
+  fill: none;
+  stroke: var(--fjord);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
+.price-frikort .eyebrow {
+  color: var(--sea-dark);
+}
+
+.price-frikort h2 {
+  margin-top: 0.35rem;
+  font-size: clamp(1.55rem, 2.7vw, 2.15rem);
+}
+
+.price-frikort h2 + p {
+  max-width: 48rem;
+  margin-top: 0.55rem;
+  color: var(--muted);
+}
+
+.price-frikort > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--fjord);
+  font-family: var(--font-heading);
+  font-weight: 720;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.price-frikort > a > span:first-child {
+  border-bottom: 1px solid var(--sea-dark);
+}
+
+.price-frikort > a > span:last-child {
+  font-size: 1.3rem;
+  transition: transform 160ms ease;
+}
+
+.price-frikort > a:hover > span:last-child {
+  transform: translateX(0.2rem);
+}
+
 .price-groups {
   display: grid;
-  gap: 1.25rem;
+  gap: clamp(3rem, 6vw, 5rem);
 }
 
 .price-group {
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-medium);
+  --price-accent: var(--sea-dark);
+  --price-header-bg: var(--pastel-sea-soft);
+  border-top: 3px solid var(--price-accent);
 }
 
 .price-group--sage {
-  background: var(--pastel-sage-soft);
+  --price-accent: #6f918b;
+  --price-header-bg: color-mix(in srgb, var(--action-blue), var(--white) 58%);
 }
 
 .price-group--sand {
-  background: var(--pastel-sand-soft);
+  --price-accent: var(--kelp-dark);
+  --price-header-bg: color-mix(in srgb, var(--action-ochre), var(--white) 58%);
 }
 
 .price-group__header {
@@ -3627,8 +3693,9 @@ p {
   grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.65fr);
   gap: 2rem;
   align-items: end;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  border-bottom: 1px solid rgba(118, 87, 54, 0.2);
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.25rem, 2.5vw, 1.75rem);
+  border-bottom: 1px solid var(--line);
+  background: var(--price-header-bg);
 }
 
 .price-group__header h3 {
@@ -3649,12 +3716,12 @@ p {
   grid-template-columns: minmax(0, 1fr) minmax(9rem, 0.23fr);
   gap: clamp(1.5rem, 5vw, 4rem);
   align-items: center;
-  padding: 1.15rem clamp(1.5rem, 4vw, 2.5rem);
-  border-bottom: 1px solid rgba(118, 87, 54, 0.18);
+  padding: 1.2rem clamp(1.25rem, 2.5vw, 1.75rem);
+  border-bottom: 1px solid var(--line);
 }
 
 .price-row:last-child {
-  border-bottom: 0;
+  border-bottom: 1px solid var(--line);
 }
 
 .price-row dt {
@@ -3672,6 +3739,7 @@ p {
 }
 
 .price-row dd strong {
+  color: var(--price-accent);
   font-family: var(--font-heading);
   font-size: clamp(1.12rem, 2vw, 1.35rem);
   font-variant-numeric: tabular-nums;
@@ -3687,14 +3755,47 @@ p {
 
 .price-list-footer {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+  grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
   gap: clamp(2rem, 7vw, 5rem);
-  margin-top: 1.25rem;
-  padding: clamp(1.4rem, 3vw, 2rem);
-  border-left: 4px solid var(--kelp);
-  background: var(--mist);
+  align-items: start;
+  margin-top: clamp(3rem, 6vw, 5rem);
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+.price-list-footer > p:first-child {
+  padding-top: clamp(1.35rem, 3vw, 1.9rem);
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  line-height: 1.55;
+}
+
+.price-list-footer > p:first-child strong {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 2vw, 1.55rem);
+  line-height: 1.2;
+}
+
+.price-list-footer__source {
+  display: grid;
+  gap: 0.9rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  line-height: 1.55;
+}
+
+.price-list-footer__logo {
+  display: block;
+  width: min(100%, 18rem);
+  text-decoration: none;
+}
+
+.price-list-footer__logo img {
+  width: 100%;
+  height: auto;
 }
 
 .price-list-footer strong,
@@ -5311,7 +5412,8 @@ p {
   width: min(19rem, calc(100vw - 1.5rem));
 }
 
-.practical-float-nav summary {
+.practical-float-nav summary,
+.practical-float-nav__header {
   display: grid;
   grid-template-columns: 1.7rem minmax(0, 1fr) auto;
   gap: 0.65rem;
@@ -5322,6 +5424,9 @@ p {
   font-family: var(--font-heading);
   font-size: 1.4rem;
   font-weight: 740;
+}
+
+.practical-float-nav summary {
   cursor: pointer;
   list-style: none;
 }
@@ -5330,8 +5435,8 @@ p {
   display: none;
 }
 
-.practical-float-nav details:not([open]) summary > span:not(.practical-float-nav__toggle),
-.practical-float-nav details:not([open]) .practical-float-nav__toggle {
+.practical-float-nav details[open] > summary,
+.practical-float-nav details:not([open]) summary > span {
   display: none;
 }
 
@@ -5339,10 +5444,14 @@ p {
   display: grid;
   width: 1.55rem;
   height: 1.55rem;
+  padding: 0;
   place-items: center;
+  border: 0;
   border-radius: 50%;
   background: var(--fjord);
   color: var(--white);
+  cursor: pointer;
+  font-family: inherit;
   font-size: 1rem;
   line-height: 1;
   transform: rotate(45deg);
@@ -5366,13 +5475,22 @@ p {
   font-size: 1.4rem;
   font-weight: 680;
   text-decoration: none;
-  transition: background-color 160ms ease;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
 }
 
 .practical-float-nav a:hover,
 .practical-float-nav a:focus-visible {
   border-radius: 0.55rem;
   background: var(--pastel-sea-soft);
+}
+
+.practical-float-nav a.is-active {
+  border-radius: 0.55rem;
+  background: var(--pastel-sand-soft);
+  color: var(--fjord-deep);
+  font-weight: 760;
 }
 
 .practical-float-nav svg,
@@ -5518,6 +5636,7 @@ p {
 
 #kort-fortalt,
 #helsenorge,
+#frikort,
 #provesvar,
 #henvisninger,
 #sykefravaer,
@@ -5723,6 +5842,134 @@ p {
 
 .practical-digital__guides .service-guide__body h3 {
   color: var(--fjord);
+}
+
+.practical-frikort {
+  padding-block: clamp(4rem, 7vw, 6rem);
+  border-block: 1px solid #b8d0cd;
+  background: var(--pastel-sea-soft);
+}
+
+.practical-frikort__grid {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(3rem, 8vw, 7rem);
+  align-items: start;
+}
+
+.practical-frikort__intro .eyebrow {
+  color: var(--sea-dark);
+}
+
+.practical-frikort__intro h2 {
+  margin-top: 0.45rem;
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
+}
+
+.practical-frikort__intro > p:not(.eyebrow) {
+  max-width: 32rem;
+  margin-top: 1rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.practical-frikort__threshold {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 2rem;
+  padding-block: 1.35rem;
+  border-block: 1px solid #a8c9c6;
+}
+
+.practical-frikort__threshold strong {
+  color: var(--fjord);
+  font-family: var(--font-heading);
+  font-size: clamp(2.3rem, 5vw, 3.8rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.practical-frikort__threshold span {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.practical-frikort__illustration {
+  width: clamp(5.5rem, 9vw, 7.5rem);
+  height: clamp(5.5rem, 9vw, 7.5rem);
+  margin-top: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--sea-dark);
+  fill: none;
+  opacity: 0.78;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.25;
+}
+
+.practical-frikort__details {
+  padding-left: clamp(2rem, 5vw, 4.5rem);
+  border-left: 1px solid #a8c9c6;
+}
+
+.practical-frikort__details h3 {
+  margin-bottom: 1rem;
+  font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+}
+
+.practical-frikort__details ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.practical-frikort__details li {
+  position: relative;
+  padding: 1rem 0 1rem 1.6rem;
+  border-top: 1px solid #b8d0cd;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.practical-frikort__details li::before {
+  position: absolute;
+  top: 1.55rem;
+  left: 0.25rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--sea-dark);
+  content: '';
+  transform: rotate(45deg);
+}
+
+.practical-frikort__details li:last-child {
+  border-bottom: 1px solid #b8d0cd;
+}
+
+.practical-frikort__details > p {
+  margin-top: 1.25rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.practical-frikort__details > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+  color: var(--fjord);
+  font-family: var(--font-heading);
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.practical-frikort__details > a > span:first-child {
+  border-bottom: 1px solid var(--sea-dark);
+}
+
+.practical-frikort__details > a > span:last-child {
+  font-size: 1.25rem;
 }
 
 .practical-after {
@@ -6165,12 +6412,14 @@ p {
 
 @media (max-width: 1000px) {
   .practical-digital__grid,
+  .practical-frikort__grid,
   .practical-work__grid,
   .practical-vaccines__intro {
     grid-template-columns: 1fr;
   }
 
   .practical-digital__grid,
+  .practical-frikort__grid,
   .practical-work__grid,
   .practical-vaccines__intro {
     gap: 3rem;
@@ -6179,6 +6428,13 @@ p {
   .practical-work header {
     position: static;
     max-width: 44rem;
+  }
+
+  .practical-frikort__details {
+    padding-top: 2rem;
+    padding-left: 0;
+    border-top: 1px solid #a8c9c6;
+    border-left: 0;
   }
 
   .practical-official-links {
@@ -6227,6 +6483,7 @@ p {
 
   #kort-fortalt,
   #helsenorge,
+  #frikort,
   #provesvar,
   #henvisninger,
   #sykefravaer,
@@ -6778,6 +7035,16 @@ p {
   .price-group__header {
     align-items: start;
     gap: 1.25rem;
+  }
+
+  .price-frikort {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .price-frikort > a {
+    grid-column: 2;
+    white-space: normal;
   }
 
   .price-row {

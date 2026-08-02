@@ -12,7 +12,7 @@ import { priceList } from '../data/clinic';
       <header class="price-list-header">
         <div>
           <p class="eyebrow">Offisiell prisliste</p>
-          <h2 id="prices-heading">Priser hos fastlegen</h2>
+          <h1 id="prices-heading">Priser hos fastlegen</h1>
           <p class="price-list-header__period">
             Gjeldende fra {priceList.validFrom} til {priceList.validThrough}
           </p>
@@ -34,6 +34,28 @@ import { priceList } from '../data/clinic';
           </a>
         </div>
       </header>
+
+      <aside class="price-frikort" aria-labelledby="price-frikort-heading">
+        <svg aria-hidden="true" viewBox="0 0 48 48">
+          <ellipse cx="15" cy="11" rx="9" ry="4"></ellipse>
+          <path d="M6 11v8c0 2.2 4 4 9 4s9-1.8 9-4v-8"></path>
+          <path d="M6 19v8c0 2.2 4 4 9 4 2.2 0 4.2-.4 5.8-1"></path>
+          <ellipse cx="33" cy="23" rx="9" ry="4"></ellipse>
+          <path d="M24 23v8c0 2.2 4 4 9 4s9-1.8 9-4v-8"></path>
+          <path d="M24 31v6c0 2.2 4 4 9 4s9-1.8 9-4v-6"></path>
+        </svg>
+        <div>
+          <p class="eyebrow">Frikort i 2026</p>
+          <h2 id="price-frikort-heading">Egenandelstaket er 3 278 kr</h2>
+          <p>
+            Når du har betalt over egenandelstaket i godkjente egenandeler,
+            får du normalt frikort automatisk.
+          </p>
+        </div>
+        <a href="/praktisk-informasjon/#frikort">
+          <span>Les om frikort</span><span aria-hidden="true">→</span>
+        </a>
+      </aside>
 
       <div class="price-groups">
         {
@@ -70,10 +92,27 @@ import { priceList } from '../data/clinic';
           beløpet du har betalt. Lokale priser for attester og tjenester som
           ikke står på takstplakaten må bekreftes av legekontoret.
         </p>
-        <p>
-          Kilde: <a href={priceList.sourceUrl}>{priceList.sourceLabel}</a>.
-          Kontrollert {priceList.checkedOn}.
-        </p>
+        <div class="price-list-footer__source">
+          <p>
+            Kilde: <a href={priceList.sourceUrl}>{priceList.sourceLabel}</a>.
+            Kontrollert {priceList.checkedOn}.
+          </p>
+          <a
+            class="price-list-footer__logo"
+            href={priceList.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Åpne offisiell takstplakat fra Den norske legeforening"
+          >
+            <img
+              src="/images/resources/legeforeningen-logo.png"
+              alt="Den norske legeforening"
+              width="518"
+              height="318"
+              loading="lazy"
+            />
+          </a>
+        </div>
       </footer>
     </div>
   </section>

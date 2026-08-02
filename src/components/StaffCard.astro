@@ -16,6 +16,7 @@ const { member, editorial = false } = Astro.props;
         class:list={[
           'staff-card__photo',
           { 'staff-card__photo--art': member.editorialImageKind === 'art' },
+          { 'staff-card__photo--contain': member.editorialImageFit === 'contain' },
         ]}
         aria-hidden="true"
       >

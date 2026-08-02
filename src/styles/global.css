@@ -1998,6 +1998,18 @@ p {
   transform-origin: center 28%;
 }
 
+.staff-card__photo.staff-card__photo--contain,
+.team-person-card__photo.team-person-card__photo--contain {
+  background: linear-gradient(90deg, #596c6d, #8e9490 56%, #aaa69f);
+}
+
+.staff-card__photo.staff-card__photo--contain img,
+.team-person-card__photo.team-person-card__photo--contain img {
+  object-fit: contain;
+  filter: none;
+  transform: none;
+}
+
 .staff-card__photo--art {
   background: var(--white);
 }
@@ -5109,7 +5121,7 @@ p {
 .team-directory-page {
   padding-block: clamp(3rem, 6vw, 6rem);
   border-bottom: 1px solid var(--line);
-  background: var(--coast);
+  background: var(--white);
 }
 
 .team-directory-header {
@@ -5118,7 +5130,7 @@ p {
 
 .team-directory-header h1 {
   margin-top: 0.55rem;
-  font-size: clamp(2.75rem, 5vw, 4.4rem);
+  font-size: clamp(2rem, 3vw, 2.8rem);
   line-height: 1;
 }
 
@@ -5133,7 +5145,7 @@ p {
 .team-directory-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.15rem;
+  gap: 1rem;
   align-items: stretch;
   margin-top: clamp(2.25rem, 5vw, 4rem);
 }
@@ -5147,12 +5159,14 @@ p {
   border: 1px solid var(--line);
   border-radius: var(--radius-medium);
   background: var(--white);
-  box-shadow: 0 14px 34px rgba(41, 59, 53, 0.06);
+  box-shadow:
+    0 0.22rem 0 rgba(41, 59, 53, 0.16),
+    0 0.7rem 1.6rem rgba(41, 59, 53, 0.07);
 }
 
 .team-person-card__photo {
   position: relative;
-  aspect-ratio: 4 / 3;
+  height: 22.25rem;
   margin: 0;
   overflow: hidden;
   border-bottom: 1px solid var(--line);
@@ -5223,7 +5237,7 @@ p {
 .team-person-card__copy > p:last-child {
   margin-top: 1rem;
   color: var(--muted);
-  font-size: 0.94rem;
+  font-size: 1.4rem;
   line-height: 1.58;
 }
 
@@ -5240,27 +5254,26 @@ p {
   color: var(--fjord);
 }
 
-@media (max-width: 940px) {
+@media (max-width: 900px) and (min-width: 761px) {
   .team-directory-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .team-directory-grid {
+    grid-template-columns: min(82vw, 20rem);
+    justify-content: center;
+  }
+
+  .team-person-card__photo {
+    height: 21.5rem;
   }
 }
 
 @media (max-width: 620px) {
   .team-directory-page {
     padding-block: 2.75rem 4rem;
-  }
-
-  .team-directory-header h1 {
-    font-size: clamp(2.5rem, 12vw, 3.4rem);
-  }
-
-  .team-directory-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .team-person-card__photo {
-    aspect-ratio: 5 / 4;
   }
 
   .team-person-card__copy {

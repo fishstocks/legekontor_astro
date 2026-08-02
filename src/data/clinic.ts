@@ -34,6 +34,7 @@ export interface StaffMember {
   initials: string;
   editorialImage: string;
   editorialImageKind?: 'photo' | 'art';
+  editorialImageFit?: 'cover' | 'contain';
   editorialImagePosition?: string;
   imageLabel?: string;
   isPlaceholderMember?: boolean;
@@ -305,7 +306,7 @@ export const clinic: ClinicConfig = {
 export const staff: StaffMember[] = [
   {
     name: 'Anna Sverd Rekdal',
-    role: 'Lege',
+    role: 'Lege – spesialist i allmennmedisin',
     initials: 'AR',
     editorialImage: '/images/staff/art/anna-sverd-rekdal.webp',
     editorialImageKind: 'art',
@@ -316,18 +317,19 @@ export const staff: StaffMember[] = [
   },
   {
     name: 'Sondre Sverd Rekdal',
-    role: 'Lege',
+    role: 'Lege – spesialist i allmennmedisin',
     initials: 'SR',
-    editorialImage: '/images/staff/stock/doctor-04.webp',
-    editorialImagePosition: 'center 12%',
-    imageLabel: 'Stockfoto',
+    editorialImage: '/images/staff/sondre-sverd-rekdal.png',
+    editorialImageKind: 'photo',
+    editorialImageFit: 'contain',
+    editorialImagePosition: 'center',
     description:
       'Spesialist i allmennmedisin. Møter pasienter med både nye helseplager og behov for oppfølging over tid.',
     status: 'needs-review',
   },
   {
     name: 'Tom Andre Aas',
-    role: 'Lege',
+    role: 'Lege – spesialist i allmennmedisin',
     initials: 'TA',
     editorialImage: '/images/staff/art/tom-andre-aas.webp',
     editorialImageKind: 'art',

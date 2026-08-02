@@ -13,6 +13,10 @@ const { member } = Astro.props;
     class:list={[
       'team-person-card__photo',
       { 'team-person-card__photo--art': member.editorialImageKind === 'art' },
+      {
+        'team-person-card__photo--contain':
+          member.editorialImageFit === 'contain',
+      },
     ]}
   >
     <img

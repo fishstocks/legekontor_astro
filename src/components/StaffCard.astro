@@ -1,0 +1,51 @@
+---
+import type { StaffMember } from '../data/clinic';
+
+interface Props {
+  member: StaffMember;
+  editorial?: boolean;
+}
+
+const { member, editorial = false } = Astro.props;
+---
+
+<article class:list={['staff-card', { 'staff-card--editorial': editorial }]}>
+  {
+    member.editorialImage ? (
+      <div
+        class:list={[
+          'staff-card__photo',
+          { 'staff-card__photo--art': member.editorialImageKind === 'art' },
+        ]}
+        aria-hidden="true"
+      >
+        <img
+          src={member.editorialImage}
+          alt=""
+          width="720"
+          height="1080"
+          loading="lazy"
+          decoding="async"
+          style={`object-position: ${member.editorialImagePosition ?? 'center'}`}
+        />
+        {member.imageLabel && (
+          <span class="staff-card__image-note">{member.imageLabel}</span>
+        )}
+      </div>
+    ) : (
+      <div class="staff-card__portrait" aria-hidden="true">
+        <span>{member.initials}</span>
+        <svg viewBox="0 0 220 150">
+          <path d="M-5 98c41-32 69-29 100-7 32 23 61 20 88-6 18-18 40-23 57-17" />
+          <path d="M-8 127c43-25 74-22 104-3 30 20 63 17 90-4 18-14 35-19 55-13" />
+        </svg>
+      </div>
+    )
+  }
+  <div class="staff-card__copy">
+    <p class="eyebrow">
+      {member.isPlaceholderMember ? 'Plassholder' : member.role}
+    </p>
+    <h2>{member.name}</h2>
+  </div>
+</article>

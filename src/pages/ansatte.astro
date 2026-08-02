@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NoticeBanner from '../components/NoticeBanner.astro';
+import TeamMember from '../components/TeamMember.astro';
+import { notices, staff } from '../data/clinic';
+
+const activeNotice = notices.find((notice) => notice.active);
+---
+
+<BaseLayout
+  title="Ansatte | Vågsbygd legesenter"
+  description="Møt legene og medarbeiderne ved Vågsbygd legesenter i Kristiansand."
+>
+  <section class="team-directory-page" aria-labelledby="team-title">
+    <div class="shell">
+      <header class="team-directory-header">
+        <p class="eyebrow">Ansatte</p>
+        <h1 id="team-title">Menneskene på legesenteret</h1>
+      </header>
+
+      {
+        activeNotice && (
+          <div
+            class="team-directory-notice"
+            aria-label="Aktuelt om legesituasjonen"
+          >
+          <NoticeBanner notice={activeNotice} />
+          </div>
+        )
+      }
+
+      <div class="team-directory-grid" aria-label="Ansatte ved legesenteret">
+        {staff.map((member) => <TeamMember member={member} />)}
+      </div>
+
+      <p class="team-directory-note">
+        <strong>Merk:</strong> Noen portretter er midlertidige stockbilder.
+        Faktiske bilder publiseres bare etter samtykke. Profiltekstene må
+        bekreftes av legekontoret før publisering.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

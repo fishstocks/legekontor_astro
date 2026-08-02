@@ -1,0 +1,42 @@
+---
+import type { ClinicConfig } from '../data/clinic';
+
+interface Props {
+  clinic: ClinicConfig;
+  showReviewState?: boolean;
+}
+
+const { clinic, showReviewState = true } = Astro.props;
+const hasReviewItems = clinic.openingHours.some(
+  (item) => item.status === 'needs-review',
+);
+---
+
+<div class="hours-card">
+  <div class="hours-card__header">
+    <div>
+      <p class="eyebrow">Besøk oss</p>
+      <h2>Åpningstider</h2>
+    </div>
+    {
+      showReviewState && hasReviewItems && (
+        <span class="review-chip">Må bekreftes</span>
+      )
+    }
+  </div>
+  <dl class="hours-list">
+    {
+      clinic.openingHours.map((item) => (
+        <div>
+          <dt>{item.label}</dt>
+          <dd>{item.hours}</dd>
+        </div>
+      ))
+    }
+  </dl>
+  <p class="hours-card__note">
+    Trenger du akuttime samme dag? Ring
+    <a href={`tel:${clinic.phone.value}`}>{clinic.phoneDisplay.value}</a> fra kl.
+    08:00.
+  </p>
+</div>

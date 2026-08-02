@@ -1,0 +1,27 @@
+---
+import { clinic } from '../data/clinic';
+---
+
+<figure class="hero-photo">
+  <img
+    src="/images/kristiansand-havn-720.webp"
+    srcset="/images/kristiansand-havn-720.webp 720w, /images/kristiansand-havn.webp 1400w"
+    sizes="(max-width: 1120px) calc(100vw - 22px), 48vw"
+    alt="Røde sjøboder og småbåter ved havnen i Kristiansand"
+    width="1400"
+    height="934"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <svg class="hero-photo__coastline" viewBox="0 0 720 620" aria-hidden="true">
+    <path d="M-12 356c93-18 150-1 201 49 57 57 103 77 171 52 64-23 116-10 170 39 51 46 108 59 196 34"></path>
+    <path d="M-18 417c86-16 142 1 195 47 59 52 108 68 175 45 65-21 120-6 178 38"></path>
+  </svg>
+  <div class="hero-photo__label">
+    <span>{clinic.address.value}</span>
+    <strong>Fastlege i Kristiansand</strong>
+  </div>
+  <figcaption>
+    Foto: Adam Cole / <a href="https://www.pexels.com/photo/24863532/">Pexels</a>
+  </figcaption>
+</figure>

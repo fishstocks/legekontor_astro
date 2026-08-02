@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { priceList } from '../data/clinic';
+---
+
+<BaseLayout
+  title="Priser | Vågsbygd legesenter"
+  description="Oversikt over egenandeler og andre vanlige priser ved Vågsbygd legesenter."
+>
+  <section class="section price-list-section" aria-labelledby="prices-heading">
+    <div class="shell">
+      <header class="price-list-header">
+        <div>
+          <p class="eyebrow">Offisiell prisliste</p>
+          <h2 id="prices-heading">Priser hos fastlegen</h2>
+          <p class="price-list-header__period">
+            Gjeldende fra {priceList.validFrom} til {priceList.validThrough}
+          </p>
+        </div>
+        <div class="price-list-header__intro">
+          <p>
+            Hva du betaler avhenger av kontakttype, tidspunkt og hvilke
+            undersøkelser eller materialer som brukes. Har du frikort, betaler
+            du ikke egenandeler som inngår i frikortgrunnlaget.
+          </p>
+          <a
+            class="button button--secondary"
+            href={priceList.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Se offisiell takstplakat
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </header>
+
+      <div class="price-groups">
+        {
+          priceList.groups.map((group) => (
+            <article
+              class:list={[
+                'price-group',
+                `price-group--${group.tone}`,
+              ]}
+            >
+              <header class="price-group__header">
+                <h3>{group.title}</h3>
+                <p>{group.description}</p>
+              </header>
+              <dl class="price-rows">
+                {group.items.map((item) => (
+                  <div class="price-row">
+                    <dt>{item.label}</dt>
+                    <dd>
+                      <strong>{item.amount}</strong>
+                      {item.amountContext && <span>{item.amountContext}</span>}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+          ))
+        }
+      </div>
+
+      <footer class="price-list-footer">
+        <p>
+          <strong>Greit å vite:</strong> Legen skal gi deg kvittering for
+          beløpet du har betalt. Lokale priser for attester og tjenester som
+          ikke står på takstplakaten må bekreftes av legekontoret.
+        </p>
+        <p>
+          Kilde: <a href={priceList.sourceUrl}>{priceList.sourceLabel}</a>.
+          Kontrollert {priceList.checkedOn}.
+        </p>
+      </footer>
+    </div>
+  </section>
+</BaseLayout>

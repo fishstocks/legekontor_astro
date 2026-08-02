@@ -1,0 +1,80 @@
+---
+import '@fontsource-variable/figtree';
+import '@fontsource-variable/atkinson-hyperlegible-next';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { clinic } from '../data/clinic';
+import { assertReleaseReady } from '../utils/release';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image = '/og-cover.svg' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image, Astro.site);
+const release = assertReleaseReady();
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalClinic',
+  name: clinic.name.value,
+  url: Astro.site?.toString(),
+  telephone: clinic.phone.value,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: clinic.address.value,
+    postalCode: '4623',
+    addressLocality: 'Kristiansand',
+    addressCountry: 'NO',
+  },
+};
+---
+
+<!doctype html>
+<html lang="nb">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#faf5ed" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="nb_NO" />
+    <meta property="og:site_name" content={clinic.name.value} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData)}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#hovedinnhold">Hopp til hovedinnhold</a>
+    {
+      release.isDraft && release.pending.length > 0 && (
+        <div class="draft-bar" role="status">
+          <strong>Forhåndsvisning</strong>
+          <span>
+            Må bekreftes før publisering: {release.pending.join(', ')}.
+          </span>
+        </div>
+      )
+    }
+    <Header currentPath={Astro.url.pathname} />
+    <main id="hovedinnhold">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

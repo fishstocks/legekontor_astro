@@ -1,0 +1,76 @@
+---
+import { clinic } from '../data/clinic';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<aside class:list={['emergency', { 'emergency--compact': compact }]} aria-labelledby="emergency-title">
+  <div class="emergency__copy">
+    <h2 id="emergency-title" class="emergency__section-title">
+      Øyeblikkelig hjelp
+    </h2>
+    {
+      compact ? (
+        <>
+          <p class="emergency__intro">
+            Hvis det ikke finnes ledige timer på Helsenorge, ring
+            <a href={`tel:${clinic.phone.value}`}>{clinic.phoneDisplay.value}</a>.
+            Vi vurderer hvor mye det haster og setter opp time samme dag ved behov.
+          </p>
+          <p class="emergency__traffic">
+            Det er stor pågang på telefonen kl. 08.00–10.00. Vent gjerne til etter
+            kl. 10.00 med henvendelser som ikke haster.
+          </p>
+        </>
+      ) : (
+        <div class="emergency__details">
+          <section class="emergency__important" aria-labelledby="emergency-important-title">
+            <h3 id="emergency-important-title">Viktig informasjon</h3>
+            <p>
+              Dersom du har behov for akutt legehjelp og det ikke er ledige timer
+              på Helsenorge, ring legekontoret kl. 08.00. Vi vurderer situasjonen
+              og setter opp øyeblikkelig hjelp ved behov.
+            </p>
+            <p class="emergency__traffic">
+              Det er stor pågang på telefonen kl. 08.00–10.00. Vi ber derfor om
+              at alle ikke-akutte henvendelser gjøres utenom dette tidsrommet.
+            </p>
+          </section>
+
+          <section class="emergency__acute" aria-labelledby="emergency-acute-title">
+            <h3 id="emergency-acute-title">Hva regnes som akutt?</h3>
+            <p>
+              Akutt-timer er for tilstander som krever rask medisinsk vurdering
+              samme dag, for eksempel:
+            </p>
+            <ul>
+              <li>Høy feber og akutt infeksjon</li>
+              <li>Pustevansker</li>
+              <li>Brystsmerter</li>
+              <li>Plutselige sterke smerter</li>
+              <li>Skader som trenger rask behandling</li>
+              <li>Allergiske reaksjoner med hevelse eller pustevansker</li>
+            </ul>
+            <p class="emergency__life-threatening">
+              Ved livstruende tilstander, ring <a href="tel:113">113</a> umiddelbart.
+            </p>
+          </section>
+        </div>
+      )
+    }
+    <div class="emergency__options">
+      <a href="tel:116117">
+        <span>Utenom åpningstid</span>
+        <strong>Legevakt 116 117</strong>
+      </a>
+      <a href="tel:113">
+        <span>Livstruende tilstand</span>
+        <strong>Ring 113</strong>
+      </a>
+    </div>
+  </div>
+</aside>

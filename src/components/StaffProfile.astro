@@ -1,0 +1,39 @@
+---
+import type { StaffMember } from '../data/clinic';
+
+interface Props {
+  member: StaffMember;
+}
+
+const { member } = Astro.props;
+---
+
+<article class="staff-profile">
+  <figure class="staff-profile__photo" aria-label={`Foreløpig stockfoto for ${member.name}`}>
+    <img
+      src={member.editorialImage}
+      alt=""
+      width="720"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+      style={`object-position: ${member.editorialImagePosition ?? 'center'}`}
+    />
+    {member.imageLabel && <figcaption>{member.imageLabel}</figcaption>}
+  </figure>
+
+  <div class="staff-profile__copy">
+    <p class="eyebrow">{member.role}</p>
+    <h2>{member.name}</h2>
+    <p class="staff-profile__role">{member.role} ved Vågsbygd legesenter</p>
+
+    {
+      member.description && (
+        <div class="staff-profile__description">
+          <p class="eyebrow">Om {member.name.split(' ')[0]}</p>
+          <p>{member.description}</p>
+        </div>
+      )
+    }
+  </div>
+</article>

@@ -1,0 +1,45 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<div class:list={['coastal-map', { 'coastal-map--compact': compact }]} aria-hidden="true">
+  <svg viewBox="0 0 720 620" role="presentation">
+    <path
+      class="coastal-map__land"
+      d="M46 78c70 12 120 2 161 36 39 33 55 93 100 111 52 21 102-14 149 9 42 20 54 70 102 94 48 25 103 4 145 31v225H46z"
+    ></path>
+    <path
+      class="coastal-map__line coastal-map__line--one"
+      d="M-10 162c88-7 131 7 172 45 46 43 53 95 111 114 58 20 95-13 150 6 64 21 78 79 151 96 59 14 105-14 161 1"
+    ></path>
+    <path
+      class="coastal-map__line coastal-map__line--two"
+      d="M-28 220c79-3 112 15 148 50 42 41 54 88 110 110 62 25 111-4 170 20 55 23 71 70 126 91 59 22 113 5 174 18"
+    ></path>
+    <path
+      class="coastal-map__line coastal-map__line--three"
+      d="M-12 285c65-3 97 15 132 48 44 41 62 83 116 108 59 28 105 6 163 31 46 20 69 53 110 74"
+    ></path>
+    <path
+      class="coastal-map__island"
+      d="M496 88c24-18 61-9 67 18 5 22-15 43-43 43-27 0-46-15-41-34 2-10 8-19 17-27z"
+    ></path>
+    <path
+      class="coastal-map__island coastal-map__island--small"
+      d="M606 185c13-11 35-5 39 10 4 17-12 31-31 29-17-2-29-14-25-27 2-5 7-9 17-12z"
+    ></path>
+    <g class="coastal-map__marker">
+      <circle cx="365" cy="282" r="27"></circle>
+      <circle cx="365" cy="282" r="7"></circle>
+      <path d="M365 255v-19M392 282h19M365 309v19M338 282h-19"></path>
+    </g>
+  </svg>
+  <div class="coastal-map__label">
+    <span>Andøyveien 23</span>
+    <strong>Her finner du oss</strong>
+  </div>
+</div>

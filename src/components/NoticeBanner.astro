@@ -1,0 +1,18 @@
+---
+import type { Notice } from '../data/clinic';
+
+interface Props {
+  notice: Notice;
+}
+
+const { notice } = Astro.props;
+---
+
+<aside class="notice" aria-labelledby="notice-title">
+  <div class="notice__marker" aria-hidden="true"></div>
+  <div class="notice__heading">
+    <p class="eyebrow">{notice.dateLabel ?? 'Aktuelt'}</p>
+    <h2 id="notice-title">{notice.title}</h2>
+  </div>
+  <p class="notice__message">{notice.message}</p>
+</aside>

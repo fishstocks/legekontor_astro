@@ -1,0 +1,35 @@
+---
+import type { StaffMember } from '../data/clinic';
+
+interface Props {
+  member: StaffMember;
+}
+
+const { member } = Astro.props;
+---
+
+<article class="team-person-card">
+  <figure
+    class:list={[
+      'team-person-card__photo',
+      { 'team-person-card__photo--art': member.editorialImageKind === 'art' },
+    ]}
+  >
+    <img
+      src={member.editorialImage}
+      alt=""
+      width="720"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+      style={`object-position: ${member.editorialImagePosition ?? 'center'}`}
+    />
+    {member.imageLabel && <figcaption>{member.imageLabel}</figcaption>}
+  </figure>
+
+  <div class="team-person-card__copy">
+    <p class="eyebrow">{member.role}</p>
+    <h2>{member.name}</h2>
+    {member.description && <p>{member.description}</p>}
+  </div>
+</article>

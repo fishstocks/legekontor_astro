@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Siden finnes ikke | Vågsbygd legesenter"
+  description="Siden du leter etter finnes ikke."
+>
+  <section class="page-hero">
+    <div class="shell page-hero__grid">
+      <div>
+        <p class="eyebrow">404 – siden finnes ikke</p>
+        <h1>Her kom du litt ut av kurs.</h1>
+        <p class="page-hero__intro">
+          Adressen kan være skrevet feil, eller siden kan ha blitt flyttet.
+        </p>
+        <div class="home-hero__meta">
+          <a class="button" href="/">Gå til forsiden</a>
+          <a class="button button--secondary" href="/#kontakt">Kontakt oss</a>
+        </div>
+      </div>
+      <div class="page-hero__coast" aria-hidden="true">
+        <svg viewBox="0 0 430 210">
+          <path
+            d="M-10 83c57-14 105-6 139 24 38 34 69 47 113 34 40-12 71-8 101 20 28 27 61 34 101 22"
+          ></path>
+          <path
+            d="M-12 122c56-14 97-6 134 24 41 32 75 43 118 30 41-12 74-5 107 21"
+          ></path>
+          <circle cx="304" cy="79" r="10"></circle>
+        </svg>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

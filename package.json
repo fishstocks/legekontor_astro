@@ -1,17 +1,23 @@
 {
-  "name": "legekontor",
+  "name": "vagsbygd-legesenter",
+  "version": "0.1.0",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "build:release": "PUBLIC_RELEASE_MODE=production astro build",
+    "check": "astro check",
+    "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^6.4.6"
+    "@fontsource-variable/atkinson-hyperlegible-next": "^5.2.8",
+    "@fontsource-variable/figtree": "^5.2.8",
+    "astro": "^7.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "lighthouse": "^13.4.1",
+    "typescript": "^5.9.2"
   }
 }

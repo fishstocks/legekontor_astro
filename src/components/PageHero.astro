@@ -1,0 +1,30 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro: string;
+}
+
+const { eyebrow, title, intro } = Astro.props;
+---
+
+<section class="page-hero">
+  <div class="shell page-hero__grid">
+    <div>
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="page-hero__intro">{intro}</p>
+    </div>
+    <div class="page-hero__coast" aria-hidden="true">
+      <svg viewBox="0 0 430 210">
+        <path
+          d="M-10 83c57-14 105-6 139 24 38 34 69 47 113 34 40-12 71-8 101 20 28 27 61 34 101 22"
+        ></path>
+        <path
+          d="M-12 122c56-14 97-6 134 24 41 32 75 43 118 30 41-12 74-5 107 21"
+        ></path>
+        <circle cx="304" cy="79" r="10"></circle>
+      </svg>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,112 @@
+---
+import type { PatientAction } from '../data/clinic';
+
+interface Props {
+  actions: PatientAction[];
+}
+
+const { actions } = Astro.props;
+---
+
+<div class="action-grid">
+  {
+    actions.map((action, index) => (
+      <article class="action-card">
+        <a class="action-card__primary" href={action.href}>
+          <span class="action-card__copy">
+            <strong>{action.label}</strong>
+            <span>{action.description}</span>
+          </span>
+        </a>
+        <button
+          class="action-card__icon"
+          type="button"
+          aria-expanded="false"
+          aria-controls={`action-preview-${index}`}
+          aria-label={`Vis kort informasjon om ${action.label.toLowerCase()}`}
+          data-action-info
+        >
+            {action.icon === 'calendar' && (
+              <svg viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M8 4v5M24 4v5M5 12h22M6 7h20a2 2 0 0 1 2 2v17a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z" />
+                <path d="m11 20 3 3 7-8" />
+              </svg>
+            )}
+            {action.icon === 'prescription' && (
+              <svg viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M8 3h12l5 5v21H8zM20 3v6h6" />
+                <path d="M12 16h9M12 21h7" />
+              </svg>
+            )}
+            {action.icon === 'message' && (
+              <svg viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M5 5h22v17H14l-6 5v-5H5z" />
+                <path d="M10 12h12M10 17h8" />
+              </svg>
+            )}
+            {action.icon === 'phone' && (
+              <svg viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M8 4 4 8c0 10 10 20 20 20l4-4-6-6-4 3c-3-2-5-4-7-7l3-4z" />
+              </svg>
+            )}
+        </button>
+        {action.preview && (
+          <aside
+            class="action-card__preview"
+            id={`action-preview-${index}`}
+            aria-label={`Kort informasjon om ${action.label.toLowerCase()}`}
+          >
+            <p class="eyebrow">{action.preview.title}</p>
+            <p>{action.preview.body}</p>
+            <ul>
+              {action.preview.items.map((item) => <li>{item}</li>)}
+            </ul>
+            <p class="action-card__preview-important">
+              <strong>Viktig:</strong> {action.preview.important}
+            </p>
+            <a href={action.preview.guideHref}>
+              Les hele veiledningen <span aria-hidden="true">→</span>
+            </a>
+          </aside>
+        )}
+      </article>
+    ))
+  }
+</div>
+
+<script>
+  const closeActionPreviews = (except?: HTMLElement) => {
+    document.querySelectorAll<HTMLElement>('.action-card[data-preview-open]').forEach((card) => {
+      if (card === except) return;
+      card.removeAttribute('data-preview-open');
+      card.querySelector<HTMLButtonElement>('[data-action-info]')
+        ?.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  document.querySelectorAll<HTMLButtonElement>('[data-action-info]').forEach((button) => {
+    if (button.dataset.previewBound === 'true') return;
+    button.dataset.previewBound = 'true';
+    button.addEventListener('click', () => {
+      const card = button.closest<HTMLElement>('.action-card');
+      if (!card) return;
+      const willOpen = !card.hasAttribute('data-preview-open');
+      closeActionPreviews(card);
+      card.toggleAttribute('data-preview-open', willOpen);
+      button.setAttribute('aria-expanded', String(willOpen));
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target as Element).closest('.action-card')) closeActionPreviews();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeActionPreviews();
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+    }
+  });
+</script>

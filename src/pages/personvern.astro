@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout
+  title="Personvern og cookies | Vågsbygd legesenter"
+  description="Informasjon om personvern, helseopplysninger, eksterne tjenester og cookies på nettstedet til Vågsbygd legesenter."
+>
+  <PageHero
+    eyebrow="Personvern"
+    title="Personvern og cookies"
+    intro="Her kan du lese hvordan nettstedet håndterer personopplysninger og hvilke eksterne tjenester som brukes."
+  />
+
+  <section class="section" aria-labelledby="privacy-heading">
+    <div class="shell">
+      <div class="section-heading">
+        <p class="eyebrow">Vågsbygd legesenter</p>
+        <h2 id="privacy-heading">Kort fortalt</h2>
+        <p>
+          Nettstedet samler ikke inn helseopplysninger og har ikke eget
+          kontaktskjema. Bruk Helsenorge eller telefon når du skal kontakte
+          legekontoret.
+        </p>
+      </div>
+
+      <div class="topic-list">
+        <article class="topic">
+          <h2>Helseopplysninger</h2>
+          <p>
+            Ikke send sensitive opplysninger på vanlig e-post. Digitale
+            henvendelser skal sendes gjennom sikre tjenester på Helsenorge.
+          </p>
+        </article>
+        <article class="topic">
+          <h2>Cookies</h2>
+          <p>
+            Nettstedet bruker ikke analyseverktøy eller egne
+            markedsføringscookies. Tekniske endringer i løsningen oppdateres på
+            denne siden.
+          </p>
+        </article>
+        <article class="topic">
+          <h2>Google Maps</h2>
+          <p>
+            Forsiden viser et innebygd kart fra Google Maps. Når kartet lastes,
+            kan Google behandle tekniske opplysninger i tråd med Googles egne
+            personvernvilkår.
+          </p>
+        </article>
+        <article class="topic">
+          <h2>Eksterne lenker</h2>
+          <p>
+            Lenker til Helsenorge, Fürst og offentlige helsetjenester åpner
+            eksterne nettsteder. Disse tjenestene har egne
+            personvernerklæringer.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

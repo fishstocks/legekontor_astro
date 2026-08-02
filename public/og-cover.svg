@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#faf5ed"/>
+  <rect x="890" width="310" height="14" fill="#c2a57d"/>
+  <path d="M-40 322c153-38 266-20 350 54 95 85 173 113 282 79 103-32 184-15 268 52 80 63 169 74 302 36" fill="none" stroke="#c2a57d" stroke-width="8" stroke-linecap="round"/>
+  <path d="M-50 416c147-36 253-16 346 58 104 81 191 107 299 74 104-30 190-12 277 53" fill="none" stroke="#879789" stroke-width="8" stroke-linecap="round" opacity=".55"/>
+  <circle cx="840" cy="230" r="26" fill="#c2a57d"/>
+  <text x="90" y="165" fill="#293b35" font-family="Arial, sans-serif" font-size="40" font-weight="700">Vågsbygd Torv legesenter</text>
+  <text x="90" y="260" fill="#293b35" font-family="Arial, sans-serif" font-size="68" font-weight="700">Trygg legehjelp,</text>
+  <text x="90" y="340" fill="#9a7951" font-family="Arial, sans-serif" font-size="68" font-weight="700">nær deg i Vågsbygd.</text>
+</svg>

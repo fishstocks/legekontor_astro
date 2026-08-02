@@ -1,0 +1,16 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<span class:list={['logo', { 'logo--compact': compact }]}>
+  <img
+    src="/images/vagsbygd-torv-logo.webp"
+    alt="Vågsbygd Torv legesenter"
+    width="722"
+    height="346"
+  />
+</span>

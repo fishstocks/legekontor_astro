@@ -1,0 +1,23 @@
+---
+import type { FhiNewsItem } from '../data/clinic';
+
+interface Props {
+  item: FhiNewsItem;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="fhi-news-card">
+  <a href={item.href}>
+    <span class="fhi-news-card__meta">
+      <span>{item.category}</span>
+      <time>{item.date}</time>
+    </span>
+    <h3>{item.title}</h3>
+    <p>{item.summary}</p>
+    <span class="fhi-news-card__link">
+      Les hos FHI <span aria-hidden="true">↗</span>
+    </span>
+  </a>
+</article>

@@ -97,7 +97,7 @@ export interface Notice {
 
 export interface PatientInfoItem {
   title: string;
-  description: string;
+  details: string[];
   status: ContentStatus;
 }
 
@@ -411,42 +411,42 @@ export const serviceHighlights: ServiceHighlight[] = [
   {
     title: 'Akutt legehjelp',
     description:
-      'Vi vurderer tilstander som trenger rask medisinsk hjelp samme dag. Ring legekontoret for vurdering.',
+      'Trenger du rask medisinsk hjelp samme dag? Ring legekontoret for vurdering.',
     icon: 'urgent',
     status: 'needs-review',
   },
   {
     title: 'Celleprøve',
     description:
-      'Vi utfører celleprøver i tråd med nasjonale anbefalinger og hjelper deg med videre oppfølging ved behov.',
+      'Vi tar celleprøver etter nasjonale anbefalinger og følger deg opp ved behov.',
     icon: 'cervical',
     status: 'needs-review',
   },
   {
     title: 'Småkirurgi',
     description:
-      'Vi fjerner blant annet føflekker, lipomer, vorter og sjenerende hudutvekster, og behandler mindre sårskader.',
+      'Vi behandler mindre sårskader og fjerner blant annet føflekker, lipomer og vorter.',
     icon: 'surgery',
     status: 'needs-review',
   },
   {
     title: 'EKG, spirometri og 24-timers blodtrykk',
     description:
-      'Undersøkelser av hjerterytme, lungefunksjon og blodtrykk over et døgn utføres når det er medisinsk grunnlag.',
+      'Vi undersøker hjerterytme, lungefunksjon og blodtrykk når det er medisinsk grunnlag.',
     icon: 'diagnostics',
     status: 'needs-review',
   },
   {
     title: 'Laboratorietjenester',
     description:
-      'Vi tilbyr hurtigprøver ved blant annet infeksjon og diabetes, urin- og INR-prøver samt ordinær blodprøvetaking.',
+      'Vi tilbyr hurtigprøver, urin- og INR-prøver samt ordinær blodprøvetaking.',
     icon: 'tests',
     status: 'needs-review',
   },
   {
     title: 'Vaksiner',
     description:
-      'Kontakt legekontoret for å avklare hvilke vaksiner som tilbys og om du trenger resept.',
+      'Kontakt oss for å avklare vaksinetilbud og behov for resept.',
     icon: 'vaccines',
     status: 'needs-review',
   },
@@ -565,34 +565,38 @@ export const notices: Notice[] = [
 
 export const beforeVisitInfo: PatientInfoItem[] = [
   {
-    title: 'Sykemelding',
-    description: 'Krever fremmøte — bestill time hos fastlegen.',
+    title: 'Akutt time',
+    details: ['Ring 38 00 05 50 fra kl. 08:00.'],
     status: 'needs-review',
   },
   {
-    title: 'Tolk',
-    description: 'Gi beskjed ved bestilling av time.',
+    title: 'Behov for tolk',
+    details: [
+      'Dersom du trenger tolk, må du ringe legekontoret for å bestille time.',
+    ],
     status: 'needs-review',
   },
   {
     title: 'Blodprøver',
-    description: 'Må avtales med lege eller resepsjon.',
+    details: ['Må avtales med lege eller resepsjon.'],
     status: 'needs-review',
   },
   {
-    title: 'Attester',
-    description: 'Bestilles via legekontoret.',
+    title: 'Legeerklæring',
+    details: [
+      'Ring samme dag som fraværet starter, og oppgi datoene du er syk.',
+      'Kontakt oss for å avtale tid for å hente erklæringen når du er frisk. Sluttdato settes ved utlevering.',
+    ],
     status: 'needs-review',
   },
   {
     title: 'Prøvesvar',
-    description:
-      'Kontakt legekontoret eller se Helsenorge dersom tilgjengelig.',
+    details: ['Følg avtalen du har gjort med legen.'],
     status: 'needs-review',
   },
   {
     title: 'Avbestilling',
-    description: 'Avbestill senest 24 timer før.',
+    details: ['Avbestill senest 24 timer før timen.'],
     status: 'needs-review',
   },
 ];

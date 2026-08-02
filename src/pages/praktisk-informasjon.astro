@@ -1,11 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceGuides from '../components/ServiceGuides.astro';
-import {
-  bloodTestResource,
-  clinic,
-  publicHealthResources,
-} from '../data/clinic';
+import { bloodTestResource, publicHealthResources } from '../data/clinic';
 import {
   resultTimes,
   vaccineLinks,
@@ -14,51 +10,12 @@ import {
 } from '../data/patientResources';
 
 const topics = [
-  ['kort-fortalt', 'Kort fortalt', 'overview'],
   ['helsenorge', 'Helsenorge', 'phone'],
   ['provesvar', 'Prøvesvar', 'sample'],
   ['henvisninger', 'Henvisninger', 'referral'],
   ['sykefravaer', 'Sykefravær', 'work'],
   ['vaksiner', 'Vaksiner', 'shield'],
   ['nyttige-lenker', 'Nyttige lenker', 'links'],
-] as const;
-
-const quickInfo = [
-  {
-    label: 'Akutt time',
-    details: [`Ring ${clinic.phoneDisplay.value} fra kl. 08:00.`],
-    icon: 'clock',
-  },
-  {
-    label: 'Behov for tolk',
-    details: [
-      'Dersom du trenger tolk, må du ringe legekontoret for å bestille time.',
-    ],
-    icon: 'language',
-  },
-  {
-    label: 'Blodprøver',
-    details: ['Må avtales med lege eller resepsjon.'],
-    icon: 'sample',
-  },
-  {
-    label: 'Legeerklæring',
-    details: [
-      'Ring samme dag som fraværet starter, og oppgi datoene du er syk.',
-      'Kontakt oss for å avtale tid for å hente erklæringen når du er frisk. Sluttdato settes ved utlevering.',
-    ],
-    icon: 'document',
-  },
-  {
-    label: 'Prøvesvar',
-    details: ['Følg avtalen du har gjort med legen.'],
-    icon: 'results',
-  },
-  {
-    label: 'Avbestilling',
-    details: ['Avbestill senest 24 timer før timen.'],
-    icon: 'calendar',
-  },
 ] as const;
 
 const practiceNotes = [
@@ -166,42 +123,7 @@ const practiceNotes = [
     </details>
   </aside>
 
-  <section
-    id="kort-fortalt"
-    class="practical-quick"
-    aria-labelledby="kort-fortalt-heading"
-  >
-    <div class="shell">
-      <header class="practical-section-heading practical-section-heading--split">
-        <div>
-          <p class="eyebrow">Det viktigste først</p>
-          <h1 id="kort-fortalt-heading">Kort fortalt</h1>
-        </div>
-        <p>
-          Små ting det er nyttig å vite før du bestiller time eller kontakter
-          legekontoret.
-        </p>
-      </header>
-
-      <dl class="practical-facts">
-        {
-          quickInfo.map((item) => (
-            <div>
-              <svg aria-hidden="true">
-                <use href={`#practical-${item.icon}`} />
-              </svg>
-              <span>
-                <dt>{item.label}</dt>
-                <dd>
-                  {item.details.map((detail) => <p>{detail}</p>)}
-                </dd>
-              </span>
-            </div>
-          ))
-        }
-      </dl>
-    </div>
-  </section>
+  <h1 class="visually-hidden">Praktisk informasjon</h1>
 
   <aside class="practical-notes" aria-labelledby="practical-notes-heading">
     <div class="shell practical-notes__layout">

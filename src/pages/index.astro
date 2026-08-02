@@ -103,14 +103,15 @@ const activeNotice = notices.find((notice) => notice.active);
   <section class="section patient-info-section" aria-labelledby="before-visit-heading">
     <div class="shell patient-info-layout">
       <div class="patient-info-intro">
-        <p class="eyebrow">Før timen</p>
+        <p class="eyebrow">Det viktigste først</p>
         <h2 id="before-visit-heading">Greit å vite</h2>
         <p>
-          Kort informasjon om det pasienter oftest spør oss om. Flere svar
-          finner du på informasjonssiden.
+          Små ting det er nyttig å vite før du bestiller time eller kontakter
+          legekontoret.
         </p>
         <a class="text-link" href="/praktisk-informasjon/">
-          All pasientinformasjon <span aria-hidden="true">→</span>
+          <span class="text-link__label">All praktisk info</span>
+          <span aria-hidden="true">→</span>
         </a>
       </div>
       <dl class="patient-info-list">
@@ -118,7 +119,9 @@ const activeNotice = notices.find((notice) => notice.active);
           beforeVisitInfo.map((item) => (
             <div class="patient-info-item">
               <dt>{item.title}</dt>
-              <dd>{item.description}</dd>
+              <dd>
+                {item.details.map((detail) => <p>{detail}</p>)}
+              </dd>
             </div>
           ))
         }
@@ -173,7 +176,8 @@ const activeNotice = notices.find((notice) => notice.active);
           <h2 id="staff-heading">Menneskene på legekontoret</h2>
         </div>
         <a class="text-link staff-showcase__more" href="/ansatte/">
-          Les mer om de ansatte <span aria-hidden="true">→</span>
+          <span class="text-link__label">Les mer om de ansatte</span>
+          <span aria-hidden="true">→</span>
         </a>
       </div>
       <div

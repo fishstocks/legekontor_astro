@@ -16,7 +16,7 @@ interface Props {
 const { title, description, image = '/og-cover.svg' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
-const release = assertReleaseReady();
+assertReleaseReady();
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -61,16 +61,6 @@ const structuredData = {
   </head>
   <body>
     <a class="skip-link" href="#hovedinnhold">Hopp til hovedinnhold</a>
-    {
-      release.isDraft && release.pending.length > 0 && (
-        <div class="draft-bar" role="status">
-          <strong>Forhåndsvisning</strong>
-          <span>
-            Må bekreftes før publisering: {release.pending.join(', ')}.
-          </span>
-        </div>
-      )
-    }
     <Header currentPath={Astro.url.pathname} />
     <main id="hovedinnhold">
       <slot />

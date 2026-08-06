@@ -14,7 +14,12 @@ const { actions } = Astro.props;
       <article class="action-card">
         <a class="action-card__primary" href={action.href}>
           <span class="action-card__copy">
-            <strong>{action.label}</strong>
+            <strong>
+              <span>{action.label}</span>
+              {action.cardDetail && (
+                <span class="action-card__detail">{action.cardDetail}</span>
+              )}
+            </strong>
           </span>
         </a>
         <button

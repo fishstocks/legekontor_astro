@@ -32,6 +32,7 @@ export interface OfficeSchedule {
 
 export interface PatientAction {
   label: string;
+  cardDetail?: string;
   description: string;
   href: string;
   preview?: {
@@ -302,7 +303,8 @@ export const clinic: ClinicConfig = {
       status: 'needs-review',
     },
     {
-      label: 'Ring legekontoret',
+      label: 'Ring oss',
+      cardDetail: '38 00 05 50',
       description: `Telefon ${'38 00 05 50'}. Ikke send helseopplysninger på e-post.`,
       href: 'tel:+4738000550',
       preview: {

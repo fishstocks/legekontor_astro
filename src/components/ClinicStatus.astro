@@ -1,0 +1,169 @@
+---
+import type { OfficeSchedule } from '../data/clinic';
+
+interface Props {
+  schedule: OfficeSchedule;
+}
+
+const { schedule } = Astro.props;
+---
+
+<aside
+  class="clinic-status"
+  data-clinic-status
+  data-state="loading"
+  data-schedule={JSON.stringify(schedule)}
+  aria-label="Status for legekontoret"
+>
+  <div class="shell clinic-status__inner">
+    <p class="clinic-status__message">
+      <span class="clinic-status__indicator" aria-hidden="true"></span>
+      <span>
+        <strong data-status-label>Legekontoret</strong>
+        <span aria-hidden="true"> · </span>
+        <span data-status-detail>Man–fre kl. 08.00–15.00</span>
+      </span>
+    </p>
+    <a class="clinic-status__link" href="/#kontakt">
+      <span class="clinic-status__link-full">Se åpningstider</span>
+      <span class="clinic-status__link-short">Tider</span>
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</aside>
+
+<script>
+  type DailyWindow = { opens: string; closes: string };
+  type Schedule = {
+    timeZone: string;
+    weekly: Record<string, DailyWindow | undefined>;
+    exceptions: Array<{
+      date: string;
+      closed?: boolean;
+      opens?: string;
+      closes?: string;
+    }>;
+  };
+
+  const minuteValue = (time: string) => {
+    const [hours, minutes] = time.split(':').map(Number);
+    return hours * 60 + minutes;
+  };
+
+  const displayTime = (time: string) => time.replace(':', '.');
+
+  const dateKey = (year: number, month: number, day: number) =>
+    `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+  const calendarDate = (date: string, offset: number) => {
+    const [year, month, day] = date.split('-').map(Number);
+    const candidate = new Date(Date.UTC(year, month - 1, day + offset, 12));
+    return {
+      date: dateKey(
+        candidate.getUTCFullYear(),
+        candidate.getUTCMonth() + 1,
+        candidate.getUTCDate(),
+      ),
+      weekday: candidate.getUTCDay() || 7,
+      value: candidate,
+    };
+  };
+
+  const windowForDate = (
+    schedule: Schedule,
+    date: string,
+    weekday: number,
+  ): DailyWindow | undefined => {
+    const exception = schedule.exceptions.find((item) => item.date === date);
+
+    if (exception?.closed) return undefined;
+    if (exception?.opens && exception.closes) {
+      return { opens: exception.opens, closes: exception.closes };
+    }
+
+    return schedule.weekly[String(weekday)];
+  };
+
+  const localNow = (now: Date, timeZone: string) => {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23',
+    }).formatToParts(now);
+    const value = Object.fromEntries(
+      parts.map((part) => [part.type, part.value]),
+    );
+
+    return {
+      date: `${value.year}-${value.month}-${value.day}`,
+      minutes: Number(value.hour) * 60 + Number(value.minute),
+    };
+  };
+
+  const weekdayLabel = (date: Date, timeZone: string) =>
+    new Intl.DateTimeFormat('nb-NO', {
+      weekday: 'long',
+      timeZone,
+    }).format(date);
+
+  const updateStatus = (bar: HTMLElement) => {
+    const label = bar.querySelector<HTMLElement>('[data-status-label]');
+    const detail = bar.querySelector<HTMLElement>('[data-status-detail]');
+
+    try {
+      const schedule = JSON.parse(bar.dataset.schedule ?? '') as Schedule;
+      const current = localNow(new Date(), schedule.timeZone);
+      const today = calendarDate(current.date, 0);
+      const todayWindow = windowForDate(
+        schedule,
+        today.date,
+        today.weekday,
+      );
+      const isOpen = Boolean(
+        todayWindow &&
+          current.minutes >= minuteValue(todayWindow.opens) &&
+          current.minutes < minuteValue(todayWindow.closes),
+      );
+
+      if (isOpen && todayWindow) {
+        bar.dataset.state = 'open';
+        if (label) label.textContent = 'Åpent nå';
+        if (detail) {
+          detail.textContent = `Stenger kl. ${displayTime(todayWindow.closes)}`;
+        }
+        return;
+      }
+
+      bar.dataset.state = 'closed';
+      if (label) label.textContent = 'Stengt nå';
+
+      for (let offset = 0; offset <= 370; offset += 1) {
+        const candidate = calendarDate(current.date, offset);
+        const window = windowForDate(
+          schedule,
+          candidate.date,
+          candidate.weekday,
+        );
+        if (!window) continue;
+        if (offset === 0 && current.minutes >= minuteValue(window.opens)) continue;
+
+        if (detail) {
+          const day = offset === 0 ? 'i dag' : weekdayLabel(candidate.value, schedule.timeZone);
+          detail.textContent = `Åpner ${day} kl. ${displayTime(window.opens)}`;
+        }
+        break;
+      }
+    } catch {
+      bar.dataset.state = 'loading';
+    }
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-clinic-status]').forEach((bar) => {
+    updateStatus(bar);
+    window.setInterval(() => updateStatus(bar), 60_000);
+  });
+</script>

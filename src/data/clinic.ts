@@ -12,6 +12,24 @@ export interface OpeningHours {
   status: ContentStatus;
 }
 
+export interface DailyOpeningWindow {
+  opens: string;
+  closes: string;
+}
+
+export interface OpeningHoursException {
+  date: string;
+  closed?: boolean;
+  opens?: string;
+  closes?: string;
+}
+
+export interface OfficeSchedule {
+  timeZone: string;
+  weekly: Partial<Record<1 | 2 | 3 | 4 | 5 | 6 | 7, DailyOpeningWindow>>;
+  exceptions: OpeningHoursException[];
+}
+
 export interface PatientAction {
   label: string;
   description: string;
@@ -138,6 +156,7 @@ export interface ClinicConfig {
   directionsUrl: ReviewedValue<string>;
   email?: ReviewedValue<string>;
   openingHours: OpeningHours[];
+  officeSchedule: OfficeSchedule;
   phoneHours: ReviewedValue<string>;
   parking: ReviewedValue<string>;
   publicTransport: ReviewedValue<string>;
@@ -200,6 +219,18 @@ export const clinic: ClinicConfig = {
     },
     { label: 'Helg', hours: 'Stengt', status: 'verified' },
   ],
+  officeSchedule: {
+    timeZone: 'Europe/Oslo',
+    weekly: {
+      1: { opens: '08:00', closes: '15:00' },
+      2: { opens: '08:00', closes: '15:00' },
+      3: { opens: '08:00', closes: '15:00' },
+      4: { opens: '08:00', closes: '15:00' },
+      5: { opens: '08:00', closes: '15:00' },
+    },
+    // Add confirmed holidays and temporary closures here as YYYY-MM-DD entries.
+    exceptions: [],
+  },
   phoneHours: {
     value: 'Mandag–fredag kl. 08:30–14:30',
     status: 'verified',

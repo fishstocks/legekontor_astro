@@ -617,14 +617,6 @@ export const beforeVisitInfo: PatientInfoItem[] = [
     status: 'needs-review',
   },
   {
-    title: 'Legeerklæring',
-    details: [
-      'Ring samme dag som fraværet starter, og oppgi datoene du er syk.',
-      'Kontakt oss for å avtale tid for å hente erklæringen når du er frisk. Sluttdato settes ved utlevering.',
-    ],
-    status: 'needs-review',
-  },
-  {
     title: 'Prøvesvar',
     details: ['Følg avtalen du har gjort med legen.'],
     status: 'needs-review',
@@ -632,6 +624,14 @@ export const beforeVisitInfo: PatientInfoItem[] = [
   {
     title: 'Avbestilling',
     details: ['Avbestill senest 24 timer før timen.'],
+    status: 'needs-review',
+  },
+  {
+    title: 'Legeerklæring',
+    details: [
+      'Ring samme dag som fraværet starter, og oppgi datoene du er syk.',
+      'Kontakt oss for å avtale tid for å hente erklæringen når du er frisk. Sluttdato settes ved utlevering.',
+    ],
     status: 'needs-review',
   },
 ];
@@ -689,9 +689,9 @@ export const publicHealthResources: ExternalResource[] = [
     name: 'Helsedirektoratet',
     description: 'Nasjonale helseråd, anbefalinger og pasientinformasjon.',
     href: 'https://www.helsedirektoratet.no/',
-    logo: '/images/resources/helsedirektoratet.svg',
+    logo: '/images/resources/helsedirektoratet-mark.png',
     logoAlt: 'Helsedirektoratet',
-    logoStyle: 'wide',
+    logoStyle: 'icon',
     status: 'verified',
   },
   {
@@ -716,9 +716,9 @@ export const publicHealthResources: ExternalResource[] = [
     name: 'Helsebiblioteket',
     description: 'Kvalitetssikret informasjon om sykdom og behandling.',
     href: 'https://www.helsebiblioteket.no/',
-    logo: '/images/resources/helsebiblioteket.svg',
+    logo: '/images/resources/helsebiblioteket-mark.png',
     logoAlt: 'Helsebiblioteket',
-    logoStyle: 'wide',
+    logoStyle: 'icon',
     status: 'verified',
   },
 ];

@@ -17,6 +17,7 @@ interface Props {
 const { title, description, image = '/og-cover.svg' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
+const isHomePage = Astro.url.pathname === '/';
 assertReleaseReady();
 
 const structuredData = {
@@ -63,7 +64,7 @@ const structuredData = {
   <body>
     <a class="skip-link" href="#hovedinnhold">Hopp til hovedinnhold</a>
     <Header currentPath={Astro.url.pathname} />
-    <ClinicStatus schedule={clinic.officeSchedule} />
+    {isHomePage && <ClinicStatus schedule={clinic.officeSchedule} />}
     <main id="hovedinnhold">
       <slot />
     </main>

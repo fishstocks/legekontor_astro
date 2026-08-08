@@ -32,12 +32,6 @@ const activeNotice = notices.find((notice) => notice.active);
       <div class="team-directory-grid" aria-label="Ansatte ved legesenteret">
         {staff.map((member) => <TeamMember member={member} />)}
       </div>
-
-      <p class="team-directory-note">
-        <strong>Merk:</strong> Noen portretter er midlertidige stockbilder.
-        Faktiske bilder publiseres bare etter samtykke. Profiltekstene må
-        bekreftes av legekontoret før publisering.
-      </p>
     </div>
   </section>
 </BaseLayout>

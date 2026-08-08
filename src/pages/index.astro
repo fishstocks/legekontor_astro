@@ -8,12 +8,13 @@ import EmergencyInfo from '../components/EmergencyInfo.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import FhiNewsCard from '../components/FhiNewsCard.astro';
 import OpeningHours from '../components/OpeningHours.astro';
+import { getFhiNewsFeed } from '../lib/fhi-news';
 import {
   beforeVisitInfo,
   bloodTestResource,
   clinic,
   clinicSwitchInfo,
-  fhiNews,
+  fhiNews as fallbackFhiNews,
   notices,
   publicHealthResources,
   serviceHighlights,
@@ -21,6 +22,8 @@ import {
 } from '../data/clinic';
 
 const activeNotice = notices.find((notice) => notice.active);
+const { items: fhiNews, updatedLabel: fhiNewsUpdatedLabel } =
+  await getFhiNewsFeed(fallbackFhiNews);
 ---
 
 <BaseLayout
@@ -32,7 +35,7 @@ const activeNotice = notices.find((notice) => notice.active);
       <picture>
         <source
           media="(max-width: 760px)"
-          srcset="/images/vagsbygd-courtyard-mobile.webp"
+          srcset="/images/vagsbygd-courtyard-wide.webp"
         />
         <img
           src="/images/vagsbygd-courtyard-wide.webp"
@@ -54,7 +57,6 @@ const activeNotice = notices.find((notice) => notice.active);
         </p>
         <div class="home-hero__meta">
           <a href="#kontakt">Andøyveien 23, Kristiansand</a>
-          <span>Lokalt legekontor</span>
         </div>
       </div>
     </div>
@@ -66,29 +68,35 @@ const activeNotice = notices.find((notice) => notice.active);
         <PatientActions actions={clinic.patientActions} />
         <aside class="patient-actions__note" aria-label="Kontakt med legesenteret">
           <div class="patient-actions__note-main">
-            <span class="patient-actions__note-logo" aria-hidden="true">
-              <img
-                src="/images/resources/helsenorge.svg"
-                alt=""
-                width="32"
-                height="32"
-              />
-            </span>
+    <picture class="patient-actions__note-logo" aria-hidden="true">
+      <source
+        media="(max-width: 760px)"
+        srcset="/images/resources/helsenorge-stacked.png"
+      />
+      <img
+        src="/images/resources/helsenorge-wordmark.png"
+        alt=""
+        width="600"
+        height="220"
+      />
+    </picture>
             <div>
               <p class="eyebrow">Helsenorge på nett og i appen</p>
               <p>
-                Bruk Helsenorge til de digitale tjenestene ovenfor og til
-                administrative henvendelser. Du kan alltid ringe legekontoret.
+                Vi bruker Helsenorge til digitale tjenester og sikker kontakt. Du
+                kan alltid ringe legekontoret.
               </p>
             </div>
           </div>
-          <a
-            class="patient-actions__note-link"
-            href="/praktisk-informasjon/#helsenorge"
-          >
-            Les hvordan tjenestene fungerer <span aria-hidden="true">→</span>
-          </a>
-        </aside>
+  <a
+    class="patient-actions__note-link link-arrow-ring"
+    href="/praktisk-informasjon/#helsenorge"
+    aria-label="Hvordan tjenestene fungerer"
+    title="Hvordan tjenestene fungerer"
+  >
+    <span aria-hidden="true">→</span>
+  </a>
+</aside>
       </div>
       {
         activeNotice && (
@@ -144,7 +152,6 @@ const activeNotice = notices.find((notice) => notice.active);
         </p>
         <ul class="plain-check-list">
           <li>Vanlige fastlegetjenester og medisinsk oppfølging</li>
-          <li>Oppfølging av både kortvarige og langvarige helseplager</li>
           <li>Sikker digital kontakt gjennom Helsenorge</li>
         </ul>
         <a class="button" href="#kontakt">
@@ -161,9 +168,6 @@ const activeNotice = notices.find((notice) => notice.active);
           height="945"
           loading="lazy"
         />
-        <figcaption>
-          Legekontorets omgivelser. Bildeteksten må bekreftes før publisering.
-        </figcaption>
       </figure>
     </div>
   </section>
@@ -175,10 +179,6 @@ const activeNotice = notices.find((notice) => notice.active);
           <p class="eyebrow">Teamet</p>
           <h2 id="staff-heading">Menneskene på legekontoret</h2>
         </div>
-        <a class="text-link staff-showcase__more" href="/ansatte/">
-          <span class="text-link__label">Les mer om de ansatte</span>
-          <span aria-hidden="true">→</span>
-        </a>
       </div>
       <div
         id="staff-carousel"
@@ -189,29 +189,35 @@ const activeNotice = notices.find((notice) => notice.active);
       >
         {staffPreview.map((member) => <StaffCard member={member} editorial />)}
       </div>
-      <div class="staff-carousel__buttons" aria-label="Naviger mellom ansatte">
-        <button
-          class="staff-carousel__button"
-          type="button"
-          aria-label="Vis forrige ansatte"
-          aria-controls="staff-carousel"
-          data-staff-previous
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="m15 5-7 7 7 7M8 12h10"></path>
-          </svg>
-        </button>
-        <button
-          class="staff-carousel__button staff-carousel__button--next"
-          type="button"
-          aria-label="Vis neste ansatte"
-          aria-controls="staff-carousel"
-          data-staff-next
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="m9 5 7 7-7 7M16 12H6"></path>
-          </svg>
-        </button>
+      <div class="staff-showcase__footer">
+        <a class="text-link staff-showcase__more" href="/ansatte/">
+          <span class="text-link__label">Les mer om de ansatte</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <div class="staff-carousel__buttons" aria-label="Naviger mellom ansatte">
+          <button
+            class="staff-carousel__button"
+            type="button"
+            aria-label="Vis forrige ansatte"
+            aria-controls="staff-carousel"
+            data-staff-previous
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m15 5-7 7 7 7M8 12h10"></path>
+            </svg>
+          </button>
+          <button
+            class="staff-carousel__button staff-carousel__button--next"
+            type="button"
+            aria-label="Vis neste ansatte"
+            aria-controls="staff-carousel"
+            data-staff-next
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m9 5 7 7-7 7M16 12H6"></path>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -237,7 +243,7 @@ const activeNotice = notices.find((notice) => notice.active);
         </p>
         <a class="button button--sand" href={clinicSwitchInfo.href}>
           Åpne Helsenorge
-          <span aria-hidden="true">↗</span>
+          <span aria-hidden="true">→</span>
         </a>
       </div>
       <figure class="switch-clinic-card__image">
@@ -290,11 +296,18 @@ const activeNotice = notices.find((notice) => notice.active);
               target="_blank"
               rel="noreferrer"
             >
-              <span class="contact-quick-link__monogram" aria-hidden="true">Hn</span>
-              <span>
-                <small>Digital kontakt</small>
-                <strong>Åpne Helsenorge ↗</strong>
+              <span class="contact-quick-link__brand" aria-hidden="true">
+                <img
+                  src="/images/resources/helsenorge.svg"
+                  alt=""
+                  width="700"
+                  height="700"
+                />
               </span>
+              <span class="contact-quick-link__action">
+                <strong>Åpne Helsenorge</strong>
+              </span>
+              <span class="link-arrow-ring" aria-hidden="true">→</span>
             </a>
           </div>
         </div>
@@ -309,22 +322,6 @@ const activeNotice = notices.find((notice) => notice.active);
             referrerpolicy="no-referrer-when-downgrade"
             allowfullscreen
           ></iframe>
-
-          <div class="home-map-card__address">
-            <span class="home-map-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path>
-                <circle cx="12" cy="10" r="2.5"></circle>
-              </svg>
-            </span>
-            <span>
-              <strong>Vågsbygd legesenter</strong>
-              <small>{clinic.address.value}, {clinic.postalAddress.value}</small>
-            </span>
-            <a href={clinic.directionsUrl.value} target="_blank" rel="noreferrer">
-              Veibeskrivelse <span aria-hidden="true">↗</span>
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -361,7 +358,6 @@ const activeNotice = notices.find((notice) => notice.active);
         </span>
         <span class="blood-test-feature__action">
           Logg inn
-          <span aria-hidden="true">↗</span>
         </span>
       </a>
 
@@ -395,17 +391,18 @@ const activeNotice = notices.find((notice) => notice.active);
           />
           <span>
             <strong>Folkehelseinstituttet</strong>
-            Oppdatert 26. juli 2026
+            Oppdatert {fhiNewsUpdatedLabel}
           </span>
         </div>
       </div>
-      <div class="fhi-news-grid">
+      <div
+        class="fhi-news-grid"
+        role="region"
+        aria-label="Nyhetskarusell fra Folkehelseinstituttet"
+        tabindex="0"
+      >
         {fhiNews.map((item) => <FhiNewsCard item={item} />)}
       </div>
-      <a class="fhi-section__all" href="https://www.fhi.no/nyheter/">
-        Se alle nyheter hos FHI
-        <span aria-hidden="true">↗</span>
-      </a>
     </div>
   </section>
 

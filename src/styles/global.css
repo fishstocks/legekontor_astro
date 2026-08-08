@@ -3375,6 +3375,7 @@ p {
 }
 
 .fhi-news-card__link {
+  position: relative;
   display: grid;
   width: 2.6rem;
   height: 2.6rem;

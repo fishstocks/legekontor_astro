@@ -17,7 +17,10 @@ const { item } = Astro.props;
     <h3>{item.title}</h3>
     <p>{item.summary}</p>
     <span class="fhi-news-card__link">
-      Les hos FHI <span aria-hidden="true">↗</span>
+      <span class="visually-hidden">Les hos FHI</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6"></path>
+      </svg>
     </span>
   </a>
 </article>

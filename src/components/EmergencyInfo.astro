@@ -17,9 +17,9 @@ const { compact = false } = Astro.props;
       compact ? (
         <>
           <p class="emergency__intro">
-            Hvis det ikke finnes ledige timer på Helsenorge, ring
+            Hvis det ikke finnes ledige timer på Helsenorge, ring{' '}
             <a href={`tel:${clinic.phone.value}`}>{clinic.phoneDisplay.value}</a>.
-            Vi vurderer hvor mye det haster og setter opp time samme dag ved behov.
+            {' '}Vi vurderer hvor mye det haster og setter opp time samme dag ved behov.
           </p>
           <p class="emergency__traffic">
             Det er stor pågang på telefonen kl. 08.00–10.00. Vent gjerne til etter

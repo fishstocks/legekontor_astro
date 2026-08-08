@@ -72,31 +72,105 @@ const isCurrent = (href: string) =>
   const menu = header?.querySelector('[data-menu]');
 
   if (header instanceof HTMLElement) {
+    const mobileHeaderQuery = window.matchMedia('(max-width: 1024px)');
+
     const updateScrollState = () => {
       header.toggleAttribute('data-scrolled', window.scrollY > 12);
+
+      const isCollapsed = header.hasAttribute('data-mobile-collapsed');
+      const collapseAfter = isCollapsed ? 16 : 72;
+      header.toggleAttribute(
+        'data-mobile-collapsed',
+        mobileHeaderQuery.matches && window.scrollY > collapseAfter,
+      );
     };
 
     updateScrollState();
     window.addEventListener('scroll', updateScrollState, { passive: true });
+    mobileHeaderQuery.addEventListener('change', (event) => {
+      updateScrollState();
+
+      if (!event.matches) {
+        if (toggle instanceof HTMLButtonElement) {
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+        if (menu instanceof HTMLElement) {
+          menu.removeAttribute('data-open');
+        }
+        document.body.classList.remove('menu-is-open');
+      }
+    });
   }
 
   if (toggle instanceof HTMLButtonElement && menu instanceof HTMLElement) {
+    const reducedMotionQuery = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    );
+    let closeTimer: number | undefined;
+
+    const finishClosing = () => {
+      menu.removeAttribute('data-closing');
+      closeTimer = undefined;
+    };
+
     const closeMenu = () => {
+      const isVisible =
+        menu.hasAttribute('data-open') || menu.hasAttribute('data-closing');
+
       toggle.setAttribute('aria-expanded', 'false');
-      menu.removeAttribute('data-open');
       document.body.classList.remove('menu-is-open');
+
+      if (!isVisible) return;
+
+      menu.removeAttribute('data-open');
+
+      if (closeTimer !== undefined) {
+        window.clearTimeout(closeTimer);
+      }
+
+      if (reducedMotionQuery.matches) {
+        finishClosing();
+        return;
+      }
+
+      menu.setAttribute('data-closing', '');
+      closeTimer = window.setTimeout(finishClosing, 180);
+    };
+
+    const openMenu = () => {
+      if (closeTimer !== undefined) {
+        window.clearTimeout(closeTimer);
+        closeTimer = undefined;
+      }
+
+      menu.removeAttribute('data-closing');
+      toggle.setAttribute('aria-expanded', 'true');
+      menu.setAttribute('data-open', '');
+      document.body.classList.add('menu-is-open');
     };
 
     toggle.addEventListener('click', () => {
       const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!isOpen));
-      menu.toggleAttribute('data-open', !isOpen);
-      document.body.classList.toggle('menu-is-open', !isOpen);
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
 
     menu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', closeMenu);
     });
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (toggle.getAttribute('aria-expanded') === 'true') {
+          closeMenu();
+        }
+      },
+      { passive: true },
+    );
 
     window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {

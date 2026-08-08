@@ -114,10 +114,9 @@ const frikortUrl =
   </svg>
 
   <aside class="practical-float-nav">
-    <details open>
+    <details>
       <summary aria-label="Åpne sidenavigasjon">
         <svg aria-hidden="true"><use href="#practical-overview" /></svg>
-        <span>På siden</span>
       </summary>
       <div class="practical-float-nav__body">
         <div class="practical-float-nav__header">
@@ -198,7 +197,7 @@ const frikortUrl =
               target="_blank"
               rel="noreferrer"
             >
-              Åpne Helsenorge <span aria-hidden="true">↗</span>
+              Åpne Helsenorge <span aria-hidden="true">→</span>
             </a>
           </div>
         </header>
@@ -255,7 +254,7 @@ const frikortUrl =
         <p>Ta vare på kvitteringene slik at du kan kontrollere registreringene.</p>
         <a href={frikortUrl} target="_blank" rel="noreferrer">
           <span>Les mer om frikort på Helsenorge</span>
-          <span aria-hidden="true">↗</span>
+          <span class="link-arrow-ring" aria-hidden="true">→</span>
         </a>
       </div>
     </div>
@@ -367,7 +366,7 @@ const frikortUrl =
               Ordningen varierer mellom arbeidsplasser. Sjekk rutinene hos
               arbeidsgiveren din.
             </p>
-            <a href="https://www.nav.no/egenmelding">Les mer hos NAV ↗</a>
+            <a href="https://www.nav.no/egenmelding">Les mer hos NAV →</a>
           </div>
         </details>
 
@@ -386,7 +385,7 @@ const frikortUrl =
               Gradert sykmelding eller tilrettelegging kan være aktuelt når du
               fortsatt har noe arbeidsevne.
             </p>
-            <a href="https://www.nav.no/sykepenger">Les mer hos NAV ↗</a>
+            <a href="https://www.nav.no/sykepenger">Les mer hos NAV →</a>
           </div>
         </details>
 
@@ -402,8 +401,8 @@ const frikortUrl =
               kan pleiepenger være aktuelt.
             </p>
             <p class="practical-inline-links">
-              <a href="https://www.nav.no/omsorgspenger">Omsorgsdager ↗</a>
-              <a href="https://www.nav.no/pleiepenger-barn">Pleiepenger ↗</a>
+              <a href="https://www.nav.no/omsorgspenger">Omsorgsdager →</a>
+              <a href="https://www.nav.no/pleiepenger-barn">Pleiepenger →</a>
             </p>
           </div>
         </details>
@@ -478,7 +477,7 @@ const frikortUrl =
                 <strong>{link.title}</strong>
                 <small>{link.source}</small>
               </span>
-              <span aria-hidden="true">↗</span>
+              <span class="link-arrow-ring" aria-hidden="true">→</span>
             </a>
           ))}
         </nav>
@@ -516,7 +515,7 @@ const frikortUrl =
           <strong>{bloodTestResource.name}</strong>
           <small>{bloodTestResource.description}</small>
         </span>
-        <span aria-hidden="true">↗</span>
+        <span class="link-arrow-ring" aria-hidden="true">→</span>
       </a>
 
       <div class="practical-official-links">
@@ -534,7 +533,7 @@ const frikortUrl =
                 <strong>{resource.name}</strong>
                 <small>{resource.description}</small>
               </span>
-              <span aria-hidden="true">↗</span>
+              <span class="link-arrow-ring" aria-hidden="true">→</span>
             </a>
           ))
         }
@@ -610,7 +609,17 @@ const frikortUrl =
     });
 
     floatingMenuLinks.forEach((link) => {
-      link.addEventListener('click', () => setActiveSection(link.hash.slice(1)));
+      link.addEventListener('click', () => {
+        setActiveSection(link.hash.slice(1));
+        floatingMenu?.removeAttribute('open');
+      });
+    });
+
+    const mainMenuToggle = document.querySelector('[data-menu-toggle]');
+    mainMenuToggle?.addEventListener('click', () => {
+      if (mainMenuToggle.getAttribute('aria-expanded') === 'true') {
+        floatingMenu?.removeAttribute('open');
+      }
     });
 
     window.addEventListener('scroll', scheduleActiveSectionUpdate, {

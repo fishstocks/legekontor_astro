@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceGuides from '../components/ServiceGuides.astro';
-import { bloodTestResource, publicHealthResources } from '../data/clinic';
+import { publicHealthResources } from '../data/clinic';
 import {
   resultTimes,
   vaccineLinks,
@@ -493,32 +493,12 @@ const frikortUrl =
     aria-labelledby="nyttige-lenker-heading"
   >
     <div class="shell">
-      <header class="practical-section-heading practical-section-heading--split">
+      <header class="practical-section-heading">
         <div>
           <p class="eyebrow">Offentlige tjenester</p>
           <h2 id="nyttige-lenker-heading">Nyttige lenker</h2>
         </div>
-        <p>
-          Kvalitetssikrede tjenester for prøvesvar, rettigheter, refusjon og
-          offentlig helseinformasjon.
-        </p>
       </header>
-
-      <a class="practical-feature-link" href={bloodTestResource.href}>
-        <span class="practical-feature-link__mark">
-          <img
-            src={bloodTestResource.logo}
-            alt={bloodTestResource.logoAlt}
-            width="48"
-            height="48"
-          />
-        </span>
-        <span>
-          <strong>{bloodTestResource.name}</strong>
-          <small>{bloodTestResource.description}</small>
-        </span>
-        <span class="link-arrow-ring" aria-hidden="true">→</span>
-      </a>
 
       <div class="practical-official-links">
         {

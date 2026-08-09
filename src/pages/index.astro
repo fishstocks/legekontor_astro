@@ -61,7 +61,15 @@ const { items: fhiNews, updatedLabel: fhiNewsUpdatedLabel } =
         </p>
         <div class="home-hero__meta">
           <a href="#kontakt">
-            Andøyveien 23,<br class="home-hero__address-break" /> Kristiansand
+            <span class="home-hero__location-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="2.5"></circle>
+              </svg>
+            </span>
+            <span class="home-hero__address-text">
+              Andøyveien 23,<br class="home-hero__address-break" /> Kristiansand
+            </span>
           </a>
         </div>
       </div>
@@ -158,7 +166,7 @@ const { items: fhiNews, updatedLabel: fhiNewsUpdatedLabel } =
           <li>Vanlige fastlegetjenester og medisinsk oppfølging</li>
           <li>Sikker digital kontakt gjennom Helsenorge</li>
         </ul>
-        <a class="button" href="#kontakt">
+        <a class="button button--resource-form" href="#kontakt">
           Se åpningstider og kontakt
         </a>
       </div>
@@ -245,7 +253,7 @@ const { items: fhiNews, updatedLabel: fhiNewsUpdatedLabel } =
         <p class="switch-clinic-card__journal">
           <strong>Husk journaloverføring:</strong> {clinicSwitchInfo.journalNote}
         </p>
-        <a class="button button--sand" href={clinicSwitchInfo.href}>
+        <a class="button button--sand button--resource-form" href={clinicSwitchInfo.href}>
           Åpne Helsenorge
           <span aria-hidden="true">→</span>
         </a>
@@ -356,12 +364,12 @@ const { items: fhiNews, updatedLabel: fhiNewsUpdatedLabel } =
           />
         </span>
         <span class="blood-test-feature__copy">
-          <span class="eyebrow">Fürst pasientportal</span>
+          <span class="eyebrow">Helsenorge</span>
           <strong>{bloodTestResource.name}</strong>
           <span>{bloodTestResource.description}</span>
         </span>
         <span class="blood-test-feature__action">
-          Logg inn
+          Se prøvesvar
         </span>
       </a>
 

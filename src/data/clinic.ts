@@ -647,12 +647,12 @@ export const clinicSwitchInfo: ClinicSwitchInfo = {
 };
 
 export const bloodTestResource: ExternalResource = {
-  name: 'Dine blodprøver',
+  name: 'Prøver og undersøkelser',
   description:
-    'Har du fått tatt blodprøver som er sendt til Fürst laboratorium, kan du logge inn for å se resultatene dine.',
-  href: 'https://www.furstpasient.no/',
-  logo: '/images/resources/furst.ico',
-  logoAlt: 'Fürst',
+    'På Helsenorge kan du se svar på noen prøver og undersøkelser, for eksempel blodprøver, CT eller røntgen.',
+  href: 'https://www.helsenorge.no/provesvar/',
+  logo: '/images/resources/helsenorge.svg',
+  logoAlt: 'Helsenorge',
   logoStyle: 'icon',
   status: 'needs-review',
 };

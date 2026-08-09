@@ -414,7 +414,7 @@ p {
   padding: 0.5rem 0.85rem;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: transparent;
+  background: var(--coast);
   color: var(--fjord);
 }
 
@@ -7070,12 +7070,12 @@ p {
     overflow-y: auto;
     border: 1px solid rgba(41, 59, 53, 0.2);
     border-radius: 0.9rem;
-    background: rgba(250, 245, 237, 0.84);
+    background: var(--coast);
     box-shadow: 0.28rem 0.28rem 0 rgba(74, 74, 74, 0.22),
       0 18px 40px rgba(24, 41, 34, 0.14);
-    backdrop-filter: blur(18px) saturate(115%);
+    backdrop-filter: none;
     transform-origin: top right;
-    -webkit-backdrop-filter: blur(18px) saturate(115%);
+    -webkit-backdrop-filter: none;
   }
 
   .site-nav[data-open] {
@@ -7235,10 +7235,10 @@ p {
       calc((100vw - var(--shell)) / 2)
     );
     border-color: rgba(41, 59, 53, 0.2);
-    background: rgba(250, 245, 237, 0.94);
+    background: var(--coast);
     box-shadow: 0 0.35rem 0 rgba(41, 59, 53, 0.2),
       0 12px 28px rgba(24, 41, 34, 0.14);
-    backdrop-filter: blur(12px);
+    backdrop-filter: none;
     pointer-events: auto;
   }
 
@@ -7979,7 +7979,7 @@ p {
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 600px) {
   :root {
     --shell: min(100% - 2.5rem, 1180px);
   }
@@ -8517,7 +8517,7 @@ p {
   }
 }
 
-@media (min-width: 431px) and (max-width: 760px) {
+@media (min-width: 601px) and (max-width: 760px) {
   .visit-contact-shell {
     width: 100%;
   }

@@ -589,10 +589,10 @@ export const priceList: PriceList = {
 
 export const notices: Notice[] = [
   {
-    title: 'Endring i legesituasjonen',
+    title: 'Vi gleder oss til en ny lege begynner!',
     message:
-      'Annbjørg Trydal Jansen har dessverre sluttet. En ny lege vil tiltre i tiden fremover. I mellomtiden minner vi om at det er ledig plass på listen til Sondre Sverd Rekdal.',
-    dateLabel: '17. mars 2026',
+      'Den 1. september begynner Susanna Sebastianpillai hos oss. Hun er en erfaren og dyktig fastlege og vi gleder oss til å få henne som kollega. Hun har ledige plasser fremover og tar gjerne imot nye pasienter.',
+    dateLabel: '9. august 2026',
     active: true,
     status: 'needs-review',
   },

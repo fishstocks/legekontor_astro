@@ -648,6 +648,11 @@ p {
   text-decoration-color: var(--kelp);
 }
 
+.home-hero__address-break,
+.home-hero__title-break {
+  display: none;
+}
+
 .home-hero__meta span {
   display: inline-flex;
   align-items: center;
@@ -2660,7 +2665,7 @@ p {
   margin: 0;
   color: var(--white);
   font-size: clamp(1.9rem, 3.1vw, 2.8rem);
-  font-weight: 610;
+  font-weight: 560;
   letter-spacing: -0.045em;
   line-height: 0.99;
   text-transform: none;
@@ -6040,6 +6045,10 @@ p {
   line-height: 1.6;
 }
 
+.practical-frikort__amount-row {
+  display: contents;
+}
+
 .practical-frikort__threshold {
   display: grid;
   gap: 0.35rem;
@@ -6237,7 +6246,7 @@ p {
 
 .practical-referrals h3 {
   margin-bottom: 0.7rem;
-  font-size: 1.15rem;
+  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
   line-height: 1.15;
 }
 
@@ -6635,10 +6644,33 @@ p {
   }
 
   .practical-frikort__details {
-    padding-top: 2rem;
+    padding-top: 0;
     padding-left: 0;
-    border-top: 1px solid #a8c9c6;
+    border-top: 0;
     border-left: 0;
+  }
+
+  .practical-frikort__amount-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2rem;
+    padding-block: 1.15rem;
+    border-block: 1px solid #a8c9c6;
+  }
+
+  .practical-frikort__threshold {
+    gap: 0.3rem;
+    margin-top: 0;
+    padding-block: 0;
+    border-block: 0;
+  }
+
+  .practical-frikort__illustration {
+    width: clamp(4.75rem, 8vw, 6.25rem);
+    height: clamp(4.75rem, 8vw, 6.25rem);
+    margin-top: 0;
   }
 
   .practical-official-links {
@@ -7004,6 +7036,15 @@ p {
 }
 
 @media (max-width: 1024px) {
+  .notice {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .notice__message {
+    grid-column: 2;
+  }
+
   .menu-toggle {
     display: inline-flex;
     padding-inline: 18px;
@@ -7939,51 +7980,626 @@ p {
 }
 
 @media (max-width: 430px) {
-  .emergency__acute ul {
+  :root {
+    --shell: min(100% - 2.5rem, 1180px);
+  }
+
+  main {
+    --font-copy: 1.25rem;
+    --font-copy-compact: 1.25rem;
+    width: 100%;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    zoom: 0.9;
+  }
+
+  .site-header__inner {
+    min-height: 4.45rem;
+  }
+
+  .logo {
+    width: 8.35rem;
+    height: 3.25rem;
+  }
+
+  .logo img {
+    transform: translateY(-0.3rem);
+  }
+
+  .menu-toggle {
+    min-height: 2.15rem;
+    gap: 0.42rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .menu-toggle__label {
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .menu-toggle__icon {
+    width: 0.85rem;
+    gap: 0.22rem;
+  }
+
+  .team-person-card {
+    min-height: 0;
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
   }
 
-  .contact-quick-links,
-  .contact-info-band .emergency--compact .emergency__options {
+  .team-person-card__photo {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1.08 / 1;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .team-person-card__photo--art img {
+    object-fit: contain;
+  }
+
+  .team-person-card__copy {
+    justify-content: flex-start;
+    padding: 1.15rem;
+  }
+
+  .site-header[data-mobile-collapsed] .menu-toggle {
+    top: 0.85rem;
+    box-shadow:
+      0 0.2rem 0 rgba(41, 59, 53, 0.18),
+      0 8px 20px rgba(24, 41, 34, 0.12);
+  }
+
+  .clinic-status__inner {
+    min-height: 2.4rem;
+    padding-block: 0.25rem;
+  }
+
+  .clinic-status__message {
+    gap: 0.4rem;
+    font-size: 17px;
+    line-height: 1.2;
+  }
+
+  .clinic-status__message strong {
+    font-weight: 700;
+  }
+
+  .clinic-status__indicator {
+    width: 0.48rem;
+    height: 0.48rem;
+    border-width: 1px;
+    box-shadow: 0 0 0 0.18rem rgba(118, 87, 54, 0.1);
+  }
+
+  .clinic-status[data-state='open'] .clinic-status__indicator {
+    box-shadow: 0 0 0 0.18rem rgba(94, 113, 101, 0.1);
+  }
+
+  .home-hero {
+    min-height: 38rem;
+  }
+
+  .home-hero__grid {
+    min-height: 38rem;
+    padding-block: 2.35rem 7rem;
+  }
+
+  .home-hero::before {
+    background:
+      radial-gradient(
+        ellipse 52% 20% at 8% 51%,
+        rgba(250, 245, 237, 0.44) 0%,
+        rgba(250, 245, 237, 0.24) 48%,
+        transparent 100%
+      ),
+      linear-gradient(90deg, rgba(250, 245, 237, 0.18), transparent 68%),
+      radial-gradient(
+        ellipse 105% 72% at 0% 22%,
+        rgba(250, 245, 237, 0.98) 0%,
+        rgba(250, 245, 237, 0.94) 30%,
+        rgba(250, 245, 237, 0.72) 54%,
+        rgba(250, 245, 237, 0.36) 72%,
+        rgba(250, 245, 237, 0.08) 90%,
+        rgba(24, 41, 34, 0.02) 100%
+      );
+  }
+
+  .home-hero .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(2.6rem, 10.6vw, 2.8rem);
+  }
+
+  .home-hero__intro {
+    display: none;
+  }
+
+  .home-hero__meta {
+    margin-top: 1.6rem;
+  }
+
+  .home-hero__meta a {
+    font-size: 17px;
+    font-weight: 550;
+    text-decoration: none;
+  }
+
+  .home-hero__address-break,
+  .home-hero__title-break {
+    display: initial;
+  }
+
+  .patient-actions {
+    margin-top: -4.5rem;
+  }
+
+  .patient-actions__module .action-grid {
+    width: 100%;
+  }
+
+  .action-grid {
+    gap: 0.9rem;
+  }
+
+  .action-card {
+    min-height: 6rem;
+    border-radius: 0.7rem;
+  }
+
+  .patient-actions__module .action-card:nth-child(n) {
+    border-radius: 0.7rem;
+    box-shadow:
+      0.22rem 0.22rem 0 rgba(74, 74, 74, 0.24),
+      0 10px 18px rgba(74, 74, 74, 0.1);
+  }
+
+  .patient-actions__module .action-card:nth-child(n):hover,
+  .patient-actions__module .action-card:nth-child(n):focus-within,
+  .patient-actions__module .action-card:nth-child(n)[data-preview-open] {
+    box-shadow:
+      0.27rem 0.27rem 0 rgba(74, 74, 74, 0.3),
+      0 14px 24px rgba(74, 74, 74, 0.12);
+  }
+
+  .action-card__primary {
+    padding: 0.55rem 0.3rem 0.55rem 3.6rem;
+  }
+
+  .action-card__icon {
+    left: 0.85rem;
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  .action-card__icon svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .action-card__copy strong {
+    min-width: 0;
+    gap: 0.15rem;
+    font-size: 1.25rem;
+    font-weight: 580;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+  }
+
+  .action-card__detail {
+    min-width: 0;
+    flex-basis: 100%;
+    font-size: 1em;
+    font-weight: 580;
+    letter-spacing: 0;
+    white-space: normal;
+  }
+
+  .patient-actions__note {
+    display: grid;
+    grid-template-columns: 3.2rem minmax(0, 1fr) 2.3rem;
+    align-items: center;
+    column-gap: 0.75rem;
+    row-gap: 0.7rem;
+    padding: 1rem;
+  }
+
+  .patient-actions__note-main,
+  .patient-actions__note-main > div {
+    display: contents;
+  }
+
+  .patient-actions__note-logo {
+    grid-column: 1;
+    grid-row: 1;
+    width: 3.2rem;
+  }
+
+  .patient-actions__note-main .eyebrow {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    margin: 0;
+  }
+
+  .patient-actions__note-main > div > p:last-child {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: none;
+    padding: 0;
+    line-height: 1.5;
+  }
+
+  .patient-actions__note-link {
+    grid-column: 3;
+    grid-row: 1;
+    width: 2.3rem;
+    height: 2.3rem;
+    align-self: center;
+    justify-self: end;
+  }
+
+  .about-preview__copy > p:not(.eyebrow) {
+    width: 100%;
+    text-align: left;
+  }
+
+  .about-preview__copy .plain-check-list {
+    width: 100%;
+    justify-self: stretch;
+    gap: 0.75rem;
+    font-size: 1.18rem;
+    font-weight: 580;
+    line-height: 1.35;
+  }
+
+  .about-preview__copy .plain-check-list li {
+    padding-left: 1.45rem;
+  }
+
+  .about-preview__copy .plain-check-list li::before {
+    top: 0.45em;
+    border-color: var(--kelp-dark);
+    background: var(--kelp-light);
+  }
+
+  .about-preview__copy .button {
+    margin-top: 0.65rem;
+  }
+
+  .clinic-photo--home {
+    width: min(88%, 31rem);
+  }
+
+  .clinic-photo--home::before {
+    background: rgba(74, 74, 74, 0.24);
+    transform: translate(0.22rem, 0.22rem);
+  }
+
+  .clinic-photo--home img {
+    box-shadow: 0 10px 18px rgba(74, 74, 74, 0.1);
+  }
+
+  .staff-grid--carousel {
+    gap: 1rem;
+  }
+
+  .staff-showcase__more {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 400;
+  }
+
+  .home-services {
+    padding-top: 5.75rem;
+  }
+
+  .home-services__header {
+    margin-bottom: 1.8rem;
+  }
+
+  .home-services__header h2 {
+    max-width: 20rem;
+    margin-inline: auto;
+  }
+
+  .home-service-list {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
-
-  .home-map-card,
-  .home-map-card iframe {
-    min-height: 22rem;
+  .home-service-item {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    align-items: start;
+    gap: 0.85rem;
+    padding: 0.95rem;
   }
 
-  .blood-test-feature {
-    grid-template-columns: 1fr;
+  .home-service-item__icon {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
-  .blood-test-feature__action {
-    grid-column: auto;
+  .home-service-item > div {
+    min-width: 0;
+  }
+
+  .home-service-item h3 {
+    margin-bottom: 0.3rem;
+    font-size: 1.3rem;
+    hyphens: none;
+    line-height: 1.15;
+    overflow-wrap: normal;
+  }
+
+  .home-service-item p {
+    font-size: 1.18rem;
+    hyphens: none;
+    line-height: 1.4;
+    overflow-wrap: normal;
+  }
+
+  .switch-clinic-card__copy .switch-clinic-card__journal {
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: 0.85rem 0.95rem;
+    border-top: 0;
+    border-left: 0.2rem solid var(--kelp-dark);
+    border-radius: 0 var(--radius-small) var(--radius-small) 0;
+    background: rgba(255, 253, 248, 0.34);
+    font-size: 1.18rem;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .switch-clinic-card__journal strong {
+    font-weight: 650;
+  }
+
+  .switch-clinic-card__copy .button--sand {
+    box-shadow:
+      0.22rem 0.22rem 0 rgba(74, 74, 74, 0.24),
+      0 10px 18px rgba(74, 74, 74, 0.1);
+  }
+
+  .switch-clinic-card__copy .button--sand:hover {
+    box-shadow:
+      0.27rem 0.27rem 0 rgba(74, 74, 74, 0.3),
+      0 14px 24px rgba(74, 74, 74, 0.12);
+  }
+
+  .visit-contact-layout {
+    overflow: visible;
+  }
+
+  .home-map-card {
+    width: calc(100% + 2.5rem);
+    margin-inline: -1.25rem;
+  }
+
+  .contact-info-band {
+    --font-copy-compact: 1.18rem;
+    padding-top: 2.5rem;
+    border-radius: 0;
+  }
+
+  .contact-info-band .hours-card h2,
+  .contact-info-band .emergency__section-title {
+    font-size: 2rem;
+  }
+
+  .contact-quick-link .link-arrow-ring {
+    display: none;
   }
 
   .resource-list-heading {
-    align-items: flex-start;
-    flex-direction: column;
+    margin-top: 3.25rem;
   }
 
-  .notice {
-    grid-template-columns: auto 1fr;
-    align-items: start;
+  .site-footer {
+    --font-copy: 1.1rem;
+    padding-top: 2.25rem;
   }
 
-  .notice__message {
-    grid-column: 2;
+  .site-footer__brand {
+    width: 11.75rem;
+    margin-bottom: 1.75rem;
   }
 
-  .hours-list div {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.25rem;
+  .site-footer__grid {
+    gap: 0;
   }
 
-  .hours-list dd {
-    text-align: left;
+  .site-footer__grid > .site-footer__contact-item:first-child {
+    padding-bottom: 1.1rem;
+  }
+
+  .site-footer__phone {
+    padding-block: 1.1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .site-footer__contact-item {
+    gap: 0.7rem;
+  }
+
+  .site-footer__icon,
+  .site-footer__safety .site-footer__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .site-footer__icon svg,
+  .site-footer__safety .site-footer__icon svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .site-footer__phone .site-footer__contact-copy p {
+    margin-top: 0.25rem;
+  }
+
+  .site-footer__safety .site-footer__heading {
+    gap: 0.7rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.15rem;
+  }
+
+  .site-footer__safety {
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .site-footer__safety p {
+    margin-left: 3.2rem;
+  }
+
+  .site-footer__safety p + p {
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .site-footer__bottom {
+    margin-top: 2rem;
+    padding-block: 1rem;
+  }
+
+  .patient-info-layout {
+    gap: 1.8rem;
+  }
+
+  .patient-info-intro .text-link {
+    margin-top: 1.25rem;
+    font-family: var(--font-body);
+    font-size: 1.18rem;
+    font-weight: 500;
+  }
+
+  .patient-info-list {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    border-top: 0;
+  }
+
+  .patient-info-item,
+  .patient-info-item:nth-child(odd),
+  .patient-info-item:nth-child(even),
+  .patient-info-list .patient-info-item:nth-child(odd),
+  .patient-info-list .patient-info-item:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    padding: 0.95rem 1rem 1rem;
+    border: 1px solid rgba(94, 113, 101, 0.18);
+    border-radius: 0.65rem;
+    background: rgba(232, 241, 239, 0.58);
+  }
+
+  .patient-info-list .patient-info-item:first-child {
+    border-color: rgba(194, 165, 125, 0.3);
+    background: rgba(248, 238, 215, 0.68);
+  }
+
+  .patient-info-item dt {
+    font-size: 1.3rem;
+    font-weight: 580;
+    line-height: 1.2;
+  }
+
+  .patient-info-item dd {
+    font-size: 1.18rem;
+    line-height: 1.4;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 760px) {
+  .visit-contact-shell {
+    width: 100%;
+  }
+
+  .contact-info-band {
+    padding-top: clamp(2.65rem, 4vw, 3.25rem);
+    border-radius: 0;
+  }
+
+  .site-footer__grid {
+    gap: 0;
+  }
+
+  .site-footer__grid > .site-footer__contact-item:first-child {
+    padding-bottom: 1.4rem;
+  }
+
+  .site-footer__phone {
+    padding-block: 1.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .site-footer__safety {
+    padding-top: 1.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .site-footer__safety p + p {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1360px) {
+  .visit-contact-shell {
+    width: 100%;
+  }
+
+  .contact-info-band {
+    padding-top: clamp(2.65rem, 4vw, 3.25rem);
+    border-radius: 0;
+  }
+}
+
+@media (min-width: 761px) {
+  .home-hero .eyebrow {
+    font-size: clamp(0.86rem, 1vw, 0.96rem);
+  }
+
+  .home-hero__meta a {
+    font-weight: 550;
+  }
+
+  .clinic-photo--home::before,
+  .switch-clinic-card__image::before {
+    background: rgba(74, 74, 74, 0.24);
+    transform: translate(0.22rem, 0.22rem);
+  }
+
+  .clinic-photo--home img,
+  .switch-clinic-card__image img {
+    box-shadow: 0 10px 18px rgba(74, 74, 74, 0.1);
+  }
+
+  .site-footer__grid {
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .site-footer__grid > * {
+    padding-inline: clamp(1rem, 3vw, 2.5rem);
+  }
+
+  .site-footer__grid > * + * {
+    border-left: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .site-footer__safety p + p {
+    margin-top: 0.65rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
 }
 

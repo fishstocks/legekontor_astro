@@ -8603,6 +8603,28 @@ p {
   }
 }
 
+@media (min-width: 601px) {
+  .patient-actions__module .action-card:nth-child(n) {
+    border-radius: 0.7rem;
+    box-shadow:
+      0.22rem 0.22rem 0 rgba(74, 74, 74, 0.3),
+      0 10px 18px rgba(74, 74, 74, 0.12);
+  }
+
+  .patient-actions__module .action-card:nth-child(n):hover,
+  .patient-actions__module .action-card:nth-child(n):focus-within,
+  .patient-actions__module .action-card:nth-child(n)[data-preview-open] {
+    box-shadow:
+      0.27rem 0.27rem 0 rgba(74, 74, 74, 0.36),
+      0 14px 24px rgba(74, 74, 74, 0.14);
+  }
+
+  .patient-actions__module .action-card__copy strong,
+  .patient-actions__module .action-card__detail {
+    font-weight: 580;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
